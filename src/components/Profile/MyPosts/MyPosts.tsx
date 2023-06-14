@@ -3,7 +3,6 @@ import s from './MyPosts.module.css';
 import {Post} from './Post/Post';
 
 export function MyPosts(props:any) {
-    debugger
     return (
         <div className={s.content}>
 

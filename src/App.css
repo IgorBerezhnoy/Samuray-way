@@ -9,6 +9,10 @@ width: 1200px;
     grid-template-columns: 2fr 10fr;
     /*    grid-gap: 10px;*/
 }
+.appWrapper {
+    grid-area: c;
+    background-color: blueviolet;
+}
 
 
 
