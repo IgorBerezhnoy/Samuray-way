@@ -2,15 +2,18 @@ import React from 'react';
 import s from './MyPosts.module.css';
 import {Post} from './Post/Post';
 
-export function MyPosts() {
+type PostsType = {
+    id: number
+    message: string
+    like: number
+}
+type PropsType={
+    posts:PostsType[]
+}
 
-    let posts = [
-        {id: 1, message: 'Hello world!', like: 4},
-        {id: 2, message: 'Hi how are you?', like: 432},
-        {id: 3, message: 'post 3', like: 32},
-        {id: 3, message: 'Yo', like: 0}
-    ];
-    let postsItems = posts.map(el => <Post key={el.id} message={el.message} like={el.like}/>);
+export function MyPosts(props:PropsType) {
+
+    let postsItems = props.posts.map(el => <Post key={el.id} message={el.message} like={el.like}/>);
 
     return (
         <div className={s.postsBlock}>
