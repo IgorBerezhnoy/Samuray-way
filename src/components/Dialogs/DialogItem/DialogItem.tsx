@@ -8,7 +8,7 @@ type DialogsDataPropsType = {
 }
 
 
-export const DialogItem = (props: DialogsDataPropsType) => {
+export const DialogItem:React.FC<DialogsDataPropsType> = (props) => {
     return (
         <div className={`${s.dialog} ${s.active}`}>
             <NavLink to={'/dialogs/' + props.id}>{props.name}</NavLink>
