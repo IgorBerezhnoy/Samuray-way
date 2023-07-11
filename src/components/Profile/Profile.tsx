@@ -7,6 +7,7 @@ import {PostsType} from '../../Redux/State';
 
 type PropsType={
     posts:PostsType
+    addPost: (post: string) => void
 }
 
 export const Profile:React.FC<PropsType>=(props)=> {
@@ -16,7 +17,7 @@ export const Profile:React.FC<PropsType>=(props)=> {
     return (
         <div className={s.content} >
             <ProfileInfo/>
-            <MyPosts posts={props.posts}/>
+            <MyPosts posts={props.posts} addPost={props.addPost}/>
         </div>
     );
 }

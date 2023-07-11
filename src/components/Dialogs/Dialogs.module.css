@@ -5,7 +5,7 @@
 
 .dialogsWrapper {
     display: flex;
-    min-width:1000px ;
+    min-width: 1000px;
     justify-content: space-around;
     align-items: center;
 }
@@ -44,4 +44,12 @@
 
 .message {
     color: white;
+}
+
+.addForm {
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+
 }

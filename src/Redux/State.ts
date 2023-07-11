@@ -1,3 +1,5 @@
+import {rerenderEntireTree} from '../render';
+
 export type PostType = {
     id: number
     message: string
@@ -8,7 +10,7 @@ export type PostsType = PostType[]
 export type DialogType = {
     id: string
     name: string
-    srs:string
+    srs: string
 }
 export type DialogsType = DialogType[]
 
@@ -22,7 +24,7 @@ export type MassagesType = MassageType[]
 export type StateType = {
     profilePage: { posts: PostsType }
     dialogsPage: { dialogs: DialogsType, messages: MassagesType }
-
+    navbar: { navItems: string[] }
 }
 
 export let state: StateType = {
@@ -36,12 +38,12 @@ export let state: StateType = {
     },
     dialogsPage: {
         dialogs: [
-            {id: '1', name: 'Dimych', srs:"img/user5.png"},
-            {id: '2', name: 'Andrew', srs:"img/user7.png"},
-            {id: '3', name: 'Sveta', srs:"img/1761894.png"},
-            {id: '4', name: 'Sasha', srs:"img/Sveta.png"},
-            {id: '5', name: 'Valera', srs:"img/1067538.png"},
-            {id: '6', name: 'Viktor', srs:"img/png-transparent-account-avatar-profile-user-avatars-icon.png"},
+            {id: '1', name: 'Dimych', srs: 'img/user5.png'},
+            {id: '2', name: 'Andrew', srs: 'img/user7.png'},
+            {id: '3', name: 'Sveta', srs: 'img/1761894.png'},
+            {id: '4', name: 'Sasha', srs: 'img/Sveta.png'},
+            {id: '5', name: 'Valera', srs: 'img/1067538.png'},
+            {id: '6', name: 'Viktor', srs: 'img/png-transparent-account-avatar-profile-user-avatars-icon.png'},
         ],
         messages: [
             {id: 1, message: 'Hi'},
@@ -49,7 +51,33 @@ export let state: StateType = {
             {id: 3, message: 'What are you doing'},
             {id: 3, message: 'Yo'}
         ],
+    },
+    navbar: {
+        navItems: ['Profile', 'Messages', 'News', 'Music', 'Settings']
     }
+};
+
+export const addPost = (postMessage: string) => {
+
+    let newPost: PostType = {
+        id: 5,
+        message: postMessage,
+        like: 0
+    };
+    // state = {...state, profilePage: {...state.profilePage, posts: [newPost, ...state.profilePage.posts]}}
+    state.profilePage.posts.push(newPost);
+    rerenderEntireTree(state)
+
+
+};export const addMessage = (message: string) => {
+
+    let newMessage: MassageType = {
+        id: 5,
+        message: message
+    };
+    // state = {...state, dialogsPage: {...state.dialogsPage, messages: [newMessage, ...state.dialogsPage.messages ]}}
+    state.dialogsPage.messages.push(newMessage);
+    rerenderEntireTree(state)
 };
 
 // let dialogs:DialogsType = [

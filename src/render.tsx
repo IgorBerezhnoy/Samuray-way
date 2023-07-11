@@ -1,9 +1,19 @@
 import React from 'react';
-import {rerenderEntireTree} from './render';
-import {state} from './Redux/State';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import {addMessage, addPost, StateType} from './Redux/State';
+import {BrowserRouter} from 'react-router-dom';
 
 
-rerenderEntireTree(state)
+export let rerenderEntireTree=(state:StateType)=>{
+
+    ReactDOM.render(<BrowserRouter>
+            <App state={state} addPost={addPost} addMessage={addMessage}/>
+        </BrowserRouter>,
+        document.getElementById('root')
+    );
+}
 
 
 

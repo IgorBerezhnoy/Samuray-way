@@ -6,6 +6,7 @@ import {DialogsType, MassagesType} from '../../Redux/State';
 
 type PropsType = {
     state: { dialogs: DialogsType, messages: MassagesType }
+    addMessage: (message: string) => void
 }
 
 export const Dialogs: React.FC<PropsType> = (props) => {
@@ -14,17 +15,36 @@ export const Dialogs: React.FC<PropsType> = (props) => {
 
     let messagesItems = props.state.messages.map(el => <Message key={el.id} message={el.message}/>);
 
+    let newMessageElement = React.createRef<HTMLTextAreaElement>();
+
+    const addMessage = () => {
+        let text = newMessageElement.current?.value;
+        if (text) {
+            props.addMessage(text);
+        }
+    };
     return (
-        <div className={s.dialogs}>
-            <div className={s.dialogsWrapper}>
-                <div className={s.dialogsItems}>
-                    {dialogsItems}
+        <>
+            <div className={s.dialogs}>
+                <div className={s.dialogsWrapper}>
+                    <div className={s.dialogsItems}>
+                        {dialogsItems}
+                    </div>
+                    <div className={s.messages}>
+                        {messagesItems}
+                    </div>
+
                 </div>
-                <div className={s.messages}>
-                    {messagesItems}
-                </div>
+
             </div>
-        </div>
+            <div className={s.addForm}>
+                <textarea style={{
+                    width: '827px',
+                    height: '58px'
+                }} ref={newMessageElement}> </textarea>
+                <button onClick={addMessage}>+</button>
+            </div>
+        </>
     );
 };
 

@@ -7,24 +7,39 @@ type PostsType = {
     message: string
     like: number
 }
-type PropsType={
-    posts:PostsType[]
+type PropsType = {
+    posts: PostsType[]
+    addPost: (post: string) => void
 }
 
-export const MyPosts:React.FC<PropsType>=(props)=> {
+export const MyPosts: React.FC<PropsType> = (props) => {
 
     let postsItems = props.posts.map(el => <Post key={el.id} message={el.message} like={el.like}/>);
 
+    let newPostElement = React.createRef<HTMLTextAreaElement>();
+
+    const addPost = () => {
+        let text = newPostElement.current?.value;
+        if (text) {
+            props.addPost(text);
+            console.log(props.posts);
+            console.log(text);
+        }
+    };
+
+    const onPostChange=()=>{
+
+    }
     return (
         <div className={s.postsBlock}>
 
             <h3>My post</h3>
             <div>
                 <div>
-                    <textarea></textarea>
+                    <textarea onChange={onPostChange} ref={newPostElement} value={"it-kamasutra"}/>
                 </div>
                 <div>
-                    <button>Add post</button>
+                    <button onClick={addPost}>Add post</button>
                 </div>
             </div>
             <div className={s.posts}>
@@ -34,4 +49,4 @@ export const MyPosts:React.FC<PropsType>=(props)=> {
         </div>
 
     );
-}
+};
