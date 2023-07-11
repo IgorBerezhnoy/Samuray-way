@@ -22,8 +22,8 @@ export type MassageType = {
 export type MassagesType = MassageType[]
 
 export type StateType = {
-    profilePage: { posts: PostsType }
-    dialogsPage: { dialogs: DialogsType, messages: MassagesType }
+    profilePage: { posts: PostsType,newPostText:string }
+    dialogsPage: { dialogs: DialogsType, messages: MassagesType, newMessageText:string}
     navbar: { navItems: string[] }
 }
 
@@ -34,7 +34,8 @@ export let state: StateType = {
             {id: 2, message: 'Hi how are you?', like: 432},
             {id: 3, message: 'post 3', like: 32},
             {id: 3, message: 'Yo', like: 0}
-        ]
+        ],
+        newPostText:""
     },
     dialogsPage: {
         dialogs: [
@@ -51,32 +52,44 @@ export let state: StateType = {
             {id: 3, message: 'What are you doing'},
             {id: 3, message: 'Yo'}
         ],
+        newMessageText:""
     },
     navbar: {
         navItems: ['Profile', 'Messages', 'News', 'Music', 'Settings']
     }
 };
 
-export const addPost = (postMessage: string) => {
+export const addPost = () => {
 
     let newPost: PostType = {
         id: 5,
-        message: postMessage,
+        message: state.profilePage.newPostText,
         like: 0
     };
     // state = {...state, profilePage: {...state.profilePage, posts: [newPost, ...state.profilePage.posts]}}
-    state.profilePage.posts.push(newPost);
+    state.profilePage.posts.unshift(newPost);
+    state.profilePage.newPostText=""
     rerenderEntireTree(state)
+};
+export const updateNewPostText = (newText: string) => {
+    state.profilePage.newPostText=newText
+    rerenderEntireTree(state)
+};
 
 
-};export const addMessage = (message: string) => {
+export const addMessage = () => {
 
     let newMessage: MassageType = {
         id: 5,
-        message: message
+        message: state.dialogsPage.newMessageText
     };
     // state = {...state, dialogsPage: {...state.dialogsPage, messages: [newMessage, ...state.dialogsPage.messages ]}}
     state.dialogsPage.messages.push(newMessage);
+    state.dialogsPage.newMessageText=""
+    rerenderEntireTree(state)
+};
+export const updateNewMessageText = (newText: string) => {
+    state.dialogsPage.newMessageText=newText
     rerenderEntireTree(state)
 };
 

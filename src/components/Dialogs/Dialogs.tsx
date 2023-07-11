@@ -7,6 +7,8 @@ import {DialogsType, MassagesType} from '../../Redux/State';
 type PropsType = {
     state: { dialogs: DialogsType, messages: MassagesType }
     addMessage: (message: string) => void
+    updateNewMessageText: (message: string) => void
+    newMessageText:string
 }
 
 export const Dialogs: React.FC<PropsType> = (props) => {
@@ -21,6 +23,13 @@ export const Dialogs: React.FC<PropsType> = (props) => {
         let text = newMessageElement.current?.value;
         if (text) {
             props.addMessage(text);
+        }
+    };
+
+    const onMessageChange = () => {
+        let text = newMessageElement.current?.value;
+        if (text) {
+            props.updateNewMessageText(text);
         }
     };
     return (
@@ -38,10 +47,7 @@ export const Dialogs: React.FC<PropsType> = (props) => {
 
             </div>
             <div className={s.addForm}>
-                <textarea style={{
-                    width: '827px',
-                    height: '58px'
-                }} ref={newMessageElement}> </textarea>
+                <textarea value={props.newMessageText} onChange={onMessageChange} style={{width: '827px', height: '58px'}} ref={newMessageElement}> </textarea>
                 <button onClick={addMessage}>+</button>
             </div>
         </>
