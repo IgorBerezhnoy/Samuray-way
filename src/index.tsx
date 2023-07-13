@@ -1,12 +1,22 @@
 import React from 'react';
-import {rerenderEntireTree} from './render';
-import {state} from './Redux/State';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import {addMessage, addPost, state, StateType, subscribe, updateNewMessageText, updateNewPostText} from './Redux/State';
+import {BrowserRouter} from 'react-router-dom';
 
 
+export let rerenderEntireTree=(state:StateType)=>{
+
+    ReactDOM.render(<BrowserRouter>
+            <App state={state} addPost={addPost} addMessage={addMessage} updateNewPostText={updateNewPostText} updateNewMessageText={updateNewMessageText}/>
+        </BrowserRouter>,
+        document.getElementById('root')
+    );
+}
 rerenderEntireTree(state)
 
-
-
+subscribe(()=>{rerenderEntireTree(state)})
 // export type PostType = {
 //     id:number
 //     message: string

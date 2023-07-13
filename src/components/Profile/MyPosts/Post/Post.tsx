@@ -8,7 +8,7 @@ type PropsType = {
 
 export const Post:React.FC<PropsType>=(props)=> {
     return (
-        <div className={s.item}><img src={'img/user5.png'}/>{props.message}
+        <div className={s.item}><img src={`${process.env.PUBLIC_URL}/img/user5.png`}/>{props.message}
             <div><span>like: {props.like}</span></div>
         </div>
 
