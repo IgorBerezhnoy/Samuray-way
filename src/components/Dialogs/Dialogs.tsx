@@ -1,15 +1,16 @@
-import React,{KeyboardEvent} from 'react';
+import React, {KeyboardEvent} from 'react';
 import s from './Dialogs.module.css';
 import {DialogItem} from './DialogItem/DialogItem';
 import {Message} from './Message/Message';
-import {ActionType, DialogsType, MassagesType} from '../../Redux/State';
+import {
+    ActionType, AddMessageTypeAC,
+    DialogsType,
+    MassagesType, updateNewMessageTextTypeAC,
+} from '../../Redux/State';
 
 type PropsType = {
     state: { dialogs: DialogsType, messages: MassagesType, newMessageText: string }
     dispatch: (action: ActionType) => void
-    // addMessage: (message: string) => void
-    // updateNewMessageText: (message: string) => void
-    // newMessageText:string
 }
 
 export const Dialogs: React.FC<PropsType> = (props) => {
@@ -23,18 +24,20 @@ export const Dialogs: React.FC<PropsType> = (props) => {
     const addMessage = () => {
         let text = newMessageElement.current?.value;
         if (text) {
-            props.dispatch({type: 'ADD-MESSAGE'});
+            const action = AddMessageTypeAC();
+            props.dispatch(action);
         }
     };
-    const OnClickEnter=(e: KeyboardEvent<HTMLTextAreaElement>)=>{
-        if (e.key==="Enter"){
-            addMessage()
+    const OnClickEnter = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+        if (e.key === 'Enter') {
+            addMessage();
         }
-    }
+    };
     const onMessageChange = () => {
         let text = newMessageElement.current?.value;
         if (text) {
-            props.dispatch({type: 'UPDATE-NEW-MESSAGE-TEXT', newText: text});
+            const action = updateNewMessageTextTypeAC(text);
+            props.dispatch(action);
         }
     };
     return (
@@ -53,10 +56,14 @@ export const Dialogs: React.FC<PropsType> = (props) => {
             </div>
             <div className={s.addForm}>
                 <textarea value={props.state.newMessageText} onChange={onMessageChange}
-                          style={{width: '827px', height: '58px'}} ref={newMessageElement} onKeyPress={OnClickEnter}> </textarea>
+                          style={{width: '827px', height: '58px'}} ref={newMessageElement}
+                          onKeyPress={OnClickEnter}> </textarea>
                 <button onClick={addMessage}>+</button>
             </div>
         </>
     );
 };
 
+// addMessage: (message: string) => void
+// updateNewMessageText: (message: string) => void
+// newMessageText:string

@@ -28,11 +28,16 @@ export type StateType = {
 export type ActionType = AddPostTypeAT | AddMessageTypeAT | updateNewPostTextTypeAT | updateNewMessageTextTypeAT
 
 
-type AddPostTypeAT = { type: 'ADD-POST' }
-type AddMessageTypeAT = { type: 'ADD-MESSAGE' }
-type  updateNewPostTextTypeAT = { type: 'UPDATE-NEW-POST-TEXT', newText: string }
-type  updateNewMessageTextTypeAT = { type: 'UPDATE-NEW-MESSAGE-TEXT', newText: string }
+export type AddPostTypeAT = { type: 'ADD-POST' }
+export type AddMessageTypeAT = { type: 'ADD-MESSAGE' }
+export type  updateNewPostTextTypeAT = { type: 'UPDATE-NEW-POST-TEXT', newText: string }
+export type  updateNewMessageTextTypeAT = { type: 'UPDATE-NEW-MESSAGE-TEXT', newText: string }
 
+
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const ADD_POST = 'ADD-POST';
+const ADD_MESSAGE = 'ADD-MESSAGE';
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 
 export let store = {
     _state: {
@@ -71,7 +76,7 @@ export let store = {
         }
     },
     _callSubscriber(state: StateType) {
-        console.log(state)
+        console.log(state);
     },
 
     getState() {
@@ -80,8 +85,6 @@ export let store = {
     subscribe(observer: () => any) {
         this._callSubscriber = observer;
     },
-
-
 
 
     dispatch(action: ActionType) {
@@ -114,13 +117,25 @@ export let store = {
             this._state.dialogsPage.newMessageText = action.newText;
             this._callSubscriber(this._state);
 
-        }else {
-            console.error("New Error");
+        } else {
+            console.error('New Error');
         }
     }
-
-
 };
+
+export const AddPostActionCreator = (): AddPostTypeAT => ({type: ADD_POST});
+export const updateNewPostTextTypeAC = (text: string): updateNewPostTextTypeAT => ({
+    type: UPDATE_NEW_POST_TEXT,
+    newText: text
+});
+
+
+export const AddMessageTypeAC = (): AddMessageTypeAT => ({type: ADD_MESSAGE});
+export const updateNewMessageTextTypeAC = (text: string): updateNewMessageTextTypeAT => ({
+    type: UPDATE_NEW_MESSAGE_TEXT,
+    newText: text
+});
+
 // window.store=store
 // export let state: StateType = {
 //     profilePage: {
@@ -157,7 +172,6 @@ export let store = {
 //         navItems: ['Profile', 'Messages', 'News', 'Music', 'Settings']
 //     }
 // };
-
 
 
 // addPost() {
