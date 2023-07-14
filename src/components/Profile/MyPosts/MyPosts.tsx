@@ -1,45 +1,48 @@
-import React from 'react';
+import React, {KeyboardEvent} from 'react';
 import s from './MyPosts.module.css';
 import {Post} from './Post/Post';
-import {PostType} from '../../../Redux/State';
+import {ActionType, PostsType} from '../../../Redux/State';
 
 
 type PropsType = {
-    posts: PostType[]
-    addPost: (post: string) => void
-    updateNewPostText: (text: string) => void
-    newPostText: string
+    state: { posts: PostsType, newPostText: string }
+    dispatch: (action: ActionType) => void
 }
 
 
 export const MyPosts: React.FC<PropsType> = (props) => {
 
-    let postsItems = props.posts.map(el => <Post key={el.id} message={el.message} like={el.like}/>);
+    let postsItems = props.state.posts.map(el => <Post key={el.id} message={el.message} like={el.like}/>);
 
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 
     const addPost = () => {
         let text = newPostElement.current?.value;
         if (text) {
-            props.addPost(text);
-            console.log(props.posts);
-            console.log(text);
+            props.dispatch({type: 'ADD-POST'});
         }
     };
+
+    const OnClickEnter=(e: KeyboardEvent<HTMLTextAreaElement>)=>{
+        if (e.key==="Enter"){
+            addPost()
+        }}
 
     const onPostChange = () => {
         let text = newPostElement.current?.value;
         if (text) {
-            props.updateNewPostText(text);
+            const action:ActionType = {type: 'UPDATE-NEW-POST-TEXT', newText: text};
+            props.dispatch(action);
         }
     };
+
     return (
         <div className={s.postsBlock}>
 
             <h3>My post</h3>
             <div>
                 <div>
-                    <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}/>
+                    <textarea onChange={onPostChange} ref={newPostElement} value={props.state.newPostText} onKeyPress={OnClickEnter} />
                 </div>
                 <div>
                     <button onClick={addPost}>Add post</button>
