@@ -2,21 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {addMessage, addPost, state, StateType, subscribe, updateNewMessageText, updateNewPostText} from './Redux/State';
 import {BrowserRouter} from 'react-router-dom';
+import {StateType, store} from './Redux/State';
 
 
-export let rerenderEntireTree=(state:StateType)=>{
+export let rerenderEntireTree = (state: StateType) => {
 
     ReactDOM.render(<BrowserRouter>
-            <App state={state} addPost={addPost} addMessage={addMessage} updateNewPostText={updateNewPostText} updateNewMessageText={updateNewMessageText}/>
+            <App state={store.getState()} addPost={store.addPost.bind(store)} addMessage={store.addMessage.bind(store)}
+                 updateNewPostText={store.updateNewPostText.bind(store)} updateNewMessageText={store.updateNewMessageText.bind(store)}/>
         </BrowserRouter>,
         document.getElementById('root')
     );
-}
-rerenderEntireTree(state)
+};
+rerenderEntireTree(store.getState());
 
-subscribe(()=>{rerenderEntireTree(state)})
+store.subscribe(() => {
+    rerenderEntireTree(store.getState());
+});
 // export type PostType = {
 //     id:number
 //     message: string
