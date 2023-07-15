@@ -57,8 +57,8 @@ export const Dialogs: React.FC<PropsType> = (props) => {
             <div className={s.addForm}>
                 <textarea value={props.state.newMessageText} onChange={onMessageChange}
                           style={{width: '827px', height: '58px'}} ref={newMessageElement}
-                          onKeyPress={OnClickEnter}> </textarea>
-                <button onClick={addMessage}>+</button>
+                          onKeyPress={OnClickEnter} placeholder={"Enter your message"}> </textarea>
+                <button onClick={addMessage}>Send</button>
             </div>
         </>
     );

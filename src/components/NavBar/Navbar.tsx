@@ -11,7 +11,7 @@ type PropsType = {
 export const Navbar: React.FC<PropsType> = (props) => {
 
     let itemsNavbar = props.state.navItems.map((el, i) => el === 'Messages' ?
-        <div><NavLink to={'/Dialogs'} activeClassName={s.active}>Messages</NavLink></div> :
+        <div key={i}><NavLink to={'/Dialogs'} activeClassName={s.active}>Messages</NavLink></div> :
         <div key={i}><NavLink to={`/${el}`}
                               activeClassName={s.active}>{el}</NavLink>
         </div>);
