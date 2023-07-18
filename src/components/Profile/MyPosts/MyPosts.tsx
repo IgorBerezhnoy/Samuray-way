@@ -3,16 +3,16 @@ import s from './MyPosts.module.css';
 import {Post} from './Post/Post';
 import {
     ActionType,
-    AddPostActionCreator,
-    PostsType, updateNewPostTextTypeAC,
-} from '../../../Redux/State';
+    PostsType,
+
+} from '../../../Redux/Store';
+import {AddPostActionCreator, updateNewPostTextTypeAC} from '../../../Redux/profile-reducer';
 
 
 type PropsType = {
     state: { posts: PostsType, newPostText: string }
     dispatch: (action: ActionType) => void
 }
-
 
 
 export const MyPosts: React.FC<PropsType> = (props) => {

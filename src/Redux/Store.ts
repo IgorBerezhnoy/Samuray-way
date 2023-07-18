@@ -1,3 +1,7 @@
+import {AddPostTypeAT, profileReducer, updateNewPostTextTypeAT} from './profile-reducer';
+import {AddMessageTypeAT, dialogsReducer, updateNewMessageTextTypeAT} from './diologs-reducer';
+import {navbarReducer} from './navbar-reducer';
+
 export type PostType = {
     id: number
     message: string
@@ -19,8 +23,10 @@ export type MassageType = {
 }
 export type MassagesType = MassageType[]
 
+export type ProfilePage = { posts: PostsType, newPostText: string };
+
 export type StateType = {
-    profilePage: { posts: PostsType, newPostText: string }
+    profilePage: ProfilePage
     dialogsPage: { dialogs: DialogsType, messages: MassagesType, newMessageText: string }
     navbar: { navItems: string[] }
 }
@@ -28,16 +34,7 @@ export type StateType = {
 export type ActionType = AddPostTypeAT | AddMessageTypeAT | updateNewPostTextTypeAT | updateNewMessageTextTypeAT
 
 
-export type AddPostTypeAT = { type: 'ADD-POST' }
-export type AddMessageTypeAT = { type: 'ADD-MESSAGE' }
-export type  updateNewPostTextTypeAT = { type: 'UPDATE-NEW-POST-TEXT', newText: string }
-export type  updateNewMessageTextTypeAT = { type: 'UPDATE-NEW-MESSAGE-TEXT', newText: string }
 
-
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const ADD_POST = 'ADD-POST';
-const ADD_MESSAGE = 'ADD-MESSAGE';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 
 export let store = {
     _state: {
@@ -88,53 +85,17 @@ export let store = {
 
 
     dispatch(action: ActionType) {
-
-        if (action.type === 'ADD-POST') {
-            let newPost: PostType = {
-                id: 5,
-                message: this._state.profilePage.newPostText,
-                like: 0
-            };
-            // state = {...state, profilePage: {...state.profilePage, posts: [newPost, ...state.profilePage.posts]}}
-            this._state.profilePage.posts.unshift(newPost);
-            this._state.profilePage.newPostText = '';
-            this._callSubscriber(this._state);
-
-        } else if (action.type === 'ADD-MESSAGE') {
-            let newMessage: MassageType = {
-                id: 5,
-                message: this._state.dialogsPage.newMessageText
-            };
-            this._state.dialogsPage.messages.push(newMessage);
-            this._state.dialogsPage.newMessageText = '';
-            this._callSubscriber(this._state);
-
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.newPostText = action.newText;
-            this._callSubscriber(this._state);
-
-        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
-            this._state.dialogsPage.newMessageText = action.newText;
-            this._callSubscriber(this._state);
-
-        } else {
-            console.error('New Error');
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage,action)
+        this._state.dialogsPage=dialogsReducer( this._state.dialogsPage,action)
+        this._state.navbar=navbarReducer(this._state.navbar,action)
+        this._callSubscriber(this._state);
     }
 };
 
-export const AddPostActionCreator = (): AddPostTypeAT => ({type: ADD_POST});
-export const updateNewPostTextTypeAC = (text: string): updateNewPostTextTypeAT => ({
-    type: UPDATE_NEW_POST_TEXT,
-    newText: text
-});
 
 
-export const AddMessageTypeAC = (): AddMessageTypeAT => ({type: ADD_MESSAGE});
-export const updateNewMessageTextTypeAC = (text: string): updateNewMessageTextTypeAT => ({
-    type: UPDATE_NEW_MESSAGE_TEXT,
-    newText: text
-});
+
+
 
 // window.store=store
 // export let state: StateType = {

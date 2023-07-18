@@ -3,10 +3,11 @@ import s from './Dialogs.module.css';
 import {DialogItem} from './DialogItem/DialogItem';
 import {Message} from './Message/Message';
 import {
-    ActionType, AddMessageTypeAC,
+    ActionType,
     DialogsType,
-    MassagesType, updateNewMessageTextTypeAC,
-} from '../../Redux/State';
+    MassagesType,
+} from '../../Redux/Store';
+import {AddMessageTypeAC, updateNewMessageTextTypeAC} from '../../Redux/diologs-reducer';
 
 type PropsType = {
     state: { dialogs: DialogsType, messages: MassagesType, newMessageText: string }
