@@ -1,8 +1,8 @@
 import React from 'react';
 import s from './Profile.module.css'
-import {MyPosts} from './MyPosts/MyPosts';
 import {ProfileInfo} from './ProfileInfo/ProfileInfo';
 import {ActionType, PostsType} from '../../Redux/Store';
+import {MyPostsContainer} from './MyPosts/MyPostsContainer';
 
 
 type PropsType={
@@ -17,7 +17,7 @@ export const Profile:React.FC<PropsType>=(props)=> {
     return (
         <div className={s.content} >
             <ProfileInfo/>
-            <MyPosts state={props.state} dispatch={props.dispatch}/>
+            <MyPostsContainer state={props.state} dispatch={props.dispatch}/>
         </div>
     );
 }

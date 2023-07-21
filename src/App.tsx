@@ -9,6 +9,7 @@ import {News} from './components/News/News';
 import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
 import {ActionType, StateType} from './Redux/Store';
+import {DialogsContainer} from './components/Dialogs/DialogsContainer';
 
 
 type PropsType = {
@@ -23,7 +24,7 @@ const App: React.FC<PropsType> = (props) => {
             <Navbar state={props.state.navbar} friends={props.state.dialogsPage.dialogs}/>
             <div className={'appWrapper'}>
                 <Route path={'/dialogs'}
-                       render={() => <Dialogs state={props.state.dialogsPage} dispatch={props.dispatch}/>}/>
+                       render={() => <DialogsContainer  state={props.state.dialogsPage} dispatch={props.dispatch}/>}/>
                 <Route path={'/profile'}
                        render={() => <Profile state={props.state.profilePage}  dispatch={props.dispatch}/>}/>
                 <Route path={'/news'} render={() => <News/>}/>

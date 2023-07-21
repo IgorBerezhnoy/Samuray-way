@@ -1,10 +1,10 @@
-import {ActionType, DialogsType, MassagesType, MassageType} from './Store';
+import {ActionType, DialogsType, MessagesType, MassageType} from './Store';
 
 
 export type AddMessageTypeAT = { type: 'ADD-MESSAGE' }
 export type  updateNewMessageTextTypeAT = { type: 'UPDATE-NEW-MESSAGE-TEXT', newText: string }
 
-type StateType = { dialogs: DialogsType, messages: MassagesType, newMessageText: string  }
+type StateType = { dialogs: DialogsType, messages: MessagesType, newMessageText: string  }
 
 const ADD_MESSAGE = 'ADD-MESSAGE';
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';

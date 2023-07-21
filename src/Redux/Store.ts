@@ -21,13 +21,13 @@ export type MassageType = {
     message: string
 
 }
-export type MassagesType = MassageType[]
+export type MessagesType = MassageType[]
 
 export type ProfilePage = { posts: PostsType, newPostText: string };
 
 export type StateType = {
     profilePage: ProfilePage
-    dialogsPage: { dialogs: DialogsType, messages: MassagesType, newMessageText: string }
+    dialogsPage: { dialogs: DialogsType, messages: MessagesType, newMessageText: string }
     navbar: { navItems: string[] }
 }
 
