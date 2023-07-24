@@ -33,7 +33,18 @@ export type StateType = {
 
 export type ActionType = AddPostTypeAT | AddMessageTypeAT | updateNewPostTextTypeAT | updateNewMessageTextTypeAT
 
-
+export type StoreType={
+    // _state:StateType
+    // _callSubscriber:(state: StateType)=>void
+    // getState:()=>StateType
+    // subscribe:(observer: () => any)=>void
+    // dispatch:(action: ActionType)=>void
+    _state:any
+    _callSubscriber:any
+    getState:any
+    subscribe:any
+    dispatch:any
+}
 
 
 export let store = {
@@ -91,6 +102,7 @@ export let store = {
         this._callSubscriber(this._state);
     }
 };
+
 
 
 

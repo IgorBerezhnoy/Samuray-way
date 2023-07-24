@@ -1,4 +1,4 @@
-import {combineReducers, createStore} from 'redux';
+import {combineReducers, createStore, Store} from 'redux';
 import {profileReducer} from './profile-reducer';
 import {dialogsReducer} from './diologs-reducer';
 import {navbarReducer} from './navbar-reducer';
@@ -9,4 +9,10 @@ let reducers = combineReducers({
     navbar: navbarReducer
 });
 
-export let store = createStore(reducers);
+
+
+
+export let store: RootStoreType = createStore(reducers);
+
+export type RootStoreType = Store<RootStateType>
+export type RootStateType = ReturnType<typeof reducers>

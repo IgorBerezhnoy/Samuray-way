@@ -2,25 +2,18 @@ import React from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from 'react-router-dom';
 import {DialogsType} from '../../Redux/Store';
+import {StoreContext} from '../../StoreContext';
 
 type PropsType = {
-    state: { navItems: string[] }
-    friends: DialogsType
+    itemsNavbar:JSX.Element[]
+    friendsNavbar:JSX.Element[]
 }
 
 export const Navbar: React.FC<PropsType> = (props) => {
-
-    let itemsNavbar = props.state.navItems.map((el, i) => el === 'Messages' ?
-        <div key={i}><NavLink to={'/Dialogs'} activeClassName={s.active}>Messages</NavLink></div> :
-        <div key={i}><NavLink to={`/${el}`}
-                              activeClassName={s.active}>{el}</NavLink>
-        </div>);
-    let friendsNavbar = props.friends.map((el, i) => <div><NavLink to={`/dialogs/${el.id}`}><img
-        className={s.imgFriends} src={el.srs}/>{el.name}</NavLink></div>).slice(0, 3);
     return (
         <nav className={s.nav}>
             <div className={s.item}>
-                {itemsNavbar}
+                {props.itemsNavbar}
                 {/*<div><NavLink to="/Profile" activeClassName={s.active}>Profile</NavLink></div>*/}
                 {/*<div><NavLink to={'/Dialogs'} activeClassName={s.active}>Messages</NavLink></div>*/}
                 {/*<div><NavLink to={'/News'} activeClassName={s.active}> News</NavLink></div>*/}
@@ -34,12 +27,10 @@ export const Navbar: React.FC<PropsType> = (props) => {
                         {/*</div>*/}
                         {/*<div ><NavLink to={'/dialogs/3'}><img className={s.imgFriends}*/}
                         {/*    src={'img/1761894.png'}/> Sveta </NavLink></div>*/}
-                        {friendsNavbar}
+                        {props.friendsNavbar}
 
                     </div>
                 </div>
             </div>
-        </nav>
-
-    );
+        </nav>);
 };

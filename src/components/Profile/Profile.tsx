@@ -4,20 +4,21 @@ import {ProfileInfo} from './ProfileInfo/ProfileInfo';
 import {ActionType, PostsType} from '../../Redux/Store';
 import {MyPostsContainer} from './MyPosts/MyPostsContainer';
 
+//
+// type PropsType={
+//     state: { posts: PostsType, newPostText: string }
+//         dispatch:(action:ActionType)=>void
+// }
 
-type PropsType={
-    state: { posts: PostsType, newPostText: string }
-        dispatch:(action:ActionType)=>void
-}
-
-export const Profile:React.FC<PropsType>=(props)=> {
+export const Profile:React.FC=(props)=> {
 
 
 
     return (
         <div className={s.content} >
             <ProfileInfo/>
-            <MyPostsContainer state={props.state} dispatch={props.dispatch}/>
+            {/*<MyPostsContainer state={props.state} dispatch={props.dispatch}/>*/}
+            <MyPostsContainer/>
         </div>
     );
 }
