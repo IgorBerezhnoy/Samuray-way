@@ -22,9 +22,9 @@ export const profileReducer = (state:StateType = initialState, action: ActionTyp
     switch (action.type) {
         case 'ADD-POST':
             let newPost: PostType = {
-                id: 5,
+                id: state.posts.length,
                 message: state.newPostText,
-                like: 0
+                like:0
             };
 
             return {...state,posts:[newPost,...state.posts],newPostText:""}

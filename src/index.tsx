@@ -4,25 +4,17 @@ import './index.css';
 import App from './App';
 import {BrowserRouter} from 'react-router-dom';
 import { store} from './Redux/redux-store';
-import {StateType} from './Redux/Store';
 import {Provider} from 'react-redux';
 
 /// Тип временно изменить не забудь
-export let rerenderEntireTree = (state: StateType) => {
+
     ReactDOM.render(<BrowserRouter>
         <Provider store={store}>
             <App />
         </Provider>
         </BrowserRouter>,
-        document.getElementById('root')
-    );
-};
-rerenderEntireTree(store.getState());
+        document.getElementById('root'));
 
-store.subscribe(() => {
-    let state = store.getState()
-    rerenderEntireTree(state);
-});
 // export type PostType = {
 //     id:number
 //     message: string

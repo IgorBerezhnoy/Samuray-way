@@ -34,7 +34,7 @@ export const dialogsReducer = (state:StateType=initialState, action: ActionType)
     switch (action.type) {
         case 'ADD-MESSAGE':
             let newMessage: MassageType = {
-                id: 5,
+                id: state.messages.length,
                 message: state.newMessageText
             };
 
