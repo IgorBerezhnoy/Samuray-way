@@ -8,18 +8,16 @@ import {
 } from '../../Redux/Store';
 
 type PropsType = {
-    dialogs: DialogsType
-    messages: MessagesType
-    newMessageText: string
+    dialogsPage: { dialogs: DialogsType, messages: MessagesType, newMessageText: string }
     addMessage: () => void
     onMessageChange: (text: string) => void
 }
 
 export const Dialogs: React.FC<PropsType> = (props) => {
-    let dialogsItems = props.dialogs.map(el => <DialogItem key={el.id} name={el.name} id={el.id} srs={el.srs}/>);
+    let dialogsItems = props.dialogsPage.dialogs.map(el => <DialogItem key={el.id} name={el.name} id={el.id} srs={el.srs}/>);
 
 
-    let messagesItems = props.messages.map(el => <Message key={el.id} message={el.message}/>);
+    let messagesItems = props.dialogsPage.messages.map(el => <Message key={el.id} message={el.message}/>);
 
     let newMessageElement = React.createRef<HTMLTextAreaElement>();
 
@@ -55,7 +53,7 @@ export const Dialogs: React.FC<PropsType> = (props) => {
 
             </div>
             <div className={s.addForm}>
-                <textarea value={props.newMessageText} onChange={onMessageChange}
+                <textarea value={props.dialogsPage.newMessageText} onChange={onMessageChange}
                           style={{width: '827px', height: '58px'}} ref={newMessageElement}
                           onKeyPress={OnClickEnter} placeholder={'Enter your message'}> </textarea>
                 <button onClick={addMessage}>Send</button>

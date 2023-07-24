@@ -2,22 +2,21 @@ import React, {KeyboardEvent} from 'react';
 import s from './MyPosts.module.css';
 import {Post} from './Post/Post';
 import {
-    PostsType,
+    PostsType, ProfilePage,
 
 } from '../../../Redux/Store';
 
 type PropsType = {
-    posts: PostsType
-    newPostText: string
+    profilePage: ProfilePage
 
-    updateNewPostText: (text: string) => void
     addPost: () => void
+    updateNewPostText: (text: string) => void
 }
 
 
 export const MyPosts: React.FC<PropsType> = (props) => {
 
-    let postsItems = props.posts.map(el => <Post key={el.id} message={el.message} like={el.like}/>);
+    let postsItems = props.profilePage.posts.map(el => <Post key={el.id} message={el.message} like={el.like}/>);
 
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 
@@ -39,6 +38,7 @@ export const MyPosts: React.FC<PropsType> = (props) => {
     };
 
     const onPostChange = () => {
+        debugger
         let text = newPostElement.current?.value;
         if (text) {
             // const action: ActionType = updateNewPostTextTypeAC(text);
@@ -53,7 +53,7 @@ export const MyPosts: React.FC<PropsType> = (props) => {
             <h3>My post</h3>
             <div>
                 <div>
-                    <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}
+                    <textarea onChange={onPostChange} ref={newPostElement} value={props.profilePage.newPostText}
                               onKeyPress={OnClickEnter}/>
                 </div>
                 <div>

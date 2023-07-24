@@ -26,12 +26,10 @@ export const profileReducer = (state:StateType = initialState, action: ActionTyp
                 message: state.newPostText,
                 like: 0
             };
-            state.posts.unshift(newPost);
-            state.newPostText = '';
-            return state;
+
+            return {...state,posts:[newPost,...state.posts],newPostText:""}
         case 'UPDATE-NEW-POST-TEXT':
-            state.newPostText = action.newText;
-            return state;
+            return {...state,newPostText:action.newText};
         default:
             console.error('New Error');
             return state;

@@ -5,7 +5,7 @@ import App from './App';
 import {BrowserRouter} from 'react-router-dom';
 import { store} from './Redux/redux-store';
 import {StateType} from './Redux/Store';
-import {Provider, StoreContext} from './StoreContext';
+import {Provider} from 'react-redux';
 
 /// Тип временно изменить не забудь
 export let rerenderEntireTree = (state: StateType) => {

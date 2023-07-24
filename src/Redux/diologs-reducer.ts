@@ -1,4 +1,5 @@
 import {ActionType, DialogsType, MessagesType, MassageType} from './Store';
+import {message} from 'antd';
 
 
 export type AddMessageTypeAT = { type: 'ADD-MESSAGE' }
@@ -36,12 +37,10 @@ export const dialogsReducer = (state:StateType=initialState, action: ActionType)
                 id: 5,
                 message: state.newMessageText
             };
-            state.messages.push(newMessage);
-            state.newMessageText = '';
-            return state
+
+            return {...state,messages:[...state.messages,newMessage],newMessageText:""}
         case 'UPDATE-NEW-MESSAGE-TEXT':
-            state.newMessageText = action.newText;
-            return state
+            return {...state,newMessageText:action.newText}
         default:
             console.error('New Error');
             return state
