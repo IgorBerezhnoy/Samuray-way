@@ -31,7 +31,6 @@ export const profileReducer = (state:StateType = initialState, action: ActionTyp
         case 'UPDATE-NEW-POST-TEXT':
             return {...state,newPostText:action.newText};
         default:
-            console.error('New Error');
             return state;
     }
 

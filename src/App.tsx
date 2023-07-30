@@ -8,6 +8,7 @@ import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
 import {NavbarContainer} from './components/NavBar/NavbarContainer';
 import {DialogsContainer} from './components/Dialogs/DialogsContainer';
+import UsersContainer from './components/users/UsersContainer';
 
 //
 // type PropsType = {
@@ -28,6 +29,9 @@ const App: React.FC = (props) => {
                 <Route path={'/profile'}
                        // render={() => <Profile state={props.state.profilePage}  dispatch={props.dispatch}/>}/>
                        render={() => <Profile />}/>
+                <Route path={'/users'}
+                       // render={() => <Profile state={props.state.profilePage}  dispatch={props.dispatch}/>}/>
+                       render={() => <UsersContainer/>}/>
                 <Route path={'/news'} render={() => <News/>}/>
                 <Route path={'/music'} render={() => <Music/>}/>
                 <Route path={'/settings'} render={() => <Settings/>}/>
@@ -40,13 +44,13 @@ const App: React.FC = (props) => {
 };
 
 export default App;
-    // addPost: (post: string) => void
-    // addMessage: (message: string) => void
-    // updateNewPostText: (text: string) => void
-    // updateNewMessageText: (text: string) => void
-                {/*<Profile/>*/}
-                {/*<Route path={"/dialogs"} component={Dialogs}/>*/}
-                {/*<Route path={"/profile"} component={Profile}/>*/}
-                {/*<Route path={"/news"} component={News}/>*/}
-                {/*<Route path={"/music"} component={Music}/>*/}
-                {/*<Route path={"/settings"} component={Settings}/>*/}
+    // // addPost: (post: string) => void
+    // // addMessage: (message: string) => void
+    // // updateNewPostText: (text: string) => void
+    // // updateNewMessageText: (text: string) => void
+    //             {/*<Profile/>*/}
+    //             {/*<Route path={"/dialogs"} component={Dialogs}/>*/}
+    //             {/*<Route path={"/profile"} component={Profile}/>*/}
+    //             {/*<Route path={"/news"} component={News}/>*/}
+    //             {/*<Route path={"/music"} component={Music}/>*/}
+    //             {/*<Route path={"/settings"} component={Settings}/>*/}

@@ -1,10 +1,10 @@
 import React from 'react';
-import {
-    StateType
-} from '../../Redux/Store';
 import {AddMessageTypeAC, updateNewMessageTextTypeAC} from '../../Redux/diologs-reducer';
 import {Dialogs} from './Dialogs';
 import {connect} from 'react-redux';
+import {RootStateType} from '../../Redux/redux-store';
+import {ActionType} from '../../Redux/Store';
+
 
 // type PropsType = {
 //     state: { dialogs: DialogsType, messages: MessagesType, newMessageText: string }
@@ -12,12 +12,12 @@ import {connect} from 'react-redux';
 // }
 
 
-let mapStateToProps = (state: StateType) => {
+let mapStateToProps = (state:RootStateType) => {
     return {
         dialogsPage: state.dialogsPage
     };
 };
-let mapDispatchToProps = (dispatch:any) => {
+let mapDispatchToProps = (dispatch:(action: ActionType) => void) => {
     return {
         addMessage: () => {
             const action = AddMessageTypeAC();
