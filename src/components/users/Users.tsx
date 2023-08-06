@@ -2,6 +2,7 @@ import React from 'react';
 import {UserType} from '../../Redux/users-reducer';
 import s from './Users.module.css';
 import axios from 'axios';
+import {Button} from 'antd';
 
 
 type PropSType = {
@@ -14,17 +15,19 @@ type PropSType = {
 export const Users = (props: PropSType) => {
 
 
-    if (props.users.length === 0) {
+    let getUsers=()=>{
+        if (props.users.length === 0) {
 
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-            debugger
-            props.setUsers(response.data.items);
-        });
+            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+                debugger
+                props.setUsers(response.data.items);
+            });
 
-
+        }
     }
     return (
         <div className={s.usersWrapper}>
+        <button onClick={getUsers}> Get users</button>
             {props.users.map(el => <div className={s.users} key={el.id}>
                 <div>
                     <div><img width={'50px'}
