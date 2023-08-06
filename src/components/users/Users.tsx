@@ -1,6 +1,7 @@
 import React from 'react';
 import {UserType} from '../../Redux/users-reducer';
 import s from './Users.module.css';
+import axios from 'axios';
 
 
 type PropSType = {
@@ -11,54 +12,41 @@ type PropSType = {
 }
 
 export const Users = (props: PropSType) => {
-if (props.users.length===0) {
-    props.setUsers([{
-        id: 1,
-        src: `${process.env.PUBLIC_URL}/img/user5.png`,
-        followed: true,
-        fullName: 'Dmitry',
-        status: 'I am a boss',
-        location: {city: 'Minsk', country: 'Belarus',}
-    },
-        {
-            id: 2,
-            src: `${process.env.PUBLIC_URL}/img/Sveta.png`,
-            followed: true,
-            fullName: 'Sasha',
-            status: 'I like a football',
-            location: {city: 'Moscow', country: 'Russia',}
-        },
-        {
-            id: 3,
-            src: `${process.env.PUBLIC_URL}/img/user7.png`,
-            followed: false,
-            fullName: 'Andrew',
-            status: 'I am a boss too',
-            location: {city: 'Kiev', country: 'Ukraine',}
-        }])
-}
+
+
+    if (props.users.length === 0) {
+
+        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+            debugger
+            props.setUsers(response.data.items);
+        });
+
+
+    }
     return (
         <div className={s.usersWrapper}>
             {props.users.map(el => <div className={s.users} key={el.id}>
                 <div>
-                    <div><img width={'50px'} src={el.src} alt={el.fullName} className={s.photo}/></div>
+                    <div><img width={'50px'}
+                              src={el.photos.small !== null ? el.photos.small : `${process.env.PUBLIC_URL}/img/user5.png`}
+                              alt={el.name} className={s.photo}/></div>
                     <div>
                         {el.followed ? <button onClick={() => props.follow(el.id)}>Follow</button> :
                             <button onClick={() => props.unfollow(el.id)}>Unfollow</button>}
 
-                            </div>
-                            </div>
-                            <div >
+                    </div>
+                </div>
+                <div>
                             <span>
-                            <div>{el.fullName}</div>
+                            <div>{el.name}</div>
                             <div>{el.status}</div>
                             </span>
-                            <span>
-                            <div>{el.location.country}</div>
-                            <div>{el.location.city}</div>
+                    <span>
+                            <div>{'el.location.country'}</div>
+                            <div>{'el.location.city'}</div>
                             </span>
-                            </div>
-                            </div>)}
-                            </div>
-                            );
-                        };
+                </div>
+            </div>)}
+        </div>
+    );
+};

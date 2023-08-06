@@ -8,17 +8,19 @@ export type SetUsersAT = { type: 'SETTERS', users: UserType[] }
 
 export type ActionType = FollowAT | UnfollowAT|SetUsersAT
 
-export type UserType = {
-    id: number,
-    src:string
-    followed: boolean,
-    fullName: string,
-    status: string,
-    location: {
-        city: string,
-        country: string
-    }
-}
+export type UserType = any
+    // {
+    // photos: string | undefined;
+    // id: number,
+    // src:string
+    // followed: boolean,
+    // name: string,
+    // status: string,
+    // location: {
+    //     city: string,
+    //     country: string
+    // }
+// }
 type StateType = { users: UserType[] }
 
 
