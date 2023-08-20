@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Users} from './Users';
 import {RootStateType} from '../../Redux/redux-store';
-import {ActionType, followAC, setUsersAC, SetUsersAT, unfollowAC, UserType} from '../../Redux/users-reducer';
+import {ActionType, followAC, setUsersAC, unfollowAC, UserType} from '../../Redux/users-reducer';
+import {UsersC} from './UsersC';
 
 
 
@@ -29,4 +29,4 @@ let mapDispatchToProps=(dispatch:(action: ActionType) => void)=>{
 
     }
 }
-export default connect (mapStateToProps,mapDispatchToProps) (Users)
+export default connect (mapStateToProps,mapDispatchToProps) (UsersC)
