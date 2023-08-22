@@ -12,3 +12,7 @@
 .users{
     display: flex;
 }
+
+.selectedPage{
+    font-weight: bold;
+}
