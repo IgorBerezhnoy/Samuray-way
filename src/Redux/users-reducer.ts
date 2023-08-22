@@ -27,7 +27,7 @@ type StateType = { users: UserType[], pageSize:number,totalUsesCount:number, cur
 let initialState: StateType = {
     users: [],
     pageSize:20,
-    totalUsesCount:0,
+    totalUsesCount:60,
 currentPage:1
 };
 export const usersReducers = (state: StateType = initialState, action: ActionType): StateType => {

@@ -14,7 +14,7 @@ let initialState: StateType = {
                 {id: 1, message: 'Hello world!', like: 4},
                 {id: 2, message: 'Hi how are you?', like: 432},
                 {id: 3, message: 'post 3', like: 32},
-                {id: 3, message: 'Yo', like: 0}
+                {id: 4, message: 'Yo', like: 0}
             ],
             newPostText: '',
 };

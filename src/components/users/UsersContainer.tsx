@@ -10,9 +10,50 @@ import {
     unfollowAC,
     UserType
 } from '../../Redux/users-reducer';
-import {UsersC} from './UsersC';
+import axios from 'axios';
+import {UsersFoo} from './UsersFoo';
 
 
+type UsersCProps = {
+    users: UserType[]
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
+    setUsers: (users: UserType[]) => void,
+    pageSize: number,
+    totalUsesCount: number
+    currentPage: number
+    setCurrentPage: (page: number) => void
+    setTotalCount: (count: number) => void
+
+}
+ class UsersAPI extends React.Component<UsersCProps> {
+
+    componentDidMount() {
+        console.log(this.props)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+            .then(response => {
+                this.props.setUsers(response.data.items);
+                this.props.setTotalCount(response.data.totalCount);
+            });
+    }
+
+    onSetCurrentPage(page: number) {
+        debugger
+        this.props.setCurrentPage(page);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
+            .then(response => {
+                this.props.setUsers(response.data.items);
+            });
+    }
+
+    render() {
+
+        return <UsersFoo users={this.props.users} currentPage={this.props.currentPage}
+                         onSetCurrentPage={this.onSetCurrentPage.bind(this)} follow={this.props.follow}
+                         unfollow={this.props.unfollow} pageSize={this.props.pageSize} totalUsesCount={this.props.totalUsesCount}/>
+            ;
+    }
+}
 
 let mapStateToProps=(state:RootStateType)=>{
     return{
@@ -46,4 +87,4 @@ let mapDispatchToProps=(dispatch:(action: ActionType) => void)=>{
 
     }
 }
-export default connect (mapStateToProps,mapDispatchToProps) (UsersC)
+export default connect (mapStateToProps,mapDispatchToProps) (UsersAPI)

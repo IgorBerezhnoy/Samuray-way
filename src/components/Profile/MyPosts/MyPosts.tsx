@@ -16,6 +16,7 @@ type PropsType = {
 
 export const MyPosts: React.FC<PropsType> = (props) => {
 
+    console.log(props.profilePage.posts);
     let postsItems = props.profilePage.posts.map(el => <Post key={el.id} message={el.message} like={el.like}/>);
 
     let newPostElement = React.createRef<HTMLTextAreaElement>();
