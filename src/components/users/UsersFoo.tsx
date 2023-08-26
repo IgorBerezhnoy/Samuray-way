@@ -1,19 +1,20 @@
 import React from 'react';
 import s from './Users.module.css';
 import {UserType} from '../../Redux/users-reducer';
+import {NavLink} from 'react-router-dom';
 
-type PropsType={
-    totalUsesCount:number
-    pageSize:number
-    onSetCurrentPage:(page: number)=>void
-    currentPage:number
-    unfollow:(userId: number) => void
+type PropsType = {
+    totalUsesCount: number
+    pageSize: number
+    onSetCurrentPage: (page: number) => void
+    currentPage: number
+    unfollow: (userId: number) => void
     follow: (userId: number) => void
     users: UserType[]
-    isFetching:boolean
+    isFetching: boolean
 }
 
-export const UsersFoo :React.FC<PropsType> = (props) => {
+export const UsersFoo: React.FC<PropsType> = (props) => {
     let pageCount = Math.ceil(props.totalUsesCount / props.pageSize);
     let pages = [];
     for (let i = 1; i <= pageCount; i++) {
@@ -23,10 +24,10 @@ export const UsersFoo :React.FC<PropsType> = (props) => {
     return (
         < div className={s.usersWrapper}>
             < div>
-                {pages.map(el =>  {
+                {pages.map(el => {
 
-                    return  <span key={el} onClick={() => props.onSetCurrentPage(el)}
-                          className={props.currentPage === el ? s.selectedPage : ''}>{el}  </span>;
+                    return <span key={el} onClick={() => props.onSetCurrentPage(el)}
+                                 className={props.currentPage === el ? s.selectedPage : ''}>{el}  </span>;
                 })}
             </div>
 
@@ -34,9 +35,9 @@ export const UsersFoo :React.FC<PropsType> = (props) => {
             {
                 props.users.map(el => <div className={''} key={el.id}>
                     <div>
-                        <div><img width={'50px'}
-                                  src={el.photos.small !== null ? el.photos.small : `${process.env.PUBLIC_URL}/img/user5.png`}
-                                  alt={el.name} className={''}/></div>
+                        <div><NavLink to={`/profile/${el.id}`}><img width={'50px'}
+                                                                    src={el.photos.small !== null ? el.photos.small : `${process.env.PUBLIC_URL}/img/user5.png`}
+                                                                    alt={el.name} className={''}/></NavLink></div>
                         <div>
                             {el.followed ? <button onClick={() => props.follow(el.id)}>Follow</button> :
                                 <button onClick={() => props.unfollow(el.id)}>Unfollow</button>}

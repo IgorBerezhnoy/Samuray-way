@@ -1,4 +1,4 @@
-import {AddPostTypeAT, profileReducer, updateNewPostTextTypeAT} from './profile-reducer';
+import {AddPostTypeAT, profileReducer, SetUserProfileAT, updateNewPostTextTypeAT} from './profile-reducer';
 import {AddMessageTypeAT, dialogsReducer, updateNewMessageTextTypeAT} from './diologs-reducer';
 import {navbarReducer} from './navbar-reducer';
 
@@ -31,7 +31,7 @@ export type StateType = {
     navbar: { navItems: string[] }
 }
 
-export type ActionType = AddPostTypeAT | AddMessageTypeAT | updateNewPostTextTypeAT | updateNewMessageTextTypeAT
+export type ActionType = AddPostTypeAT | AddMessageTypeAT | updateNewPostTextTypeAT | updateNewMessageTextTypeAT|SetUserProfileAT
 
 export type StoreType={
     // _state:StateType

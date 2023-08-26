@@ -1,6 +1,6 @@
 import {ActionType, PostsType, PostType} from './Store';
 
-type StateType = {  posts: PostsType, newPostText: string }
+type StateType = {  posts: PostsType, newPostText: string ,profile:null}
 
 export type AddPostTypeAT = { type: 'ADD-POST' }
 export type  updateNewPostTextTypeAT = { type: 'UPDATE-NEW-POST-TEXT', newText: string }
@@ -17,6 +17,7 @@ let initialState: StateType = {
                 {id: 4, message: 'Yo', like: 0}
             ],
             newPostText: '',
+    profile:null
 };
 export const profileReducer = (state:StateType = initialState, action: ActionType): StateType => {
     switch (action.type) {
@@ -30,6 +31,9 @@ export const profileReducer = (state:StateType = initialState, action: ActionTyp
             return {...state,posts:[newPost,...state.posts],newPostText:""}
         case 'UPDATE-NEW-POST-TEXT':
             return {...state,newPostText:action.newText};
+        case 'SET-USER-PROFILE':{
+            return {...state,profile:action.profile}
+        }
         default:
             return state;
     }
@@ -40,3 +44,9 @@ export const updateNewPostText = (text: string): updateNewPostTextTypeAT => ({
     type: UPDATE_NEW_POST_TEXT,
     newText: text
 });
+
+export type SetUserProfileAT=ReturnType<typeof setUserProfileAC>
+export const setUserProfileAC = (profile: any) => ({
+    type: "SET-USER-PROFILE",
+    profile
+}as const);
