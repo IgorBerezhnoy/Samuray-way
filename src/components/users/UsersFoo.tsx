@@ -10,6 +10,7 @@ type PropsType={
     unfollow:(userId: number) => void
     follow: (userId: number) => void
     users: UserType[]
+    isFetching:boolean
 }
 
 export const UsersFoo :React.FC<PropsType> = (props) => {
