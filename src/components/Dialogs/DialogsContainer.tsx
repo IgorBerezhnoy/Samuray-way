@@ -1,9 +1,8 @@
 import React from 'react';
-import {AddMessageTypeAC, updateNewMessageTextTypeAC} from '../../Redux/diologs-reducer';
+import {addMessage, onMessageChange} from '../../Redux/diologs-reducer';
 import {Dialogs} from './Dialogs';
 import {connect} from 'react-redux';
 import {RootStateType} from '../../Redux/redux-store';
-import {ActionType} from '../../Redux/Store';
 
 
 // type PropsType = {
@@ -17,20 +16,12 @@ let mapStateToProps = (state:RootStateType) => {
         dialogsPage: state.dialogsPage
     };
 };
-let mapDispatchToProps = (dispatch:(action: ActionType) => void) => {
-    return {
-        addMessage: () => {
-            const action = AddMessageTypeAC();
-          dispatch(action);
-        },
-        onMessageChange: (text:string) => {
-            const action = updateNewMessageTextTypeAC(text);
-    dispatch(action);
-        }
-    };
-};
 
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+
+export const DialogsContainer = connect(mapStateToProps, {
+    addMessage,
+    onMessageChange
+})(Dialogs);
 
 
 // export const DialogsContainer: React.FC = (props) => {
