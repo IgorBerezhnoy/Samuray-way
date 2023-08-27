@@ -3,7 +3,7 @@ import s from './ProfileInfo.module.css';
 import {ProfileType} from '../../../Redux/profile-reducer';
 import Preloader from '../../common/Preloader/Preloader';
 
-type PropsType = { profile: ProfileType }
+type PropsType = { profile: ProfileType | null }
 export const ProfileInfo: React.FC<PropsType> = (props) => {
 
     if (!!props.profile) {
@@ -14,13 +14,14 @@ export const ProfileInfo: React.FC<PropsType> = (props) => {
                     src={props.profile.photos.large ? props.profile.photos.large : `${process.env.PUBLIC_URL}/img/user5.png`}
                     width={'200px'}/>
                 <div>
+                    {props.profile.fullName && <div>FullName: {props.profile.fullName}</div>}
+                    {props.profile.aboutMe && <div>aboutMe: {props.profile.aboutMe}</div>}
 
-                    <div>aboutMe: {props.profile.aboutMe}</div>
                     <div>contacts:</div>
-                    <div>vk:{props.profile.contacts.vk}</div>
-                    <div>twitter:{props.profile.contacts.twitter}</div>
-                    <div>instagram: {props.profile.contacts.instagram}</div>
-                    <div>github: {props.profile.contacts.github}</div>
+                    {props.profile.contacts.vk && <div>vk:{props.profile.contacts.vk}</div>}
+                    {props.profile.contacts.twitter && <div>twitter:{props.profile.contacts.twitter}</div>}
+                    {props.profile.contacts.instagram && <div>instagram: {props.profile.contacts.instagram}</div>}
+                    {props.profile.contacts.github && <div>github: {props.profile.contacts.github}</div>}
 
 
                 </div>
