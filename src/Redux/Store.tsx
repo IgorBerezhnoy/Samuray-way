@@ -96,7 +96,7 @@ export type StoreType={
 
 
     dispatch(action: ActionType) {
-        this._state.profilePage = profileReducer(this._state.profilePage,action)
+        // this._state.profilePage = profileReducer(this._state.profilePage,action)
         this._state.dialogsPage=dialogsReducer( this._state.dialogsPage,action)
         this._state.navbar=navbarReducer(this._state.navbar,action)
         this._callSubscriber(this._state);

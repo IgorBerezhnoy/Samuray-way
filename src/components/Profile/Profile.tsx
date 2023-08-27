@@ -2,20 +2,20 @@ import React from 'react';
 import s from './Profile.module.css'
 import {ProfileInfo} from './ProfileInfo/ProfileInfo';
 import {MyPostsContainer} from './MyPosts/MyPostsContainer';
+import {ProfileType} from '../../Redux/profile-reducer';
 
 //
-// type PropsType={
-//     state: { posts: PostsType, newPostText: string }
-//         dispatch:(action:ActionType)=>void
-// }
+type PropsType={
+    profile:ProfileType
+}
 
-export const Profile:React.FC=(props)=> {
+export const Profile:React.FC<PropsType>=(props)=> {
 
 
 
     return (
         <div className={s.content} >
-            <ProfileInfo/>
+            <ProfileInfo profile={props.profile}/>
             {/*<MyPostsContainer state={props.state} dispatch={props.dispatch}/>*/}
             <MyPostsContainer/>
         </div>
