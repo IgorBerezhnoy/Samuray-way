@@ -1,20 +1,27 @@
 import React from 'react';
-import {ActionType, StateType} from '../../../Redux/Store';
-import {addPost, updateNewPostText} from '../../../Redux/profile-reducer';
+import {addPost, PostType, updateNewPostText} from '../../../Redux/profile-reducer';
 import {connect} from 'react-redux';
-import {Dialogs} from '../../Dialogs/Dialogs';
 import {MyPosts} from './MyPosts';
+import {RootStateType} from '../../../Redux/redux-store';
 
 
 // type PropsType = {
 //     state: { posts: PostsType, newPostText: string }
 //     dispatch: (action: ActionType) => void
 // }
+export type MyPostContainerPropsType = mapStateToPropsType & mapDispatchToPropsType
 
+type mapStateToPropsType = { posts: PostType[], newPostText: string, }
+type mapDispatchToPropsType = {
+    addPost: () => void,
+    updateNewPostText: (text: string) => void
+}
 
-let mapStateToProps = (state: StateType) => {
+let mapStateToProps = (state: RootStateType): mapStateToPropsType => {
+
     return {
-        profilePage: state.profilePage
+        posts: state.profilePage.posts,
+        newPostText: state.profilePage.newPostText
     };
 };
 

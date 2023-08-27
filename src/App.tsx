@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import {Header} from './components/Header/Header';
 import {Route} from 'react-router-dom';
 import {News} from './components/News/News';
 import {Music} from './components/Music/Music';
@@ -9,6 +8,8 @@ import {NavbarContainer} from './components/NavBar/NavbarContainer';
 import {DialogsContainer} from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
+import HeaderContainer from './components/Header/HeaderContainer';
+
 
 //
 // type PropsType = {
@@ -19,7 +20,7 @@ import ProfileContainer from './components/Profile/ProfileContainer';
 const App: React.FC = (props) => {
     return (
         <div className="app-wrapper">
-            <Header/>
+            <HeaderContainer />
             {/*<Navbar state={props.state.navbar} friends={props.state.dialogsPage.dialogs}/>*/}
             <NavbarContainer/>
             <div className={'appWrapper'}>

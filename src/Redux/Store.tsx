@@ -1,6 +1,6 @@
-import {AddPostTypeAT, profileReducer, SetUserProfileAT, updateNewPostTextTypeAT} from './profile-reducer';
-import {AddMessageTypeAT, dialogsReducer, updateNewMessageTextTypeAT} from './diologs-reducer';
+import {dialogsReducer} from './diologs-reducer';
 import {navbarReducer} from './navbar-reducer';
+import {ActionType} from './users-reducer';
 
 export type PostType = {
     id: number
@@ -25,13 +25,13 @@ export type MessagesType = MassageType[]
 
 export type ProfilePage = { posts: PostsType, newPostText: string };
 
-export type StateType = {
+ type StateType = {
     profilePage: ProfilePage
     dialogsPage: { dialogs: DialogsType, messages: MessagesType, newMessageText: string }
     navbar: { navItems: string[] }
 }
 
-export type ActionType = AddPostTypeAT | AddMessageTypeAT | updateNewPostTextTypeAT | updateNewMessageTextTypeAT|SetUserProfileAT
+ // type ActionType = AddPostTypeAT | AddMessageTypeAT | updateNewPostTextTypeAT | updateNewMessageTextTypeAT|SetUserProfileAT
 
 export type StoreType={
     // _state:StateType
@@ -95,7 +95,7 @@ export type StoreType={
     },
 
 
-    dispatch(action: ActionType) {
+    dispatch(action: any) {
         // this._state.profilePage = profileReducer(this._state.profilePage,action)
         this._state.dialogsPage=dialogsReducer( this._state.dialogsPage,action)
         this._state.navbar=navbarReducer(this._state.navbar,action)

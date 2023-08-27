@@ -2,7 +2,6 @@ import React from 'react';
 
 import {Navbar} from './Navbar';
 import {connect} from 'react-redux';
-import { StateType} from '../../Redux/Store';
 import {RootStateType} from '../../Redux/redux-store';
 
 // type PropsType = {

@@ -1,11 +1,3 @@
-import {ActionType, DialogsType, MessagesType, MassageType} from './Store';
-
-
-
-export type AddMessageTypeAT = { type: 'ADD-MESSAGE' }
-export type  updateNewMessageTextTypeAT = { type: 'UPDATE-NEW-MESSAGE-TEXT', newText: string }
-
-type StateType = { dialogs: DialogsType, messages: MessagesType, newMessageText: string  }
 
 const ADD_MESSAGE = 'ADD-MESSAGE';
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
@@ -52,3 +44,27 @@ export const onMessageChange = (text: string): updateNewMessageTextTypeAT => ({
     type: UPDATE_NEW_MESSAGE_TEXT,
     newText: text
 });
+
+
+
+
+
+export type DialogType = {
+    id: string
+    name: string
+    srs: string
+}
+export type DialogsType = DialogType[]
+
+export type MassageType = {
+    id: number
+    message: string
+
+}
+export type MessagesType = MassageType[]
+
+export type AddMessageTypeAT = { type: 'ADD-MESSAGE' }
+export type  updateNewMessageTextTypeAT = { type: 'UPDATE-NEW-MESSAGE-TEXT', newText: string }
+
+type StateType = { dialogs: DialogsType, messages: MessagesType, newMessageText: string  }
+export type ActionType =  AddMessageTypeAT |updateNewMessageTextTypeAT

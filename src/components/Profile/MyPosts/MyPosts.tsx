@@ -1,71 +1,64 @@
 import React, {KeyboardEvent} from 'react';
 import s from './MyPosts.module.css';
 import {Post} from './Post/Post';
-import {
-    PostsType, ProfilePage,
-
-} from '../../../Redux/Store';
-
-type PropsType = {
-    profilePage: ProfilePage
-
-    addPost: () => void
-    updateNewPostText: (text: string) => void
-}
+import {MyPostContainerPropsType} from './MyPostsContainer';
 
 
-export const MyPosts: React.FC<PropsType> = (props) => {
+export class MyPosts extends React.Component<MyPostContainerPropsType> {
+    render() {
 
-    console.log(props.profilePage.posts);
-    let postsItems = props.profilePage.posts.map(el => <Post key={el.id} message={el.message} like={el.like}/>);
+        console.log(this.props.posts);
+        let postsItems = this.props.posts.map(el => <Post key={el.id}
+                                                          message={el.message} like={el.like}/>);
 
-    let newPostElement = React.createRef<HTMLTextAreaElement>();
+        let newPostElement = React.createRef<HTMLTextAreaElement>();
 
-    const addPost = () => {
+        const addPost = () => {
 
 
-        let text = newPostElement.current?.value;
-        if (text) {
-            // const action = AddPostActionCreator();
-            // props.dispatch(action);
-            props.addPost();
-        }
-    };
+            let text = newPostElement.current?.value;
+            if (text) {
+                // const action = AddPostActionCreator();
+                // props.dispatch(action);
+                this.props.addPost();
+            }
+        };
 
-    const OnClickEnter = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-        if (e.key === 'Enter') {
-            addPost();
-        }
-    };
+        const OnClickEnter = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+            if (e.key === 'Enter') {
+                addPost();
+            }
+        };
 
-    const onPostChange = () => {
-        debugger
-        let text = newPostElement.current?.value;
-        if (text) {
-            // const action: ActionType = updateNewPostTextTypeAC(text);
-            // props.dispatch(action);
-            props.updateNewPostText(text);
-        }
-    };
+        const onPostChange = () => {
+            debugger
+            let text = newPostElement.current?.value;
+            if (text) {
+                // const action: ActionType = updateNewPostTextTypeAC(text);
+                // props.dispatch(action);
+                this.props.updateNewPostText(text);
+            }
+        };
 
-    return (
-        <div className={s.postsBlock}>
+        return (
+            <div className={s.postsBlock}>
 
-            <h3>My post</h3>
-            <div>
+                <h3>My post</h3>
                 <div>
-                    <textarea onChange={onPostChange} ref={newPostElement} value={props.profilePage.newPostText}
+                    <div>
+                    <textarea onChange={onPostChange} ref={newPostElement} value={this.props.newPostText}
                               onKeyPress={OnClickEnter}/>
+                    </div>
+                    <div>
+                        <button onClick={addPost}>Add post</button>
+                    </div>
                 </div>
-                <div>
-                    <button onClick={addPost}>Add post</button>
+                <div className={s.posts}>
+                    <div>{postsItems}
+                    </div>
                 </div>
             </div>
-            <div className={s.posts}>
-                <div>{postsItems}
-                </div>
-            </div>
-        </div>
 
-    );
-};
+        );
+    }
+}
