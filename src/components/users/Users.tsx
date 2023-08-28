@@ -2,7 +2,6 @@ import React from 'react';
 import {UserType} from '../../Redux/users-reducer';
 import s from './Users.module.css';
 import axios from 'axios';
-import {Button} from 'antd';
 
 
 type PropSType = {
@@ -15,7 +14,7 @@ type PropSType = {
 export const Users = (props: PropSType) => {
 
 
-    let getUsers=()=>{
+    let getUsers = () => {
         if (props.users.length === 0) {
 
             axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
@@ -24,18 +23,42 @@ export const Users = (props: PropSType) => {
             });
 
         }
+    };
+
+    const onClickFollowHandler = (user: UserType) => {
+        debugger
+        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {}, {withCredentials: true})
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    props.follow(user.id);
+                }
+            });
+    };
+    const onClickUnfollowHandler = (user: UserType) => {
+        debugger
+        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {withCredentials: true})
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    props.unfollow(user.id);
+                }
+            });
+    };
+
+
+    const testFunc = () => {
+        alert(1)
     }
     return (
         <div className={s.usersWrapper}>
-        <button onClick={getUsers}> Get users</button>
+            <button onClick={getUsers}> Get users</button>
             {props.users.map(el => <div className={s.users} key={el.id}>
                 <div>
                     <div><img width={'50px'}
                               src={el.photos.small !== null ? el.photos.small : `${process.env.PUBLIC_URL}/img/user5.png`}
                               alt={el.name} className={s.photo}/></div>
                     <div>
-                        {el.followed ? <button onClick={() => props.follow(el.id)}>Follow</button> :
-                            <button onClick={() => props.unfollow(el.id)}>Unfollow</button>}
+                        {el.followed ? <button onClick={testFunc}>Follow</button> :
+                            <button onClick={testFunc}>Unfollow</button>}
 
                     </div>
                 </div>

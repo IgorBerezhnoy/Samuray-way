@@ -34,7 +34,7 @@ class UsersAPI extends React.Component<UsersCProps> {
     componentDidMount() {
         this.props.toggleIsFetching(true);
         console.log(this.props);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {withCredentials: true})
             .then(response => {
                 this.props.toggleIsFetching(false);
                 this.props.setUsers(response.data.items);
@@ -46,7 +46,7 @@ class UsersAPI extends React.Component<UsersCProps> {
 
         this.props.setCurrentPage(page);
         this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`, {withCredentials: true})
             .then(response => {
                 this.props.toggleIsFetching(false);
                 this.props.setUsers(response.data.items);
@@ -58,10 +58,17 @@ class UsersAPI extends React.Component<UsersCProps> {
         return <>
             {this.props.isFetching ?
                 <Preloader/> :
-                <UsersFoo users={this.props.users} currentPage={this.props.currentPage}
-                          onSetCurrentPage={this.onSetCurrentPage.bind(this)} follow={this.props.follow}
-                          unfollow={this.props.unfollow} pageSize={this.props.pageSize}
-                          totalUsesCount={this.props.totalUsesCount} isFetching={this.props.isFetching}/>}</>
+                <UsersFoo users={this.props.users}
+                          currentPage={this.props.currentPage}
+                          onSetCurrentPage={this.onSetCurrentPage.bind(this)}
+                          follow={this.props.follow}
+                          unfollow={this.props.unfollow}
+                          pageSize={this.props.pageSize}
+                          totalUsesCount={this.props.totalUsesCount}
+                          isFetching={this.props.isFetching}
+                />
+            }
+        </>
             ;
     }
 }

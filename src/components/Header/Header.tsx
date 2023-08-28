@@ -7,7 +7,7 @@ type PropsType = HeaderContainerPropsType
 export const Header: React.FC<PropsType> = (props) => {
     return (
         <header className={s.header}>
-            <img src={`${process.env.PUBLIC_URL}/img/logo.png`}/>
+            <NavLink to={'/profile'}><img src={`${process.env.PUBLIC_URL}/img/logo.png`}/></NavLink>
 
             {props.isAuth ? <div className={s.loginBlock}>
                     <NavLink to={'/profile/'+props.id}>{props.login}</NavLink>

@@ -1,4 +1,4 @@
-import {combineReducers, createStore, Store} from 'redux';
+import {combineReducers, compose, createStore, Store} from 'redux';
 import {profileReducer} from './profile-reducer';
 import {dialogsReducer} from './diologs-reducer';
 import {navbarReducer} from './navbar-reducer';
@@ -13,8 +13,8 @@ let reducers = combineReducers({
     authMe: authReducer
 });
 
-
-export let store: RootStoreType = createStore(reducers);
+const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+export let store: RootStoreType = createStore(reducers, composeEnhancers());
 
 export type RootStoreType = Store<RootStateType>
 export type RootStateType = ReturnType<typeof reducers>
