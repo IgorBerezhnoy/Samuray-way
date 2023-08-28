@@ -2,7 +2,7 @@ import React from 'react';
 import s from './Users.module.css';
 import {UserType} from '../../Redux/users-reducer';
 import {NavLink} from 'react-router-dom';
-import axios from 'axios';
+import {usersAPI} from '../../api/Api';
 
 type PropsType = {
     totalUsesCount: number
@@ -23,7 +23,7 @@ export const UsersFoo: React.FC<PropsType> = (props) => {
     }
     const onClickFollowHandler = (user: UserType) => {
 
-        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {}, {withCredentials: true})
+        usersAPI.followUsersApi(user)
             .then(response => {
                 if (response.data.resultCode === 0) {
                     props.follow(user.id);
@@ -31,8 +31,7 @@ export const UsersFoo: React.FC<PropsType> = (props) => {
             });
     };
     const onClickUnfollowHandler = (user: UserType) => {
-
-        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {withCredentials: true})
+        usersAPI.unfollowUsersApi(user)
             .then(response => {
                 if (response.data.resultCode === 0) {
                     props.unfollow(user.id);

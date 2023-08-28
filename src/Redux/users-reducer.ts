@@ -24,7 +24,7 @@ type StateType = { users: UserType[], pageSize: number, totalUsesCount: number, 
 let initialState: StateType = {
     users: [],
     pageSize: 20,
-    totalUsesCount: 60,
+    totalUsesCount: 20,
     currentPage: 1,
     isFetching: false
 };
