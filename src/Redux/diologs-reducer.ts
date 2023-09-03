@@ -22,7 +22,7 @@ let initialState= {
         ],
         newMessageText: ''
 }
-export const dialogsReducer = (state:StateType=initialState, action: ActionType):StateType => {
+export const dialogsReducer = (state:StateType=initialState, action: DialogsActionType):StateType => {
     switch (action.type) {
         case 'ADD-MESSAGE':
             let newMessage: MassageType = {
@@ -67,4 +67,4 @@ export type AddMessageTypeAT = { type: 'ADD-MESSAGE' }
 export type  updateNewMessageTextTypeAT = { type: 'UPDATE-NEW-MESSAGE-TEXT', newText: string }
 
 type StateType = { dialogs: DialogsType, messages: MessagesType, newMessageText: string  }
-export type ActionType =  AddMessageTypeAT |updateNewMessageTextTypeAT
+export type DialogsActionType =  AddMessageTypeAT |updateNewMessageTextTypeAT

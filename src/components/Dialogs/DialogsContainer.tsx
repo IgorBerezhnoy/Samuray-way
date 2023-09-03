@@ -2,7 +2,7 @@ import React from 'react';
 import {addMessage, onMessageChange} from '../../Redux/diologs-reducer';
 import {Dialogs} from './Dialogs';
 import {connect} from 'react-redux';
-import {RootStateType} from '../../Redux/redux-store';
+import {AppRootStateType} from '../../Redux/redux-store';
 
 
 // type PropsType = {
@@ -11,7 +11,7 @@ import {RootStateType} from '../../Redux/redux-store';
 // }
 
 
-let mapStateToProps = (state:RootStateType) => {
+let mapStateToProps = (state:AppRootStateType) => {
     return {
         dialogsPage: state.dialogsPage
     };

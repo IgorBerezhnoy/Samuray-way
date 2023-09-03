@@ -1,3 +1,7 @@
+import {AppThunk} from './redux-store';
+import {profileApi, usersAPI} from '../api/Api';
+import {followingInProgressAC, unfollow, UserType} from './users-reducer';
+
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const ADD_POST = 'ADD-POST';
 
@@ -12,7 +16,7 @@ let initialState: StateType = {
     profile: null,
     profilePage: null
 };
-export const profileReducer = (state: StateType = initialState, action: ActionType): StateType => {
+export const profileReducer = (state: StateType = initialState, action: ProfilePageActionType): StateType => {
     switch (action.type) {
         case 'ADD-POST':
             let newPost: PostType = {
@@ -66,7 +70,7 @@ export type ProfileType = {
     }
 }
 export type SetUserProfileAT = ReturnType<typeof setUserProfileAC>
-export type ActionType = AddPostTypeAT | updateNewPostTextTypeAT | SetUserProfileAT
+export type ProfilePageActionType = AddPostTypeAT | updateNewPostTextTypeAT | SetUserProfileAT
 export type PostType = {
     id: number
     message: string
@@ -82,3 +86,11 @@ export type StateType = {
 
 export type AddPostTypeAT = { type: 'ADD-POST' }
 export type  updateNewPostTextTypeAT = { type: 'UPDATE-NEW-POST-TEXT', newText: string }
+
+export const setUserProfileTC = (userId:string): AppThunk => (dispatch, getState) => {
+    if (!userId) userId = '29562';
+    profileApi(userId)
+        .then(response => {
+            dispatch(setUserProfileAC(response.data))
+        });
+};

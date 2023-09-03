@@ -5,9 +5,9 @@ let initialState= {
         navItems: ['Profile', 'Messages', 'News', 'Music', 'Settings', "Users"]
 }
 
-class ActionType {
+export type NavActionType ={
 }
 
-export const navbarReducer=(state:StateType=initialState,action:ActionType)=>{
+export const navbarReducer=(state:StateType=initialState,action:NavActionType)=>{
     return state
 }

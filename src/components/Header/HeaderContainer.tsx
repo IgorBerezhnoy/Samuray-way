@@ -1,21 +1,14 @@
 import React from 'react';
 import {Header} from './Header';
 import {connect} from 'react-redux';
-import {setUserDateAC, StateType,} from '../../Redux/auth-reducer';
-import {RootStateType} from '../../Redux/redux-store';
-import {AuthMeApi} from '../../api/Api';
+import {AuthMeTC, setUserDateAC, StateType,} from '../../Redux/auth-reducer';
+import {AppRootStateType} from '../../Redux/redux-store';
 
 export type HeaderContainerPropsType = MapDispatchToPropsType & MapStateToPropsType
 
 class HeaderContainer extends React.Component<HeaderContainerPropsType> {
     componentDidMount() {
-
-        AuthMeApi()
-            .then((res) => {
-                if (res.data.resultCode === 0) {
-                    this.props.setUserDateAC(res.data.data);
-                }
-            });
+        AuthMeTC()
     }
 
     render() {
@@ -27,7 +20,7 @@ type MapStateToPropsType = { isAuth: boolean, login: string | null, id: number|n
 
 type MapDispatchToPropsType = { setUserDateAC: (state: StateType) => void }
 
-let mapStateToProps = (state: RootStateType): MapStateToPropsType => {
+let mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
     return {
         isAuth: state.authMe.isAuth,
         login: state.authMe.login,
@@ -36,4 +29,4 @@ let mapStateToProps = (state: RootStateType): MapStateToPropsType => {
 };
 
 
-export default connect(mapStateToProps, {setUserDateAC})(HeaderContainer);
+export default connect(mapStateToProps, {setUserDateAC,AuthMeTC})(HeaderContainer);

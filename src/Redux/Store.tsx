@@ -1,6 +1,6 @@
 import {dialogsReducer} from './diologs-reducer';
 import {navbarReducer} from './navbar-reducer';
-import {ActionType} from './users-reducer';
+import {UsersReducerActionType} from './users-reducer';
 
 export type PostType = {
     id: number

@@ -2,14 +2,14 @@ import React from 'react';
 
 import {Navbar} from './Navbar';
 import {connect} from 'react-redux';
-import {RootStateType} from '../../Redux/redux-store';
+import {AppRootStateType} from '../../Redux/redux-store';
 
 // type PropsType = {
 //     state: { navItems: string[] }
 //     friends: DialogsType
 // }
 
-let mapStateToProps = (state:RootStateType ) => {
+let mapStateToProps = (state:AppRootStateType ) => {
     return {
         navbar: state.navbar,
         dialogsPage: state.dialogsPage

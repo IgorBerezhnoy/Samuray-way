@@ -2,15 +2,14 @@ import React from 'react';
 import s from './Users.module.css';
 import {UserType} from '../../Redux/users-reducer';
 import {NavLink} from 'react-router-dom';
-import {usersAPI} from '../../api/Api';
 
 type PropsType = {
     totalUsesCount: number
     pageSize: number
     onSetCurrentPage: (page: number) => void
     currentPage: number
-    unfollow: (userId: number) => void
-    follow: (userId: number) => void
+    unfollowTC: (user: UserType) => void
+    followTC: (user: UserType) => void
     users: UserType[]
     isFetching: boolean
     followingInProgress: number[]
@@ -24,25 +23,10 @@ export const UsersFoo: React.FC<PropsType> = (props) => {
         pages.push(i);
     }
     const onClickFollowHandler = (user: UserType) => {
-        props.followingInProgressAC(user.id, true);
-        usersAPI.followUsersApi(user)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    props.follow(user.id);
-                }
-                props.followingInProgressAC(user.id, false);
-            });
+        props.followTC(user);
     };
     const onClickUnfollowHandler = (user: UserType) => {
-        props.followingInProgressAC(user.id, true);
-
-        usersAPI.unfollowUsersApi(user)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    props.unfollow(user.id);
-                }
-                props.followingInProgressAC(user.id, false);
-            });
+        props.unfollowTC(user);
     };
 
     pages = pages.slice(0, 10);
@@ -88,3 +72,22 @@ export const UsersFoo: React.FC<PropsType> = (props) => {
         </div>
     );
 };
+        // props.followingInProgressAC(user.id, true);
+        // usersAPI.followUsersApi(user)
+        //     .then(response => {
+        //         if (response.data.resultCode === 0) {
+        //             props.follow(user.id);
+        //         }
+        //         props.followingInProgressAC(user.id, false);
+        //     });
+
+
+        //   props.followingInProgressAC(user.id, true);
+        //
+        //   usersAPI.unfollowUsersApi(user)
+        //       .then(response => {
+        //           if (response.data.resultCode === 0) {
+        //               props.unfollow(user.id);
+        //           }
+        //           props.followingInProgressAC(user.id, false);
+        //       });
