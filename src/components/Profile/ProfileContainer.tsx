@@ -28,13 +28,14 @@ class ProfileContainerAPI extends React.Component<CommonPropsType> {
 }
 
 type MapStateToPropsType = {
-    profile: ProfileType | null
+    profile: ProfileType | null, isAuth: boolean
 }
-type MapDispatchToPropsType = { setUserProfileAC: (profile: ProfileType) => void, setUserProfileTC : (userId:string)=>void }
+type MapDispatchToPropsType = { setUserProfileAC: (profile: ProfileType) => void, setUserProfileTC: (userId: string) => void }
 
 let mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
     return {
-        profile: state.profilePage.profile
+        profile: state.profilePage.profile,
+        isAuth: state.authMe.isAuth
     };
 
 };

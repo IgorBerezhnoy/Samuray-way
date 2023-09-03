@@ -6,14 +6,19 @@ import {
     DialogsType,
     MessagesType,
 } from '../../Redux/Store';
+import {Redirect} from 'react-router-dom';
 
 type PropsType = {
     dialogsPage: { dialogs: DialogsType, messages: MessagesType, newMessageText: string }
     addMessage: () => void
-    onMessageChange: (text: string) => void
+    onMessageChange: (text: string) => void,
+    isAuth:boolean
 }
 
 export const Dialogs: React.FC<PropsType> = (props) => {
+
+    if (!props.isAuth)return <Redirect to={"/login"}/>
+
     let dialogsItems = props.dialogsPage.dialogs.map(el => <DialogItem key={el.id} name={el.name} id={el.id} srs={el.srs}/>);
 
 

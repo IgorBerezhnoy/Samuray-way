@@ -13,7 +13,8 @@ import {AppRootStateType} from '../../Redux/redux-store';
 
 let mapStateToProps = (state:AppRootStateType) => {
     return {
-        dialogsPage: state.dialogsPage
+        dialogsPage: state.dialogsPage,
+        isAuth: state.authMe.isAuth
     };
 };
 

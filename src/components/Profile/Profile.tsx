@@ -4,14 +4,17 @@ import {ProfileInfo} from './ProfileInfo/ProfileInfo';
 import {MyPostsContainer} from './MyPosts/MyPostsContainer';
 import {ProfileType} from '../../Redux/profile-reducer';
 import Preloader from '../common/Preloader/Preloader';
+import {Redirect} from 'react-router-dom';
 
 //
 type PropsType = {
     profile: ProfileType | null
+    isAuth: boolean
 }
 
 export const Profile: React.FC<PropsType> = (props) => {
 
+    if (!props.isAuth)return <Redirect to={"/login"}/>
 
     return (
         <div className={s.content}>

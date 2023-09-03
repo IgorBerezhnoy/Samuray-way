@@ -1,8 +1,8 @@
 import React from 'react';
 import s from './Header.module.css';
 import {NavLink} from 'react-router-dom';
-import {HeaderContainerPropsType} from './HeaderContainer';
 import {StateType} from '../../Redux/auth-reducer';
+import {Login} from '../Login/Login';
 
 type PropsType = { isAuth: boolean, login: string | null, id: number | null, setUserDateAC: (state: StateType) => void }
 export const Header: React.FC<PropsType> = (props) => {
