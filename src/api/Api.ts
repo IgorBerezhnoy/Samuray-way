@@ -23,11 +23,11 @@ export const usersAPI = {
     }
 };
 export const AuthMeApi = () => {
-    return instance.get('https://social-network.samuraijs.com/api/1.0/auth/me')
+    return instance.get('auth/me')
 
         .then(res => res);
 };
 export const profileApi = (userId: string) => {
-    return instance.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
+    return instance.get(`profile/${userId}`)
         .then(res => res);
 };

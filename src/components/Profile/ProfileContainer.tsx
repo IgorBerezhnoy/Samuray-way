@@ -16,7 +16,7 @@ class ProfileContainerAPI extends React.Component<CommonPropsType> {
 
     componentDidMount() {
         let userId = this.props.match.params.userId;
-        setUserProfileTC(userId);
+        this.props.setUserProfileTC(userId);
 
     }
 
@@ -30,7 +30,7 @@ class ProfileContainerAPI extends React.Component<CommonPropsType> {
 type MapStateToPropsType = {
     profile: ProfileType | null
 }
-type MapDispatchToPropsType = { setUserProfileAC: (profile: ProfileType) => void }
+type MapDispatchToPropsType = { setUserProfileAC: (profile: ProfileType) => void, setUserProfileTC : (userId:string)=>void }
 
 let mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
     return {

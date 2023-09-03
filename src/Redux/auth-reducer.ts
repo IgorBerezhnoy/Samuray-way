@@ -42,6 +42,7 @@ type SetUserDateAT = ReturnType<typeof setUserDateAC>
 
 
 export const AuthMeTC = (): AppThunk => (dispatch, getState) => {
+    debugger
     AuthMeApi()
         .then((res) => {
             if (res.data.resultCode === 0) {

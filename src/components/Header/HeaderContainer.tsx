@@ -8,7 +8,7 @@ export type HeaderContainerPropsType = MapDispatchToPropsType & MapStateToPropsT
 
 class HeaderContainer extends React.Component<HeaderContainerPropsType> {
     componentDidMount() {
-        AuthMeTC()
+        this.props.AuthMeTC()
     }
 
     render() {
@@ -18,7 +18,7 @@ class HeaderContainer extends React.Component<HeaderContainerPropsType> {
 
 type MapStateToPropsType = { isAuth: boolean, login: string | null, id: number|null }
 
-type MapDispatchToPropsType = { setUserDateAC: (state: StateType) => void }
+type MapDispatchToPropsType = { setUserDateAC: (state: StateType) => void, AuthMeTC: () => void }
 
 let mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
     return {
