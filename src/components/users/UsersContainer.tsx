@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {RootStateType} from '../../Redux/redux-store';
 import {
-    follow,
+    follow, followingInProgressAC,
     setCurrentPage,
     setTotalCount,
     setUsers,
@@ -26,7 +26,9 @@ type UsersCProps = {
     setCurrentPage: (page: number) => void
     setTotalCount: (count: number) => void
     isFetching: boolean
-    toggleIsFetching: (isFetching: boolean) => void
+    toggleIsFetching: (isFetching: boolean) => void,
+    followingInProgress: number[]
+    followingInProgressAC:(userId: number, isFetching: boolean)=>void
 }
 
 class UsersAPI extends React.Component<UsersCProps> {
@@ -36,7 +38,6 @@ class UsersAPI extends React.Component<UsersCProps> {
         console.log(this.props);
         usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
             .then(response => {
-                debugger
                 this.props.toggleIsFetching(false);
                 this.props.setUsers(response.items);
                 this.props.setTotalCount(response.totalCount);
@@ -67,6 +68,8 @@ class UsersAPI extends React.Component<UsersCProps> {
                           pageSize={this.props.pageSize}
                           totalUsesCount={this.props.totalUsesCount}
                           isFetching={this.props.isFetching}
+                          followingInProgress={this.props.followingInProgress}
+                          followingInProgressAC={this.props.followingInProgressAC}
                 />
             }
         </>
@@ -80,7 +83,8 @@ let mapStateToProps = (state: RootStateType) => {
         pageSize: state.usersPage.pageSize,
         totalUsesCount: state.usersPage.totalUsesCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
     };
 
 };
@@ -101,6 +105,7 @@ export default connect(mapStateToProps, {
     setUsers,
     setCurrentPage,
     setTotalCount,
-    toggleIsFetching
+    toggleIsFetching,
+    followingInProgressAC
 
 })(UsersAPI);
