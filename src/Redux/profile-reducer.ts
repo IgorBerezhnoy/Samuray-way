@@ -1,6 +1,5 @@
 import {AppThunk} from './redux-store';
-import {profileApi, usersAPI} from '../api/Api';
-import {followingInProgressAC, unfollow, UserType} from './users-reducer';
+import {profileApi} from '../api/Api';
 
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const ADD_POST = 'ADD-POST';

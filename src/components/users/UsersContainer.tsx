@@ -14,6 +14,7 @@ import {
 } from '../../Redux/users-reducer';
 import {UsersFoo} from './UsersFoo';
 import Preloader from '../common/Preloader/Preloader';
+import {WithAuthRedirect} from '../../hoc/WithAuthRedirect';
 
 
 type UsersCProps = {
@@ -81,7 +82,7 @@ let mapStateToProps = (state: AppRootStateType) => {
 };
 
 
-export default connect(mapStateToProps, {
+export default WithAuthRedirect(connect(mapStateToProps, {
     setUsers,
     setCurrentPage,
     setTotalCount,
@@ -91,7 +92,7 @@ export default connect(mapStateToProps, {
     unfollowTC,
     followTC
 
-})(UsersAPI);
+})(UsersAPI));
 
 
 

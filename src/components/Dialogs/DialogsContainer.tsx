@@ -3,26 +3,24 @@ import {addMessage, onMessageChange} from '../../Redux/diologs-reducer';
 import {Dialogs} from './Dialogs';
 import {connect} from 'react-redux';
 import {AppRootStateType} from '../../Redux/redux-store';
+import {WithAuthRedirect} from '../../hoc/WithAuthRedirect';
 
 
 // type PropsType = {
 //     state: { dialogs: DialogsType, messages: MessagesType, newMessageText: string }
 //     dispatch: (action: ActionType) => void
 // }
-
-
-let mapStateToProps = (state:AppRootStateType) => {
+let mapStateToProps = (state: AppRootStateType) => {
     return {
         dialogsPage: state.dialogsPage,
-        isAuth: state.authMe.isAuth
     };
 };
 
 
-export const DialogsContainer = connect(mapStateToProps, {
+export const DialogsContainer = WithAuthRedirect(connect(mapStateToProps, {
     addMessage,
     onMessageChange
-})(Dialogs);
+})(Dialogs));
 
 
 // export const DialogsContainer: React.FC = (props) => {
