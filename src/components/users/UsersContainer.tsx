@@ -15,6 +15,9 @@ import {
 import {UsersFoo} from './UsersFoo';
 import Preloader from '../common/Preloader/Preloader';
 import {WithAuthRedirect} from '../../hoc/WithAuthRedirect';
+import {compose} from 'redux';
+import {setUserProfileAC, setUserProfileTC} from '../../Redux/profile-reducer';
+import {withRouter} from 'react-router-dom';
 
 
 type UsersCProps = {
@@ -82,17 +85,20 @@ let mapStateToProps = (state: AppRootStateType) => {
 };
 
 
-export default WithAuthRedirect(connect(mapStateToProps, {
-    setUsers,
-    setCurrentPage,
-    setTotalCount,
-    toggleIsFetching,
-    followingInProgressAC,
-    getUsersTC,
-    unfollowTC,
-    followTC
+export default compose<React.ComponentType>( connect(mapStateToProps,
+    {
+        setUsers,
+        setCurrentPage,
+        setTotalCount,
+        toggleIsFetching,
+        followingInProgressAC,
+        getUsersTC,
+        unfollowTC,
+        followTC
 
-})(UsersAPI));
+    }), withRouter,WithAuthRedirect)(UsersAPI)
+
+
 
 
 

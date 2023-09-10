@@ -4,6 +4,7 @@ import {Dialogs} from './Dialogs';
 import {connect} from 'react-redux';
 import {AppRootStateType} from '../../Redux/redux-store';
 import {WithAuthRedirect} from '../../hoc/WithAuthRedirect';
+import {compose} from 'redux';
 
 
 // type PropsType = {
@@ -17,10 +18,18 @@ let mapStateToProps = (state: AppRootStateType) => {
 };
 
 
-export const DialogsContainer = WithAuthRedirect(connect(mapStateToProps, {
+
+export default compose<React.ComponentType>(connect(mapStateToProps, {
     addMessage,
     onMessageChange
-})(Dialogs));
+}),WithAuthRedirect)(Dialogs)
+
+
+
+// export const DialogsContainer = WithAuthRedirect(connect(mapStateToProps, {
+//     addMessage,
+//     onMessageChange
+// })(Dialogs));
 
 
 // export const DialogsContainer: React.FC = (props) => {
