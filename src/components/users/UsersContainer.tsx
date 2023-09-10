@@ -16,7 +16,6 @@ import {UsersFoo} from './UsersFoo';
 import Preloader from '../common/Preloader/Preloader';
 import {WithAuthRedirect} from '../../hoc/WithAuthRedirect';
 import {compose} from 'redux';
-import {setUserProfileAC, setUserProfileTC} from '../../Redux/profile-reducer';
 import {withRouter} from 'react-router-dom';
 
 

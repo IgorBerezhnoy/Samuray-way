@@ -63,6 +63,7 @@ export type ProfileType = {
     'lookingForAJobDescription': any,
     'fullName': string,
     'userId': null,
+    status:string,
     'photos': {
         'small': null | string,
         'large': null | string

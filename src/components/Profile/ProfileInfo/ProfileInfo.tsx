@@ -2,6 +2,7 @@ import React from 'react';
 import s from './ProfileInfo.module.css';
 import {ProfileType} from '../../../Redux/profile-reducer';
 import Preloader from '../../common/Preloader/Preloader';
+import {ProfileStatus} from './ProfileStatus';
 
 type PropsType = { profile: ProfileType | null }
 export const ProfileInfo: React.FC<PropsType> = (props) => {
@@ -16,6 +17,7 @@ export const ProfileInfo: React.FC<PropsType> = (props) => {
                 <div>
                     {props.profile.fullName && <div>FullName: {props.profile.fullName}</div>}
                     {props.profile.aboutMe && <div>aboutMe: {props.profile.aboutMe}</div>}
+                    <ProfileStatus status={"props.profile.status"}/>
 
                     <div>contacts:</div>
                     {props.profile.contacts.vk && <div>vk:{props.profile.contacts.vk}</div>}
