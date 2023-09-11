@@ -18,7 +18,7 @@ import DialogsContainer from './components/Dialogs/DialogsContainer';
 //     dispatch:(action:ActionType)=>void
 // }
 
-const App: React.FC = (props) => {
+const App: React.FC = () => {
     return (
         <div className="app-wrapper">
             <HeaderContainer />

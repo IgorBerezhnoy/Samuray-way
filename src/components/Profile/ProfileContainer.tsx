@@ -8,7 +8,6 @@ import {compose} from 'redux';
 
 class ProfileContainerAPI extends React.Component<CommonPropsType> {
     componentDidMount() {
-        debugger
         let userId = this.props.match.params.userId;
         this.props.setUserProfileTC(userId);
         this.props.setUserStatusTC(userId);
@@ -16,7 +15,7 @@ class ProfileContainerAPI extends React.Component<CommonPropsType> {
 
     render() {
         return (
-            <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatusTC={updateStatusTC}/>
+            <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatusTC={this.props.updateStatusTC}/>
         );
     }
 }

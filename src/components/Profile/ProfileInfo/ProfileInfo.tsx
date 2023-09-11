@@ -17,7 +17,7 @@ export const ProfileInfo: React.FC<PropsType> = (props) => {
                 <div>
                     {props.profile.fullName && <div>FullName: {props.profile.fullName}</div>}
                     {props.profile.aboutMe && <div>aboutMe: {props.profile.aboutMe}</div>}
-                    <ProfileStatus status={props.status}/>
+                    <ProfileStatus status={props.status} updateStatusTC={props.updateStatusTC}/>
 
                     <div>contacts:</div>
                     {props.profile.contacts.vk && <div>vk:{props.profile.contacts.vk}</div>}

@@ -6,7 +6,6 @@ import {StateType} from '../../Redux/auth-reducer';
 type PropsType = { isAuth: boolean, login: string | null, id: string, setUserDateAC: (state: StateType) => void , setUserProfileTC : (id:string)=>void}
 export const Header: React.FC<PropsType> = (props) => {
     const onclickHandler=()=>{
-        debugger
         props.setUserProfileTC(props.id)
     }
     return (

@@ -39,7 +39,8 @@ export const profileApi = {
             .then(res => res);
     },
     updateStatus(status: string) {
-        return instance.put(` profile/status/}`, {status})
+        console.log(status);
+        return instance.put(`profile/status`, {status})
             .then(res => res);
     }
 };
