@@ -3,6 +3,7 @@ import {Header} from './Header';
 import {connect} from 'react-redux';
 import {AuthMeTC, setUserDateAC, StateType,} from '../../Redux/auth-reducer';
 import {AppRootStateType} from '../../Redux/redux-store';
+import {setUserProfileTC} from '../../Redux/profile-reducer';
 
 export type HeaderContainerPropsType = MapDispatchToPropsType & MapStateToPropsType
 
@@ -12,13 +13,14 @@ class HeaderContainer extends React.Component<HeaderContainerPropsType> {
     }
 
     render() {
-        return <Header setUserDateAC={this.props.setUserDateAC} login={this.props.login} isAuth={this.props.isAuth} id={this.props.id}/>;
+        // @ts-ignore
+        return <Header setUserDateAC={this.props.setUserDateAC} login={this.props.login} isAuth={this.props.isAuth} id={this.props.id} setUserProfileTC={this.props.setUserProfileTC}/>;
     }
 }
 
 type MapStateToPropsType = { isAuth: boolean, login: string | null, id: number|null }
 
-type MapDispatchToPropsType = { setUserDateAC: (state: StateType) => void, AuthMeTC: () => void }
+type MapDispatchToPropsType = { setUserDateAC: (state: StateType) => void, AuthMeTC: () => void, setUserProfileTC : (id:string)=>void}
 
 let mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
     return {
@@ -29,4 +31,4 @@ let mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
 };
 
 
-export default connect(mapStateToProps, {setUserDateAC,AuthMeTC})(HeaderContainer);
+export default connect(mapStateToProps, {setUserDateAC,AuthMeTC,setUserProfileTC})(HeaderContainer);

@@ -3,14 +3,18 @@ import s from './Header.module.css';
 import {NavLink} from 'react-router-dom';
 import {StateType} from '../../Redux/auth-reducer';
 
-type PropsType = { isAuth: boolean, login: string | null, id: number | null, setUserDateAC: (state: StateType) => void }
+type PropsType = { isAuth: boolean, login: string | null, id: string, setUserDateAC: (state: StateType) => void , setUserProfileTC : (id:string)=>void}
 export const Header: React.FC<PropsType> = (props) => {
+    const onclickHandler=()=>{
+        debugger
+        props.setUserProfileTC(props.id)
+    }
     return (
         <header className={s.header}>
-            <NavLink to={'/profile'}><img src={`${process.env.PUBLIC_URL}/img/logo.png`}/></NavLink>
+            <NavLink to={'/Profile/' + props.id} onClick={onclickHandler}><img src={`${process.env.PUBLIC_URL}/img/logo.png`}/></NavLink>
 
-            {props.isAuth ? <div className={s.loginBlock}>
-                    <NavLink to={'/profile/' + props.id}>{props.login}</NavLink>
+            {props.isAuth ? <div className={s.loginBlock} onClick={onclickHandler}>
+                    <NavLink to={'/Profile/' + props.id}>{props.login}</NavLink>
                 </div>
                 : <div className={s.loginBlock}>
                     <NavLink to={'/login'}>Login</NavLink>

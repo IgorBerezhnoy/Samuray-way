@@ -1,6 +1,5 @@
 import {AppThunk} from './redux-store';
-import {AuthMeApi, usersAPI} from '../api/Api';
-import {followingInProgressAC, unfollow, UserType} from './users-reducer';
+import {AuthMeApi} from '../api/Api';
 
 export type AuthResType = {
     data: StateType,
@@ -42,7 +41,7 @@ type SetUserDateAT = ReturnType<typeof setUserDateAC>
 
 
 export const AuthMeTC = (): AppThunk => (dispatch, getState) => {
-    AuthMeApi()
+    AuthMeApi.me()
         .then((res) => {
             if (res.data.resultCode === 0) {
                 dispatch(setUserDateAC(res.data.data));

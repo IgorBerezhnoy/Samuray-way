@@ -13,7 +13,8 @@ let initialState: StateType = {
     ],
     newPostText: '',
     profile: null,
-    profilePage: null
+    profilePage: null,
+    status: ''
 };
 export const profileReducer = (state: StateType = initialState, action: ProfilePageActionType): StateType => {
     switch (action.type) {
@@ -30,6 +31,12 @@ export const profileReducer = (state: StateType = initialState, action: ProfileP
         case 'SET-USER-PROFILE': {
             return {...state, profile: action.profile};
         }
+        case 'SET-USER-STATUS': {
+            return {...state, status: action.status};
+        }
+        case 'UPDATE-USER-STATUS': {
+            return {...state, status: action.status};
+        }
         default:
             return state;
     }
@@ -45,6 +52,61 @@ export const setUserProfileAC = (profile: ProfileType) => ({
     type: 'SET-USER-PROFILE',
     profile
 } as const);
+export const setUserStatusAC = (status: string) => ({
+    type: 'SET-USER-STATUS',
+    status
+} as const);
+export const updateUserStatusAC = (status: string) => ({
+    type: 'UPDATE-USER-STATUS',
+    status
+} as const);
+
+export const setUserProfileTC = (userId: string = '29562'): AppThunk => (dispatch) => {
+    profileApi.getProfile(userId)
+        .then(response => {
+            dispatch(setUserProfileAC(response.data));
+        });
+};
+export const setUserStatusTC = (userId: string= '29562'): AppThunk => (dispatch) => {
+
+    profileApi.getUserStatus(userId)
+        .then(response => {
+            dispatch(setUserStatusAC(response.data));
+        });
+};
+export const updateStatusTC = (status: string): AppThunk => (dispatch) => {
+    profileApi.updateStatus(status)
+        .then(response => {
+            if (response.data.reasultCode===0){
+            dispatch(updateUserStatusAC(status));
+            }
+        });
+};
+
+export type SetUserProfileAT = ReturnType<typeof setUserProfileAC>
+export type ProfilePageActionType =
+    AddPostTypeAT
+    | updateNewPostTextTypeAT
+    | SetUserProfileAT
+    | ReturnType<typeof setUserStatusAC> | ReturnType<typeof updateUserStatusAC>
+
+
+export type PostType = {
+    id: number
+    message: string
+    like: number
+}
+export type PostsType = PostType[]
+export type StateType = {
+    profilePage: null | ProfileType;
+    posts: PostType[],
+    newPostText: string,
+    profile: null | ProfileType,
+    status: string
+}
+
+export type AddPostTypeAT = { type: 'ADD-POST' }
+export type  updateNewPostTextTypeAT = { type: 'UPDATE-NEW-POST-TEXT', newText: string }
 
 
 export type ProfileType = {
@@ -63,34 +125,9 @@ export type ProfileType = {
     'lookingForAJobDescription': any,
     'fullName': string,
     'userId': null,
-    status:string,
+    status: string,
     'photos': {
         'small': null | string,
         'large': null | string
     }
 }
-export type SetUserProfileAT = ReturnType<typeof setUserProfileAC>
-export type ProfilePageActionType = AddPostTypeAT | updateNewPostTextTypeAT | SetUserProfileAT
-export type PostType = {
-    id: number
-    message: string
-    like: number
-}
-export type PostsType = PostType[]
-export type StateType = {
-    profilePage: null | ProfileType;
-    posts: PostType[],
-    newPostText: string,
-    profile: null | ProfileType
-}
-
-export type AddPostTypeAT = { type: 'ADD-POST' }
-export type  updateNewPostTextTypeAT = { type: 'UPDATE-NEW-POST-TEXT', newText: string }
-
-export const setUserProfileTC = (userId:string): AppThunk => (dispatch, getState) => {
-    if (!userId) userId = '29562';
-    profileApi(userId)
-        .then(response => {
-            dispatch(setUserProfileAC(response.data))
-        });
-};

@@ -22,12 +22,24 @@ export const usersAPI = {
             .then(res => res);
     }
 };
-export const AuthMeApi = () => {
-    return instance.get('auth/me')
+export const AuthMeApi = {
+    me() {
+        return instance.get('auth/me')
 
-        .then(res => res);
+            .then(res => res);
+    }
 };
-export const profileApi = (userId: string) => {
-    return instance.get(`profile/${userId}`)
-        .then(res => res);
+export const profileApi = {
+    getProfile(userId: string) {
+        return instance.get(`profile/${userId}`)
+            .then(res => res);
+    },
+    getUserStatus(userId: string) {
+        return instance.get(`profile/status/${userId}`)
+            .then(res => res);
+    },
+    updateStatus(status: string) {
+        return instance.put(` profile/status/}`, {status})
+            .then(res => res);
+    }
 };

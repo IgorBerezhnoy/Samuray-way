@@ -36,7 +36,7 @@ const App: React.FC = (props) => {
                        render={() => <UsersContainer/>}/>
                 <Route path={'/news'} render={() => <News/>}/>
                 <Route path={'/music'} render={() => <Music/>}/>
-                <Route path={'/settings'} render={() => <Settings/>}/>
+                <Route path={'/settings'} render={( ) => <Settings/>}/>
                 <Route path={'/login'} render={() => <Login/>}/>
                 {/*<Music/>*/}
             </div>
