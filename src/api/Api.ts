@@ -25,10 +25,19 @@ export const usersAPI = {
 export const AuthMeApi = {
     me() {
         return instance.get('auth/me')
-
+            .then(res => res);
+    },
+    login(properties:formDateType) {
+        return instance.post('auth/login',properties)
             .then(res => res);
     }
 };
+export type formDateType={
+    email:string,
+    password:string,
+    rememberMe:boolean
+}
+
 export const profileApi = {
     getProfile(userId: string) {
         return instance.get(`profile/${userId}`)

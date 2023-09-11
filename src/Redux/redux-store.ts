@@ -7,13 +7,16 @@ import {authReducer, AuthReducerActionType} from './auth-reducer';
 import thunk, {ThunkAction, ThunkDispatch} from 'redux-thunk';
 import {useDispatch} from 'react-redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
+import {reducer} from 'redux-form';
+
 
 let rootReducers = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     navbar: navbarReducer,
     usersPage: usersReducers,
-    authMe: authReducer
+    authMe: authReducer,
+    form:reducer
 });
 
 // const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

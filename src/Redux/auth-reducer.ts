@@ -1,5 +1,5 @@
 import {AppThunk} from './redux-store';
-import {AuthMeApi} from '../api/Api';
+import {AuthMeApi, formDateType} from '../api/Api';
 
 export type AuthResType = {
     data: StateType,
@@ -29,6 +29,9 @@ export const authReducer = (state: StateType = initialState, action: AuthReducer
         case 'SET-USER-DATE': {
             return {...state, ...action.state, isAuth: true, isFetching: true};
         }
+        case 'LOGIN-DATE': {
+            return {...state, isAuth: true, isFetching: true};
+        }
         default:
             return state;
     }
@@ -37,7 +40,10 @@ export const authReducer = (state: StateType = initialState, action: AuthReducer
 export const setUserDateAC = (state: StateType) => {
     return {type: 'SET-USER-DATE', state} as const;
 };
-type SetUserDateAT = ReturnType<typeof setUserDateAC>
+export const loginDateAC = () => {
+    return {type: 'LOGIN-DATE'} as const;
+};
+type SetUserDateAT = ReturnType<typeof setUserDateAC>| ReturnType<typeof loginDateAC>
 
 
 export const AuthMeTC = (): AppThunk => (dispatch, getState) => {
@@ -45,6 +51,16 @@ export const AuthMeTC = (): AppThunk => (dispatch, getState) => {
         .then((res) => {
             if (res.data.resultCode === 0) {
                 dispatch(setUserDateAC(res.data.data));
+            }
+        });
+
+};
+export const loginDateTC = (loginData:formDateType): AppThunk => (dispatch, getState) => {
+    AuthMeApi.login(loginData)
+        .then((res) => {
+            if (res.data.resultCode === 0) {
+                dispatch(setUserDateAC(res.data.data));
+                dispatch(loginDateAC());
             }
         });
 
