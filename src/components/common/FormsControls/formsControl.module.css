@@ -1,0 +1,9 @@
+.formControl{
+
+}
+.formControlError{
+    border: red solid 1px ;
+}
+.spanFormControlError{
+    color: orange;
+}

@@ -3,14 +3,16 @@ import s from './MyPosts.module.css';
 import {Post} from './Post/Post';
 import {MyPostContainerPropsType} from './MyPostsContainer';
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
+import {maxLength30, requiredField} from '../../../utils/validators/validators';
+import {Input} from '../../common/FormsControls/FormsControls';
 
 
 export class MyPosts extends React.Component<MyPostContainerPropsType> {
     render() {
 
         console.log(this.props.posts);
-        let postsItems = this.props.posts.map(el => <Post key={el.id}
-                                                          message={el.message} like={el.like}/>);
+        let postsItems = this.props.posts.map(el =>
+            <Post key={el.id} message={el.message} like={el.like}/>);
         const onSubmit = (formDate: any) => {
             console.log(formDate);
             this.props.addPost(formDate.newPostBody);
@@ -41,7 +43,8 @@ const AddPostForm: React.FC<InjectedFormProps> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field component={'input'} name={'newPostBody'} placeholder={'Enter your post'}/>
+                <Field component={Input} name={'newPostBody'} placeholder={'Enter your post'}
+                       validate={[requiredField, maxLength30]}/>
             </div>
             <div>
                 <button>Add post</button>
