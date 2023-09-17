@@ -1,7 +1,6 @@
 import {AppThunk} from './redux-store';
 import {profileApi} from '../api/Api';
 
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const ADD_POST = 'ADD-POST';
 
 let initialState: StateType = {
@@ -11,7 +10,6 @@ let initialState: StateType = {
         {id: 3, message: 'post 3', like: 32},
         {id: 4, message: 'Yo', like: 0}
     ],
-    newPostText: '',
     profile: null,
     profilePage: null,
     status: ''
@@ -21,13 +19,11 @@ export const profileReducer = (state: StateType = initialState, action: ProfileP
         case 'ADD-POST':
             let newPost: PostType = {
                 id: state.posts.length,
-                message: state.newPostText,
+                message: action.post,
                 like: 0
             };
 
-            return {...state, posts: [newPost, ...state.posts], newPostText: ''};
-        case 'UPDATE-NEW-POST-TEXT':
-            return {...state, newPostText: action.newText};
+            return {...state, posts: [newPost, ...state.posts]};
         case 'SET-USER-PROFILE': {
             return {...state, profile: action.profile};
         }
@@ -42,11 +38,8 @@ export const profileReducer = (state: StateType = initialState, action: ProfileP
     }
 
 };
-export const addPost = (): AddPostTypeAT => ({type: ADD_POST});
-export const updateNewPostText = (text: string): updateNewPostTextTypeAT => ({
-    type: UPDATE_NEW_POST_TEXT,
-    newText: text
-});
+export const addPost = (post:string): AddPostTypeAT => ({type: ADD_POST, post});
+
 
 export const setUserProfileAC = (profile: ProfileType) => ({
     type: 'SET-USER-PROFILE',
@@ -100,12 +93,11 @@ export type PostsType = PostType[]
 export type StateType = {
     profilePage: null | ProfileType;
     posts: PostType[],
-    newPostText: string,
     profile: null | ProfileType,
     status: string
 }
 
-export type AddPostTypeAT = { type: 'ADD-POST' }
+export type AddPostTypeAT = { type: 'ADD-POST' , post:string}
 export type  updateNewPostTextTypeAT = { type: 'UPDATE-NEW-POST-TEXT', newText: string }
 
 

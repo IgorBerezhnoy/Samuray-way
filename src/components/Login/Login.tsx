@@ -39,6 +39,8 @@ let mapStateToProps = (state: AppRootStateType) => {
 export let LoginContainer = connect(mapStateToProps, {
     loginDateTC
 })(Login);
+
+
 let LoginForm: React.FC<InjectedFormProps> = (props) => {
     return (<form onSubmit={props.handleSubmit}>
         <div><Field component={'input'} name={'login'} placeholder={'Login'}/></div>

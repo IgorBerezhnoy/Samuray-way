@@ -8,7 +8,7 @@ import {NavbarContainer} from './components/NavBar/NavbarContainer';
 import UsersContainer from './components/users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
-import {Login, LoginContainer} from './components/Login/Login';
+import {LoginContainer} from './components/Login/Login';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 
 

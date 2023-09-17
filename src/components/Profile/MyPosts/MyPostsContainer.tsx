@@ -1,35 +1,35 @@
 import React from 'react';
-import {addPost, PostType, updateNewPostText} from '../../../Redux/profile-reducer';
+import {addPost, PostType} from '../../../Redux/profile-reducer';
 import {connect} from 'react-redux';
 import {MyPosts} from './MyPosts';
 import {AppRootStateType} from '../../../Redux/redux-store';
+
+
+export type MyPostContainerPropsType = mapStateToPropsType & mapDispatchToPropsType
+
+type mapStateToPropsType = { posts: PostType[] }
+type mapDispatchToPropsType = {
+    addPost: (post: string) => void,
+}
+
+let mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
+
+    return {
+        posts: state.profilePage.posts
+    };
+};
+
+
+export const MyPostsContainer = connect(mapStateToProps, {
+    addPost
+})(MyPosts);
+
 
 
 // type PropsType = {
 //     state: { posts: PostsType, newPostText: string }
 //     dispatch: (action: ActionType) => void
 // }
-export type MyPostContainerPropsType = mapStateToPropsType & mapDispatchToPropsType
-
-type mapStateToPropsType = { posts: PostType[], newPostText: string, }
-type mapDispatchToPropsType = {
-    addPost: () => void,
-    updateNewPostText: (text: string) => void
-}
-
-let mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
-
-    return {
-        posts: state.profilePage.posts,
-        newPostText: state.profilePage.newPostText
-    };
-};
-
-
-export const MyPostsContainer = connect(mapStateToProps, {
-    addPost,
-    updateNewPostText
-})(MyPosts);
 
 //
 //

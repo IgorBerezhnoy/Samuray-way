@@ -1,11 +1,11 @@
 import React from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from 'react-router-dom';
-import {DialogsType, MessagesType} from '../../Redux/Store';
+import {DialogsType, MessagesType} from '../../Redux/diologs-reducer';
 
 type PropsType = {
     navbar: { navItems: string[] }
-    dialogsPage: { dialogs: DialogsType, messages: MessagesType, newMessageText: string }
+    dialogsPage: { dialogs: DialogsType, messages: MessagesType }
 }
 
 export const Navbar: React.FC<PropsType> = (props) => {
