@@ -27,41 +27,51 @@ let initialState: StateType = {
 export const authReducer = (state: StateType = initialState, action: AuthReducerActionType): StateType => {
     switch (action.type) {
         case 'SET-USER-DATE': {
-            return {...state, ...action.state, isAuth: true, isFetching: true};
-        }
-        case 'LOGIN-DATE': {
-            return {...state, isAuth: true, isFetching: true};
+            return {...state, ...action.state, isAuth: action.isAuth, isFetching: action.isFetching};
         }
         default:
             return state;
     }
 };
 
-export const setUserDateAC = (state: StateType) => {
-    return {type: 'SET-USER-DATE', state} as const;
+export const setUserDateAC = (state: StateType, isAuth: boolean, isFetching: boolean) => {
+    return {type: 'SET-USER-DATE', state, isAuth, isFetching} as const;
 };
-export const loginDateAC = () => {
-    return {type: 'LOGIN-DATE'} as const;
-};
-type SetUserDateAT = ReturnType<typeof setUserDateAC>| ReturnType<typeof loginDateAC>
+
+type SetUserDateAT = ReturnType<typeof setUserDateAC>
 
 
 export const AuthMeTC = (): AppThunk => (dispatch, getState) => {
     AuthMeApi.me()
         .then((res) => {
             if (res.data.resultCode === 0) {
-                dispatch(setUserDateAC(res.data.data));
+                dispatch(setUserDateAC(res.data.data, true, true));
             }
         });
 
 };
-export const loginDateTC = (loginData:formDateType): AppThunk => (dispatch, getState) => {
+export const loginDateTC = (loginData: formDateType): AppThunk => (dispatch, getState) => {
     AuthMeApi.login(loginData)
         .then((res) => {
             if (res.data.resultCode === 0) {
-                dispatch(setUserDateAC(res.data.data));
-                dispatch(loginDateAC());
+                dispatch(AuthMeTC())
+                dispatch(setUserDateAC(res.data.data, true, true));
             }
         });
-
+};
+export const logOutTC = (): AppThunk => (dispatch, getState) => {
+    console.log("aaaaaa");
+    AuthMeApi.logOut()
+        .then((res) => {
+            if (res.data.resultCode === 0) {
+                let dataNull = {
+                    id: null,
+                    login: null,
+                    email: null,
+                    isFetching: false,
+                    isAuth: false
+                };
+                dispatch(setUserDateAC(dataNull, false, false));
+            }
+        });
 };

@@ -19,4 +19,4 @@ export const minLengthCreator = (minlength: number) => (value:string)=>{
 
 export let maxLength30=maxLengthCreator(30)
 export let maxLength150=maxLengthCreator(150)
-export let maxLength3=minLengthCreator(3)
+export let minLength=minLengthCreator(3)

@@ -30,7 +30,11 @@ export const AuthMeApi = {
     login(properties:formDateType) {
         return instance.post('auth/login',properties)
             .then(res => res);
-    }
+    },
+    logOut() {
+        return instance.delete('auth/login')
+            .then(res => res);
+    },
 };
 export type formDateType={
     email:string,

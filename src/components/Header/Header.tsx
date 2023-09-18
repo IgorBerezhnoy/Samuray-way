@@ -1,9 +1,8 @@
 import React from 'react';
 import s from './Header.module.css';
 import {NavLink} from 'react-router-dom';
-import {StateType} from '../../Redux/auth-reducer';
 
-type PropsType = { isAuth: boolean, login: string | null, id: string, setUserDateAC: (state: StateType) => void , setUserProfileTC : (id:string)=>void}
+type PropsType = { logOutTC:()=>void, isAuth: boolean, login: string | null, id: string, setUserProfileTC : (id:string)=>void}
 export const Header: React.FC<PropsType> = (props) => {
     const onclickHandler=()=>{
         props.setUserProfileTC(props.id)
@@ -14,6 +13,7 @@ export const Header: React.FC<PropsType> = (props) => {
 
             {props.isAuth ? <div className={s.loginBlock} onClick={onclickHandler}>
                     <NavLink to={'/Profile/' + props.id}>{props.login}</NavLink>
+                <button onClick={()=>props.logOutTC()}>LogOut</button>
                 </div>
                 : <div className={s.loginBlock}>
                     <NavLink to={'/login'}>Login</NavLink>
