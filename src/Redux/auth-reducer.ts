@@ -1,5 +1,6 @@
 import {AppThunk} from './redux-store';
 import {AuthMeApi, formDateType} from '../api/Api';
+import {stopSubmit} from 'redux-form';
 
 export type AuthResType = {
     data: StateType,
@@ -51,16 +52,25 @@ export const AuthMeTC = (): AppThunk => (dispatch, getState) => {
 
 };
 export const loginDateTC = (loginData: formDateType): AppThunk => (dispatch, getState) => {
+
+
+
+
     AuthMeApi.login(loginData)
         .then((res) => {
             if (res.data.resultCode === 0) {
                 dispatch(AuthMeTC())
                 dispatch(setUserDateAC(res.data.data, true, true));
+            }else {
+                let message=res.data.messages[0]?res.data.messages[0]:"Some error"
+                // @ts-ignore
+                dispatch(stopSubmit('login', {_error: res.data.messages[0]}));
+    //
             }
         });
 };
 export const logOutTC = (): AppThunk => (dispatch, getState) => {
-    console.log("aaaaaa");
+    console.log('aaaaaa');
     AuthMeApi.logOut()
         .then((res) => {
             if (res.data.resultCode === 0) {

@@ -7,6 +7,7 @@ import {AppRootStateType} from '../../Redux/redux-store';
 import {Redirect} from 'react-router-dom';
 import {Input} from '../common/FormsControls/FormsControls';
 import {minLength, requiredField} from '../../utils/validators/validators';
+import s from './Login.module.css';
 
 type PropsType = {
     isAuth: boolean,
@@ -47,8 +48,6 @@ export let LoginContainer = connect(mapStateToProps, {
 })(Login);
 
 
-
-
 let LoginForm: React.FC<InjectedFormProps> = (props) => {
     return (<form onSubmit={props.handleSubmit}>
         <div><Field component={Input} validate={[requiredField, minLength]} name={'login'} placeholder={'Login'}/>
@@ -57,6 +56,7 @@ let LoginForm: React.FC<InjectedFormProps> = (props) => {
                     placeholder={'Password'}/></div>
         <div><Field component={'input'} name={'rememberMe'} type={'checkbox'}/>Remember Me</div>
         <div>
+            {props.error && <div className={s.formSummaryError}> {props.error}</div>}
             <button>Login</button>
         </div>
     </form>);

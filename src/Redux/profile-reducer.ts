@@ -54,14 +54,21 @@ export const updateUserStatusAC = (status: string) => ({
     status
 } as const);
 
-export const setUserProfileTC = (userId: string = '29562'): AppThunk => (dispatch) => {
+export const setUserProfileTC = (userId: string ): AppThunk => (dispatch, getState) => {
+    if (!userId){
+        userId="29562"
+        // userId=getState().authMe.id!.toString()
+    }
     profileApi.getProfile(userId)
         .then(response => {
             dispatch(setUserProfileAC(response.data));
         });
 };
-export const setUserStatusTC = (userId: string= '29562'): AppThunk => (dispatch) => {
-
+export const setUserStatusTC = (userId: string): AppThunk => (dispatch, getState) => {
+    if (!userId){
+        userId="29562"
+        // userId=getState().authMe.id!.toString()
+    }
     profileApi.getUserStatus(userId)
         .then(response => {
             dispatch(setUserStatusAC(response.data));

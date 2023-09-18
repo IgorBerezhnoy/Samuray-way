@@ -30,7 +30,7 @@ export type AppActionsType = ProfilePageActionType | DialogsActionType | UsersRe
 
 
 export type ThunkType = ThunkDispatch<AppRootStateType, unknown, AppActionsType>
-export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootStoreType, unknown, AppActionsType>
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppRootStateType, unknown, AppActionsType>
 type DispatchFunc = () => ThunkType
 export const useAppDispatch: DispatchFunc = useDispatch;
 
