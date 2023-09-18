@@ -8,6 +8,7 @@ import thunk, {ThunkAction, ThunkDispatch} from 'redux-thunk';
 import {useDispatch} from 'react-redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {reducer} from 'redux-form';
+import {appReducer, AppReducerActionType} from './app-reducer';
 
 
 let rootReducers = combineReducers({
@@ -16,17 +17,22 @@ let rootReducers = combineReducers({
     navbar: navbarReducer,
     usersPage: usersReducers,
     authMe: authReducer,
-    form:reducer
+    form: reducer,
+    app: appReducer
 });
 
-// const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export let store: RootStoreType = createStore(rootReducers, composeWithDevTools(applyMiddleware(thunk)));
 
 export type RootStoreType = Store<AppRootStateType>
 export type AppRootStateType = ReturnType<typeof rootReducers>
 
-export type AppActionsType = ProfilePageActionType | DialogsActionType | UsersReducerActionType | AuthReducerActionType
+export type AppActionsType =
+    ProfilePageActionType
+    | DialogsActionType
+    | UsersReducerActionType
+    | AuthReducerActionType
+    | AppReducerActionType
 
 
 export type ThunkType = ThunkDispatch<AppRootStateType, unknown, AppActionsType>

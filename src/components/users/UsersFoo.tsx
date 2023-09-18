@@ -30,15 +30,16 @@ export const UsersFoo: React.FC<PropsType> = (props) => {
     };
 
     pages = pages.slice(0, 10);
+    const users = <>{pages.map(el => {
+
+        return <span key={el} onClick={() => props.onSetCurrentPage(el)}
+                     className={props.currentPage === el ? s.selectedPage : ''}>{el}  </span>;
+    })}</>;
     return (
 
         < div className={s.usersWrapper}>
             < div>
-                {pages.map(el => {
-
-                    return <span key={el} onClick={() => props.onSetCurrentPage(el)}
-                                 className={props.currentPage === el ? s.selectedPage : ''}>{el}  </span>;
-                })}
+                {users}
             </div>
 
 
@@ -69,6 +70,7 @@ export const UsersFoo: React.FC<PropsType> = (props) => {
                     </div>
                 </div>)
             }
+            <div>{users}</div>
         </div>
     );
 };
