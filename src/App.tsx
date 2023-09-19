@@ -15,7 +15,6 @@ import {AppRootStateType} from './Redux/redux-store';
 import {compose} from 'redux';
 import {setInitializedTC} from './Redux/app-reducer';
 import Preloader from './components/common/Preloader/Preloader';
-import {authMeTC} from './Redux/auth-reducer';
 
 
 //

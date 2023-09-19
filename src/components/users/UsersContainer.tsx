@@ -17,6 +17,14 @@ import Preloader from '../common/Preloader/Preloader';
 import {WithAuthRedirect} from '../../hoc/WithAuthRedirect';
 import {compose} from 'redux';
 import {withRouter} from 'react-router-dom';
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsesCount,
+    getUsers
+} from '../../Redux/users-selectors';
 
 
 type UsersCProps = {
@@ -32,21 +40,21 @@ type UsersCProps = {
     isFetching: boolean
     toggleIsFetching: (isFetching: boolean) => void,
     followingInProgress: number[]
-    followingInProgressAC:(userId: number, isFetching: boolean)=>void,
-    getUsersTC:(currentPage:number,pageSize:number)=>void
+    followingInProgressAC: (userId: number, isFetching: boolean) => void,
+    getUsersTC: (currentPage: number, pageSize: number) => void
 }
 
 class UsersAPI extends React.Component<UsersCProps> {
 
 
     componentDidMount() {
-        this.props.getUsersTC(this.props.currentPage,this.props.pageSize)
+        this.props.getUsersTC(this.props.currentPage, this.props.pageSize);
     }
 
     onSetCurrentPage(page: number) {
 
         this.props.setCurrentPage(page);
-        this.props.getUsersTC(page,this.props.pageSize)
+        this.props.getUsersTC(page, this.props.pageSize);
     }
 
     render() {
@@ -73,18 +81,29 @@ class UsersAPI extends React.Component<UsersCProps> {
 
 let mapStateToProps = (state: AppRootStateType) => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsesCount: state.usersPage.totalUsesCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsesCount: getTotalUsesCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
     };
 
 };
+// let mapStateToProps = (state: AppRootStateType) => {
+//     return {
+//         users: state.usersPage.users,
+//         pageSize: state.usersPage.pageSize,
+//         totalUsesCount: state.usersPage.totalUsesCount,
+//         currentPage: state.usersPage.currentPage,
+//         isFetching: state.usersPage.isFetching,
+//         followingInProgress: state.usersPage.followingInProgress
+//     };
+//
+// };
 
 
-export default compose<React.ComponentType>( connect(mapStateToProps,
+export default compose<React.ComponentType>(connect(mapStateToProps,
     {
         setUsers,
         setCurrentPage,
@@ -95,21 +114,17 @@ export default compose<React.ComponentType>( connect(mapStateToProps,
         unfollowTC,
         followTC
 
-    }), withRouter,WithAuthRedirect)(UsersAPI)
+    }), withRouter, WithAuthRedirect)(UsersAPI);
 
 
-
-
-
-        // this.props.toggleIsFetching(true);
-        // console.log(this.props);
-        // usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-        //     .then(response => {
-        //         this.props.toggleIsFetching(false);
-        //         this.props.setUsers(response.items);
-        //         this.props.setTotalCount(response.totalCount);
-        //     });
-
+// this.props.toggleIsFetching(true);
+// console.log(this.props);
+// usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+//     .then(response => {
+//         this.props.toggleIsFetching(false);
+//         this.props.setUsers(response.items);
+//         this.props.setTotalCount(response.totalCount);
+//     });
 
 
 // let mapDispatchToProps = (dispatch: (action: ActionType) => void) => {
@@ -122,10 +137,10 @@ export default compose<React.ComponentType>( connect(mapStateToProps,
 //         toggleIsFetching:toggleIsFetchingAC };
 // };
 
-        // this.props.toggleIsFetching(true);
-        //
-        // usersAPI.getUsers(page, this.props.pageSize)
-        //     .then(response => {
-        //         this.props.toggleIsFetching(false);
-        //         this.props.setUsers(response.items);
-        //     });
+// this.props.toggleIsFetching(true);
+//
+// usersAPI.getUsers(page, this.props.pageSize)
+//     .then(response => {
+//         this.props.toggleIsFetching(false);
+//         this.props.setUsers(response.items);
+//     });
