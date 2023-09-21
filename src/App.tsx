@@ -27,6 +27,7 @@ class App extends React.Component<AppPropsType> {
     componentDidMount() {
        this.props.setInitializedTC()
     }
+    //
 
     render() {
         if(!this.props.isInitialized){
