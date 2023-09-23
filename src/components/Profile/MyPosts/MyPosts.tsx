@@ -7,35 +7,31 @@ import {maxLength30, requiredField} from '../../../utils/validators/validators';
 import {Input} from '../../common/FormsControls/FormsControls';
 
 
-export class MyPosts extends React.Component<MyPostContainerPropsType> {
-    render() {
+export const MyPosts=React.memo( (props: MyPostContainerPropsType)=> {
 
-        console.log(this.props.posts);
-        let postsItems = this.props.posts.map(el =>
-            <Post key={el.id} message={el.message} like={el.like}/>);
-        const onSubmit = (formDate: any) => {
-            console.log(formDate);
-            this.props.addPost(formDate.newPostBody);
-            formDate.newPostBody = '';
-        };
-        return (
-            <div className={s.postsBlock}>
+    console.log('MyPosts');
+    let postsItems = props.posts.map(el =>
+        <Post key={el.id} message={el.message} like={el.like}/>);
+    const onSubmit = (formDate: any) => {
+        console.log(formDate);
+        props.addPost(formDate.newPostBody);
+        formDate.newPostBody = '';
+    };
+    return (
+        <div className={s.postsBlock}>
 
-                <h3>My post</h3>
-                <div>
-                    <AddPostReduxForm onSubmit={onSubmit}/>
-                </div>
-                <div className={s.posts}>
-                    <div>{postsItems}
-                    </div>
+            <h3>My post</h3>
+            <div>
+                <AddPostReduxForm onSubmit={onSubmit}/>
+            </div>
+            <div className={s.posts}>
+                <div>{postsItems}
                 </div>
             </div>
+        </div>
 
-        );
-    }
-
-
-}
+    );
+})
 
 const AddPostForm: React.FC<InjectedFormProps> = (props) => {
 
@@ -52,7 +48,7 @@ const AddPostForm: React.FC<InjectedFormProps> = (props) => {
 
         </form>
     );
-};
+}
 
 const AddPostReduxForm = reduxForm({form: 'MyPostsAddMessageForm'})(AddPostForm);
 
