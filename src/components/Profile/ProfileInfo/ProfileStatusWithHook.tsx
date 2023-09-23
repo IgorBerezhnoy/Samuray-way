@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 
 type PropsType = {
     status: string,
@@ -7,9 +7,9 @@ type PropsType = {
 
 export const ProfileStatusWithHook: React.FC<PropsType> = (props) => {
     let [editMode, setEditMode] = useState<boolean>(false);
-    let [status, setStatus] = useState<string>(props.status);
+    let [value, setValue] = useState<string>(props.status);
     const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setStatus(e.currentTarget.value);
+        setValue(e.currentTarget.value);
     };
     const activateEditMode = () => {
         setEditMode(true);
@@ -17,17 +17,26 @@ export const ProfileStatusWithHook: React.FC<PropsType> = (props) => {
     const deactivateEditMode = () => {
 
         setEditMode(false);
-        props.updateStatusTC(status)
+        props.updateStatusTC(value)
     };
-
+useEffect(()=>{
+    setValue(props.status)
+},[props.status])
     return <div>
         {editMode
             ? <div><input autoFocus onBlur={deactivateEditMode} onChange={onStatusChange}
-                          value={status}></input></div>
+                          value={value}></input></div>
             : <div><span
-                onDoubleClick={activateEditMode}>{status ?status : 'Your status'}</span>
+                onDoubleClick={activateEditMode}>{value ?value : 'Your status'}</span>
             </div>
         }
     </div>;
 
 };
+
+//     let [editMode,setEditMode]=useState<boolean>(false)
+//
+//
+// let onDoubleClickHandler=()=>{
+//         setEditMode(true)
+// }
