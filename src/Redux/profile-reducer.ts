@@ -3,7 +3,7 @@ import {profileApi} from '../api/Api';
 
 const ADD_POST = 'ADD-POST';
 
-let initialState: StateType = {
+let initialState: ProfileReducerStateType = {
     posts: [
         {id: 1, message: 'Hello world!', like: 4},
         {id: 2, message: 'Hi how are you?', like: 432},
@@ -14,7 +14,7 @@ let initialState: StateType = {
     profilePage: null,
     status: ''
 };
-export const profileReducer = (state: StateType = initialState, action: ProfilePageActionType): StateType => {
+export const profileReducer = (state: ProfileReducerStateType = initialState, action: ProfilePageActionType): ProfileReducerStateType => {
     switch (action.type) {
         case 'ADD-POST':
             let newPost: PostType = {
@@ -24,6 +24,9 @@ export const profileReducer = (state: StateType = initialState, action: ProfileP
             };
 
             return {...state, posts: [newPost, ...state.posts]};
+        case 'CLEAR_POST': {
+            return {...state, posts: state.posts.filter(el => el.id !== action.id)};
+        }
         case 'SET-USER-PROFILE': {
             return {...state, profile: action.profile};
         }
@@ -38,7 +41,8 @@ export const profileReducer = (state: StateType = initialState, action: ProfileP
     }
 
 };
-export const addPost = (post:string): AddPostTypeAT => ({type: ADD_POST, post});
+export const addPost = (post: string): AddPostTypeAT => ({type: ADD_POST, post});
+export const clearPost = (id: number) => ({type: 'CLEAR_POST', id} as const);
 
 
 export const setUserProfileAC = (profile: ProfileType) => ({
@@ -54,9 +58,9 @@ export const updateUserStatusAC = (status: string) => ({
     status
 } as const);
 
-export const setUserProfileTC = (userId: string ): AppThunk => (dispatch, getState) => {
-    if (!userId){
-        userId="29562"
+export const setUserProfileTC = (userId: string): AppThunk => (dispatch, getState) => {
+    if (!userId) {
+        userId = '29562';
         // userId=getState().authMe.id!.toString()
     }
     profileApi.getProfile(userId)
@@ -65,8 +69,8 @@ export const setUserProfileTC = (userId: string ): AppThunk => (dispatch, getSta
         });
 };
 export const setUserStatusTC = (userId: string): AppThunk => (dispatch, getState) => {
-    if (!userId){
-        userId="29562"
+    if (!userId) {
+        userId = '29562';
         // userId=getState().authMe.id!.toString()
     }
     profileApi.getUserStatus(userId)
@@ -77,8 +81,8 @@ export const setUserStatusTC = (userId: string): AppThunk => (dispatch, getState
 export const updateStatusTC = (status: string): AppThunk => (dispatch) => {
     profileApi.updateStatus(status)
         .then(response => {
-            if (response.data.reasultCode===0){
-            dispatch(updateUserStatusAC(status));
+            if (response.data.reasultCode === 0) {
+                dispatch(updateUserStatusAC(status));
             }
         });
 };
@@ -88,7 +92,7 @@ export type ProfilePageActionType =
     AddPostTypeAT
     | updateNewPostTextTypeAT
     | SetUserProfileAT
-    | ReturnType<typeof setUserStatusAC> | ReturnType<typeof updateUserStatusAC>
+    | ReturnType<typeof setUserStatusAC> | ReturnType<typeof updateUserStatusAC> | ReturnType<typeof clearPost>
 
 
 export type PostType = {
@@ -97,14 +101,14 @@ export type PostType = {
     like: number
 }
 export type PostsType = PostType[]
-export type StateType = {
+export type ProfileReducerStateType = {
     profilePage: null | ProfileType;
     posts: PostType[],
     profile: null | ProfileType,
     status: string
 }
 
-export type AddPostTypeAT = { type: 'ADD-POST' , post:string}
+export type AddPostTypeAT = { type: 'ADD-POST', post: string }
 export type  updateNewPostTextTypeAT = { type: 'UPDATE-NEW-POST-TEXT', newText: string }
 
 
