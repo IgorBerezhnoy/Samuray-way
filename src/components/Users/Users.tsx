@@ -17,7 +17,7 @@ type PropsType = {
 export const Users: React.FC<PropsType> = (props) => {
 
     const users = props.users.map(el =>
-        <User user={el} followingInProgress={props.followingInProgress}followUnfollowTC={props.followUnfollowTC}/>);
+        <User key={el.id} user={el} followingInProgress={props.followingInProgress}followUnfollowTC={props.followUnfollowTC}/>);
     return (
         <Paginator onSetCurrentPage={props.onSetCurrentPage} currentPage={props.currentPage} pageSize={props.pageSize}
                    totalUsesCount={props.totalUsesCount}>

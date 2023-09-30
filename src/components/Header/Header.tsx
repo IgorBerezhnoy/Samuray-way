@@ -9,7 +9,7 @@ export const Header: React.FC<PropsType> = (props) => {
     }
     return (
         <header className={s.header}>
-            <NavLink to={'/profile/' + props.id} onClick={onclickHandler}><img src={`${process.env.PUBLIC_URL}/img/logo.png`}/></NavLink>
+            <NavLink to={'/profile/' + props.id} onClick={onclickHandler}><img alt={"logo"} src={`${process.env.PUBLIC_URL}/img/logo.png`}/></NavLink>
 
             {props.isAuth ? <div className={s.loginBlock} onClick={onclickHandler}>
                     <NavLink to={'/profile/' + props.id}>{props.login}</NavLink>
@@ -19,6 +19,5 @@ export const Header: React.FC<PropsType> = (props) => {
                     <NavLink to={'/login'}>Login</NavLink>
                 </div>}
         </header>
-
     );
 };
