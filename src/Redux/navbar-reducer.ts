@@ -7,22 +7,22 @@ let initialState = {
         {name: 'News', navLink: '/news'},
         {name: 'Music', navLink: '/music'},
         {name: 'Settings',navLink:'/settings' },
-        {name: 'Users', navLink: '/users'}]
+        {name: 'Users', navLink: '/Users'}]
 };
 
 export type NavActionType = ReturnType<typeof setIDInNavbar>
 
 export const navbarReducer = (state: navBarStateType = initialState, action: NavActionType) => {
     switch (action.type) {
-        case 'navbar/SET-ID': {
-            return {
-                ...state,
-                navItems: state.navItems.map(el => el.name === 'Profile' ? {
-                    ...el,
-                    navLink: '/profile/' + action.id
-                } : el)
-            };
-        }
+        // case 'navbar/SET-ID': {
+        //     return {
+        //         ...state,
+        //         navItems: state.navItems.map(el => el.name === 'Profile' ? {
+        //             ...el,
+        //             navLink: '/profile/' + action.id
+        //         } : el)
+        //     };
+        // }
         default: {
             return state;
         }

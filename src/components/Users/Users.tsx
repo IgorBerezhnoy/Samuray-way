@@ -1,48 +1,32 @@
 import React from 'react';
-import s from './Users.module.css';
 import {UserType} from '../../Redux/users-reducer';
 import {NavLink} from 'react-router-dom';
+import {Paginator} from '../common/Paginator/Paginator';
 
 type PropsType = {
     totalUsesCount: number
     pageSize: number
     onSetCurrentPage: (page: number) => void
     currentPage: number
-    unfollowTC: (user: UserType) => void
-    followTC: (user: UserType) => void
+    followUnfollowTC: (user: UserType, followed: boolean) => void
     users: UserType[]
     isFetching: boolean
     followingInProgress: number[]
     followingInProgressAC: (userId: number, isFetching: boolean) => void
 }
 
-export const UsersFoo: React.FC<PropsType> = (props) => {
-    let pageCount = Math.ceil(props.totalUsesCount / props.pageSize);
-    let pages = [];
-    for (let i = 1; i <= pageCount; i++) {
-        pages.push(i);
-    }
+export const Users: React.FC<PropsType> = (props) => {
+
     const onClickFollowHandler = (user: UserType) => {
-        props.followTC(user);
+        props.followUnfollowTC(user, true);
     };
     const onClickUnfollowHandler = (user: UserType) => {
-        props.unfollowTC(user);
+        props.followUnfollowTC(user, false);
     };
 
-    pages = pages.slice(0, 10);
-    const users = <>{pages.map(el => {
-
-        return <span key={el} onClick={() => props.onSetCurrentPage(el)}
-                     className={props.currentPage === el ? s.selectedPage : ''}>{el}  </span>;
-    })}</>;
     return (
-
-        < div className={s.usersWrapper}>
-            < div>
-                {users}
-            </div>
-
-
+        <Paginator onSetCurrentPage={props.onSetCurrentPage} currentPage={props.currentPage} pageSize={props.pageSize}
+                   totalUsesCount={props.totalUsesCount}>
             {
                 props.users.map(el => <div className={''} key={el.id}>
                     <div>
@@ -70,8 +54,7 @@ export const UsersFoo: React.FC<PropsType> = (props) => {
                     </div>
                 </div>)
             }
-            <div>{users}</div>
-        </div>
+        </Paginator>
     );
 };
 // props.followingInProgressAC(user.id, true);

@@ -3,7 +3,6 @@ import {profileApi} from '../api/Api';
 import {setIDInNavbar} from './navbar-reducer';
 
 
-
 let initialState: ProfileReducerStateType = {
     posts: [
         {id: 1, message: 'Hello world!', like: 4},
@@ -41,51 +40,29 @@ export const profileReducer = (state: ProfileReducerStateType = initialState, ac
     }
 
 };
-export const addPost = (post: string): AddPostTypeAT => ({type: "profile/ADD-POST", post});
+export const addPost = (post: string): AddPostTypeAT => ({type: 'profile/ADD-POST', post});
 export const clearPost = (id: number) => ({type: 'profile/CLEAR_POST', id} as const);
 
 
-export const setUserProfileAC = (profile: ProfileType) => ({
-    type: 'profile/SET-USER-PROFILE',
-    profile
-} as const);
-export const setUserStatusAC = (status: string) => ({
-    type: 'profile/SET-USER-STATUS',
-    status
-} as const);
-export const updateUserStatusAC = (status: string) => ({
-    type: 'profile/UPDATE-USER-STATUS',
-    status
-} as const);
+export const setUserProfileAC = (profile: ProfileType) => ({type: 'profile/SET-USER-PROFILE', profile} as const);
+export const setUserStatusAC = (status: string) => ({type: 'profile/SET-USER-STATUS', status} as const);
+export const updateUserStatusAC = (status: string) => ({type: 'profile/UPDATE-USER-STATUS', status} as const);
 
-export const setUserProfileTC = (userId: string): AppThunk => (dispatch) => {
-    // if (!userId) {
-    //     userId = '29562';
-    //     // userId=getState().authMe.id!.toString()
-    // }
-    setIDInNavbar(Number(userId))
-    profileApi.getProfile(userId)
-        .then(response => {
-            dispatch(setUserProfileAC(response.data));
-        });
+
+export const setUserProfileTC = (userId: string): AppThunk => async (dispatch) => {
+    setIDInNavbar(Number(userId));
+    let res = await profileApi.getProfile(userId);
+    dispatch(setUserProfileAC(res.data));
 };
-export const setUserStatusTC = (userId: string): AppThunk => (dispatch) => {
-    // if (!userId) {
-    //     userId = '29562';
-    //
-    // }
-    profileApi.getUserStatus(userId)
-        .then(response => {
-            dispatch(setUserStatusAC(response.data));
-        });
+export const setUserStatusTC = (userId: string): AppThunk => async (dispatch) => {
+    let res = await profileApi.getUserStatus(userId);
+    dispatch(setUserStatusAC(res.data));
 };
-export const updateStatusTC = (status: string): AppThunk => (dispatch) => {
-    profileApi.updateStatus(status)
-        .then(response => {
-            if (response.data.reasultCode === 0) {
-                dispatch(updateUserStatusAC(status));
-            }
-        });
+export const updateStatusTC = (status: string): AppThunk => async (dispatch) => {
+    let res = await profileApi.updateStatus(status);
+    if (res.data.reasultCode === 0) {
+        dispatch(updateUserStatusAC(status));
+    }
 };
 
 export type SetUserProfileAT = ReturnType<typeof setUserProfileAC>
@@ -127,7 +104,7 @@ export type ProfileType = {
     'lookingForAJob': boolean,
     'lookingForAJobDescription': any,
     'fullName': string,
-    'userId':number| null,
+    'userId': number | null,
     status: string,
     'photos': {
         'small': null | string,

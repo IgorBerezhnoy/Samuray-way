@@ -14,17 +14,16 @@ type PropsType = {
     loginDateTC: (data: formDateType) => void
 }
 
-
-export const Login = (props: PropsType) => {
+export const Login: React.FC<PropsType> = ({isAuth, loginDateTC, ...restProps}) => {
     const onSubmit = (formDate: any) => {
         let data: formDateType = {
             email: formDate.login as string,
             password: formDate.password as string,
             rememberMe: formDate.rememberMe as boolean
         };
-        props.loginDateTC(data);
+        loginDateTC(data);
     };
-    if (props.isAuth) {
+    if (isAuth) {
         return <Redirect to={'profile'}/>;
     }
     return (
@@ -35,7 +34,6 @@ export const Login = (props: PropsType) => {
         </div>
     );
 };
-
 
 let mapStateToProps = (state: AppRootStateType) => {
     return {
