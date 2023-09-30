@@ -25,9 +25,6 @@ import {
     getUsers,
     getUsersSuperSelector
 } from '../../Redux/users-selectors';
-
-
-
 class UsersAPI extends React.Component<UsersAPIType> {
     componentDidMount() {
         this.props.getUsersTC(this.props.currentPage, this.props.pageSize);
@@ -48,13 +45,12 @@ class UsersAPI extends React.Component<UsersAPIType> {
                        totalUsesCount={this.props.totalUsesCount}
                        isFetching={this.props.isFetching}
                        followingInProgress={this.props.followingInProgress}
-                       followingInProgressAC={this.props.followingInProgressAC}
                 />
             }
         </>
-            ;
     }
 }
+
 let mapStateToProps = (state: AppRootStateType) => {
     return {
         users: getUsers(state),

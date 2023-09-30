@@ -1,7 +1,7 @@
 import React from 'react';
 import {UserType} from '../../Redux/users-reducer';
-import {NavLink} from 'react-router-dom';
 import {Paginator} from '../common/Paginator/Paginator';
+import {User} from './User/User';
 
 type PropsType = {
     totalUsesCount: number
@@ -12,51 +12,20 @@ type PropsType = {
     users: UserType[]
     isFetching: boolean
     followingInProgress: number[]
-    followingInProgressAC: (userId: number, isFetching: boolean) => void
 }
 
 export const Users: React.FC<PropsType> = (props) => {
 
-    const onClickFollowHandler = (user: UserType) => {
-        props.followUnfollowTC(user, true);
-    };
-    const onClickUnfollowHandler = (user: UserType) => {
-        props.followUnfollowTC(user, false);
-    };
-
+    const users = props.users.map(el =>
+        <User user={el} followingInProgress={props.followingInProgress}followUnfollowTC={props.followUnfollowTC}/>);
     return (
         <Paginator onSetCurrentPage={props.onSetCurrentPage} currentPage={props.currentPage} pageSize={props.pageSize}
                    totalUsesCount={props.totalUsesCount}>
-            {
-                props.users.map(el => <div className={''} key={el.id}>
-                    <div>
-                        <div><NavLink to={`/Profile/${el.id}`}>
-                            <img width={'50px'}
-                                 src={el.photos.small !== null ? el.photos.small : `${process.env.PUBLIC_URL}/img/user5.png`}
-                                 alt={el.name} className={''}/></NavLink></div>
-                        <div>
-                            {el.followed ? <button disabled={props.followingInProgress.some(id => id === el.id)}
-                                                   onClick={() => onClickUnfollowHandler(el)}>Unfollow</button> :
-                                <button disabled={props.followingInProgress.some(id => id === el.id)}
-                                        onClick={() => onClickFollowHandler(el)}>Follow</button>}
-
-                        </div>
-                    </div>
-                    <div>
-                            <span>
-                            <div>{el.name}</div>
-                            <div>{el.status}</div>
-                            </span>
-                        <span>
-                            <div>{'el.location.country'}</div>
-                            <div>{'el.location.city'}</div>
-                            </span>
-                    </div>
-                </div>)
-            }
+            {users}
         </Paginator>
     );
 };
+
 // props.followingInProgressAC(user.id, true);
 // usersAPI.followUsersApi(user)
 //     .then(response => {
