@@ -8,7 +8,6 @@ beforeEach(() => {
 
         ],
         profile: null,
-        profilePage: null,
         status: ''
     };
 });

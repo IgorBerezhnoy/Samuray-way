@@ -1,4 +1,4 @@
-const ADD_MESSAGE = 'ADD-MESSAGE';
+
 let initialState = {
     dialogs: [
         {id: '1', name: 'Dimych', srs: `${process.env.PUBLIC_URL}/img/user5.png`},
@@ -21,7 +21,7 @@ let initialState = {
 };
 export const dialogsReducer = (state: StateType = initialState, action: DialogsActionType): StateType => {
     switch (action.type) {
-        case 'ADD-MESSAGE':
+        case 'dialogs/ADD-MESSAGE':
             let newMessage: MassageType = {
                 id: state.messages.length,
                 message: action.message
@@ -35,7 +35,7 @@ export const dialogsReducer = (state: StateType = initialState, action: DialogsA
 
 
 };
-export const addMessage = (message: string): AddMessageTypeAT => ({type: ADD_MESSAGE, message});
+export const addMessage = (message: string): AddMessageTypeAT => ({type: "dialogs/ADD-MESSAGE", message});
 
 
 export type DialogType = {
@@ -52,8 +52,8 @@ export type MassageType = {
 }
 export type MessagesType = MassageType[]
 
-export type AddMessageTypeAT = { type: 'ADD-MESSAGE', message: string }
-export type  updateNewMessageTextTypeAT = { type: 'UPDATE-NEW-MESSAGE-TEXT', newText: string }
+export type AddMessageTypeAT = { type: 'dialogs/ADD-MESSAGE', message: string }
+export type  updateNewMessageTextTypeAT = { type: 'dialogs/UPDATE-NEW-MESSAGE-TEXT', newText: string }
 
 type StateType = { dialogs: DialogsType, messages: MessagesType }
 export type DialogsActionType = AddMessageTypeAT

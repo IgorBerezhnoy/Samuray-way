@@ -3,21 +3,20 @@ import React from 'react';
 import {Navbar} from './Navbar';
 import {connect} from 'react-redux';
 import {AppRootStateType} from '../../Redux/redux-store';
+import {setIDInNavbar} from '../../Redux/navbar-reducer';
+import {setUserProfileTC} from '../../Redux/profile-reducer';
 
-// type PropsType = {
-//     state: { navItems: string[] }
-//     friends: DialogsType
-// }
 
 let mapStateToProps = (state:AppRootStateType ) => {
     return {
         navbar: state.navbar,
-        dialogsPage: state.dialogsPage
+        dialogsPage: state.dialogsPage,
+        id: state.authMe.id
     };
 };
-let mapDispatchToProps = (dispatch:any) => {
+let mapDispatchToProps = () => {
     return {
-
+        setIDInNavbar,setUserProfileTC
     };
 };
 

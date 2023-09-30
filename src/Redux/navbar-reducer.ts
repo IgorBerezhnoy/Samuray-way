@@ -1,13 +1,32 @@
+export type navBarStateType = typeof initialState
 
-type StateType= { navItems: string[]  }
+let initialState = {
+    navItems: [
+        {name: 'Profile', navLink: `/profile/`},
+        {name: 'Messages', navLink: '/dialogs'},
+        {name: 'News', navLink: '/news'},
+        {name: 'Music', navLink: '/music'},
+        {name: 'Settings',navLink:'/settings' },
+        {name: 'Users', navLink: '/users'}]
+};
 
-let initialState= {
-        navItems: ['Profile', 'Messages', 'News', 'Music', 'Settings', "Users"]
-}
+export type NavActionType = ReturnType<typeof setIDInNavbar>
 
-export type NavActionType ={
-}
+export const navbarReducer = (state: navBarStateType = initialState, action: NavActionType) => {
+    switch (action.type) {
+        case 'navbar/SET-ID': {
+            return {
+                ...state,
+                navItems: state.navItems.map(el => el.name === 'Profile' ? {
+                    ...el,
+                    navLink: '/profile/' + action.id
+                } : el)
+            };
+        }
+        default: {
+            return state;
+        }
+    }
 
-export const navbarReducer=(state:StateType=initialState,action:NavActionType)=>{
-    return state
-}
+};
+export const setIDInNavbar = (id: number) => ({type: 'navbar/SET-ID', id});
