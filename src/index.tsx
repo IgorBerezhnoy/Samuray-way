@@ -6,13 +6,15 @@ import {BrowserRouter} from 'react-router-dom';
 import { store} from './Redux/redux-store';
 import {Provider} from 'react-redux';
 
-/// Тип временно изменить не забудь
-
-    ReactDOM.render(<BrowserRouter>
+ export const MainApp=()=>{
+   return  <BrowserRouter>
         <Provider store={store}>
             <App />
         </Provider>
-        </BrowserRouter>,
+    </BrowserRouter>
+}
+
+    ReactDOM.render(<MainApp/>,
         document.getElementById('root'));
 
 // export type PostType = {

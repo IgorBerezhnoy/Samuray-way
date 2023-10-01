@@ -2,7 +2,7 @@ import React from 'react';
 import s from './ProfileInfo.module.css';
 import {ProfileType} from '../../../Redux/profile-reducer';
 import Preloader from '../../common/Preloader/Preloader';
-import {ProfileStatusWithHook} from './ProfileStatusWithHook';
+import {ProfileStatusWithHook} from './ProfileStatusWithHook/ProfileStatusWithHook';
 
 type PropsType = { profile: ProfileType | null, status: string, updateStatusTC: (status: string) => void }
 export const ProfileInfo: React.FC<PropsType> = (props) => {
