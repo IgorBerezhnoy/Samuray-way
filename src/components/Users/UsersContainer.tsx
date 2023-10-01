@@ -27,6 +27,7 @@ import {
 } from '../../Redux/users-selectors';
 class UsersAPI extends React.Component<UsersAPIType> {
     componentDidMount() {
+        console.log(11111111);
         this.props.getUsersTC(this.props.currentPage, this.props.pageSize);
     }
     onSetCurrentPage(page: number) {
@@ -36,7 +37,7 @@ class UsersAPI extends React.Component<UsersAPIType> {
     render() {
         return <>
             {this.props.isFetching ?
-                <Preloader/> :
+                <Preloader/> : null}
                 <Users users={this.props.users}
                        currentPage={this.props.currentPage}
                        onSetCurrentPage={this.onSetCurrentPage.bind(this)}
@@ -46,7 +47,7 @@ class UsersAPI extends React.Component<UsersAPIType> {
                        isFetching={this.props.isFetching}
                        followingInProgress={this.props.followingInProgress}
                 />
-            }
+
         </>
     }
 }
