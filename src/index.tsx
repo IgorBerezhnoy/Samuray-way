@@ -2,20 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {BrowserRouter} from 'react-router-dom';
-import { store} from './Redux/redux-store';
+import {HashRouter} from 'react-router-dom';
+import {store} from './Redux/redux-store';
 import {Provider} from 'react-redux';
 
- export const MainApp=()=>{
-   return  <BrowserRouter>
+export const MainApp = () => {
+    return <HashRouter basename={process.env.PUBLIC_URL}>
         <Provider store={store}>
-            <App />
+            <App/>
         </Provider>
-    </BrowserRouter>
-}
+    </HashRouter>;
+};
 
-    ReactDOM.render(<MainApp/>,
-        document.getElementById('root'));
+ReactDOM.render(<MainApp/>,
+    document.getElementById('root'));
 
 // export type PostType = {
 //     id:number
