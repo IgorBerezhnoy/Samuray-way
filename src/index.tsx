@@ -7,7 +7,7 @@ import {store} from './Redux/redux-store';
 import {Provider} from 'react-redux';
 
 export const MainApp = () => {
-    return <HashRouter basename={process.env.PUBLIC_URL}>
+    return <HashRouter>
         <Provider store={store}>
             <App/>
         </Provider>

@@ -11,10 +11,10 @@ import {WithAuthRedirect} from '../../hoc/WithAuthRedirect';
 class ProfileContainerAPI extends React.Component<CommonPropsType> {
 
     onUpdateComponent() {
-        if (+this.props.match.params.userId!==this.props.id){
-        let userId = this.props.match.params.userId;
-        this.props.setUserProfileTC(userId);
-        this.props.setUserStatusTC(userId);
+        if (+this.props.match.params.userId !== this.props.id) {
+            let userId = this.props.match.params.userId;
+            this.props.setUserProfileTC(userId);
+            this.props.setUserStatusTC(userId);
         }
     }
 
@@ -38,7 +38,7 @@ let mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
     return {
         profile: state.profilePage.profile,
         status: state.profilePage.status,
-        id:state.profilePage.profile?.userId
+        id: state.profilePage.profile?.userId
     };
 };
 
@@ -56,7 +56,7 @@ type CommonPropsType = RouteComponentProps<PathParamsType> & ProfileContainerPro
 type MapStateToPropsType = {
     profile: ProfileType | null,
     status: string
-    id?:number|null
+    id?: number | null
 }
 type MapDispatchToPropsType = {
     setUserProfileAC: (profile: ProfileType) => void, setUserProfileTC: (userId: string) => void,
