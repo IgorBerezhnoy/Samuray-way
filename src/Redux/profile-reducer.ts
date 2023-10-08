@@ -35,6 +35,11 @@ export const profileReducer = (state: ProfileReducerStateType = initialState, ac
         case 'profile/UPDATE-USER-STATUS': {
             return {...state, status: action.status};
         }
+        case 'profile/SAVE-PHOTO':{
+            debugger
+            // @ts-ignore
+            return {...state, profile:{...state.profile,photos:{...state.profile.photos,small:action.file}}}
+        }
         default:
             return state;
     }
@@ -47,6 +52,7 @@ export const clearPost = (id: number) => ({type: 'profile/CLEAR_POST', id} as co
 export const setUserProfileAC = (profile: ProfileType) => ({type: 'profile/SET-USER-PROFILE', profile} as const);
 export const setUserStatusAC = (status: string) => ({type: 'profile/SET-USER-STATUS', status} as const);
 export const updateUserStatusAC = (status: string) => ({type: 'profile/UPDATE-USER-STATUS', status} as const);
+export const savePhotoSuccess = (file: File) => ({type: 'profile/SAVE-PHOTO', file} as const);
 
 
 export const setUserProfileTC = (userId: string): AppThunk => async (dispatch) => {
@@ -64,13 +70,21 @@ export const updateStatusTC = (status: string): AppThunk => async (dispatch) => 
         dispatch(updateUserStatusAC(status));
     }
 };
+export const savePhoto = (photo:File): AppThunk => async (dispatch) => {
+    let res = await profileApi.savePhoto(photo);
+    console.log(res.data.reasultCode);
+    if (res.data.reasultCode === 0) {
+        debugger
+        dispatch(savePhotoSuccess(photo));
+    }
+};
 
 export type SetUserProfileAT = ReturnType<typeof setUserProfileAC>
 export type ProfilePageActionType =
     AddPostTypeAT
     | updateNewPostTextTypeAT
     | SetUserProfileAT
-    | ReturnType<typeof setUserStatusAC> | ReturnType<typeof updateUserStatusAC> | ReturnType<typeof clearPost>
+    | ReturnType<typeof setUserStatusAC> | ReturnType<typeof updateUserStatusAC> | ReturnType<typeof clearPost>| ReturnType<typeof savePhotoSuccess>
 
 
 export type PostType = {
@@ -107,7 +121,7 @@ export type ProfileType = {
     'userId': number | null,
     status: string,
     'photos': {
-        'small': null | string,
-        'large': null | string
+        'small': any,
+        'large': any
     }
 }

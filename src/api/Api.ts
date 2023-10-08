@@ -27,8 +27,8 @@ export const AuthMeApi = {
         return instance.get('auth/me')
             .then(res => res);
     },
-    login(properties:formDateType) {
-        return instance.post('auth/login',properties)
+    login(properties: formDateType) {
+        return instance.post('auth/login', properties)
             .then(res => res);
     },
     logOut() {
@@ -36,10 +36,10 @@ export const AuthMeApi = {
             .then(res => res);
     },
 };
-export type formDateType={
-    email:string,
-    password:string,
-    rememberMe:boolean
+export type formDateType = {
+    email: string,
+    password: string,
+    rememberMe: boolean
 }
 
 export const profileApi = {
@@ -52,8 +52,17 @@ export const profileApi = {
             .then(res => res);
     },
     updateStatus(status: string) {
-        console.log(status);
         return instance.put(`profile/status`, {status})
+            .then(res => res);
+    },
+    savePhoto(image: File) {
+        let FD = new FormData();
+        FD.append('image', image);
+        return instance.put(`profile/photo`, FD, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
             .then(res => res);
     }
 };

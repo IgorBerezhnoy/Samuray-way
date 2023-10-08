@@ -3,6 +3,8 @@ import React, {ChangeEvent, useEffect, useState} from 'react';
 type PropsType = {
     status: string,
     updateStatusTC: (status: string) => void
+    isOwner: boolean
+    name: string
 }
 
 export const ProfileStatusWithHook: React.FC<PropsType> = (props) => {
@@ -17,20 +19,24 @@ export const ProfileStatusWithHook: React.FC<PropsType> = (props) => {
     const deactivateEditMode = () => {
 
         setEditMode(false);
-        props.updateStatusTC(value)
+        props.updateStatusTC(value);
     };
-useEffect(()=>{
-    setValue(props.status)
-},[props.status])
-    return <div>
-        {editMode
-            ? <div><input autoFocus onBlur={deactivateEditMode} onChange={onStatusChange}
-                          value={value}></input></div>
-            : <div><span
-                onDoubleClick={activateEditMode}>{value ?value : 'Your status'}</span>
+    useEffect(() => {
+        setValue(props.status);
+    }, [props.status]);
+    return (
+        props.isOwner ? <div>
+                {editMode
+                    ? <div><input autoFocus onBlur={deactivateEditMode} onChange={onStatusChange}
+                                  value={value}></input></div>
+                    : <div><span
+                        onDoubleClick={activateEditMode}>{value ? value : 'Your status'}</span>
+                    </div>
+                }
             </div>
-        }
-    </div>;
+            : <div><span>{value ? value : "Здесь бы мог быть статус "+props.name}</span>
+            </div>
+    );
 
 };
 
