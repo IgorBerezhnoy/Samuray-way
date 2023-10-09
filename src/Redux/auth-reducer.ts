@@ -52,7 +52,7 @@ export const authMeTC = (): AppThunk => async (dispatch) => {
 export const loginDateTC = (loginData: formDateType): AppThunk => async (dispatch) => {
     let res = await AuthMeApi.login(loginData);
     if (res.data.resultCode === 0) {
-        dispatch(authMeTC());
+       await dispatch(authMeTC());
         dispatch(setUserDateAC(res.data.data, true, true));
     } else {
         let message = res.data.messages[0] ? res.data.messages[0] : 'Some error';

@@ -11,20 +11,27 @@ import {WithAuthRedirect} from '../../hoc/WithAuthRedirect';
 class ProfileContainerAPI extends React.Component<CommonPropsType> {
 
     onUpdateComponent() {
-        if (+this.props.match.params.userId !== this.props.id) {
-            let userId = this.props.match.params.userId;
-            this.props.setUserProfileTC(userId);
-            this.props.setUserStatusTC(userId);
-
+        debugger
+        let userId = this.props.match.params.userId;
+        if (!userId) {
+            userId = this.props.myId!.toString();
         }
+        this.props.setUserProfileTC(userId);
+        this.props.setUserStatusTC(userId);
     }
 
     componentDidMount() {
         this.onUpdateComponent();
     }
 
-    componentDidUpdate() {
-        this.onUpdateComponent();
+    componentDidUpdate(prevProps: Readonly<CommonPropsType>, prevState: any) {
+        console.log('updateProps', prevProps, prevState);
+
+        if (prevProps.match.params.userId !== this.props.match.params.userId) {
+
+            this.onUpdateComponent();
+        }
+
     }
 
 
@@ -32,7 +39,8 @@ class ProfileContainerAPI extends React.Component<CommonPropsType> {
 
         return (
             <Profile {...this.props} profile={this.props.profile} status={this.props.status}
-                     updateStatusTC={this.props.updateStatusTC} isOwner={this.props.myId === this.props.id} savePhoto={this.props.savePhoto}/>
+                     updateStatusTC={this.props.updateStatusTC} isOwner={this.props.myId === this.props.id}
+                     savePhoto={this.props.savePhoto}/>
         );
     }
 }
@@ -42,7 +50,7 @@ let mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
         profile: state.profilePage.profile,
         status: state.profilePage.status,
         id: state.profilePage.profile?.userId,
-        myId:state.authMe.id
+        myId: state.authMe.id
     };
 };
 
@@ -61,13 +69,13 @@ type MapStateToPropsType = {
     profile: ProfileType | null,
     status: string
     id?: number | null
-    myId:number | null
+    myId: number | null
 
 }
 type MapDispatchToPropsType = {
     setUserProfileAC: (profile: ProfileType) => void, setUserProfileTC: (userId: string) => void,
     setUserStatusTC: (userId: string) => void, updateStatusTC: (status: string) => void,
-    savePhoto:(event:File)=>void
+    savePhoto: (event: File) => void
 }
 
 
