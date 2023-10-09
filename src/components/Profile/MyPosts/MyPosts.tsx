@@ -7,16 +7,15 @@ import {maxLength30, requiredField} from '../../../utils/validators/validators';
 import {Input} from '../../common/FormsControls/FormsControls';
 
 
-export const MyPosts=React.memo( (props: MyPostContainerPropsType)=> {
+export const MyPosts = React.memo((props: MyPostContainerPropsType) => {
 
-    console.log('MyPosts');
     let postsItems = props.posts.map(el =>
-        <Post key={el.id} message={el.message} like={el.like}/>);
-    const onSubmit = (formDate: any) => {
-        console.log(formDate);
-        props.addPost(formDate.newPostBody);
+        <Post key={el.id} message={el.message} like={el.like} photo={props.photo?.small!}/>);
+
+    const onSubmit = (formDate: any) => {props.addPost(formDate.newPostBody);
         formDate.newPostBody = '';
     };
+
     return (
         <div className={s.postsBlock}>
 
@@ -31,7 +30,7 @@ export const MyPosts=React.memo( (props: MyPostContainerPropsType)=> {
         </div>
 
     );
-})
+});
 
 const AddPostForm: React.FC<InjectedFormProps> = (props) => {
 
@@ -48,7 +47,7 @@ const AddPostForm: React.FC<InjectedFormProps> = (props) => {
 
         </form>
     );
-}
+};
 
 const AddPostReduxForm = reduxForm({form: 'MyPostsAddMessageForm'})(AddPostForm);
 

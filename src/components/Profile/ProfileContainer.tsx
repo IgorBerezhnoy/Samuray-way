@@ -29,12 +29,7 @@ class ProfileContainerAPI extends React.Component<CommonPropsType> {
 
 
     render() {
-        console.log(+this.props.match.params.userId !== this.props.id||this.props.id===undefined);
-        console.log(this.props.match.params.userId);
-        console.log(this.props.id);
-        console.log(this.props.myId );
-        console.log(this.props.myId !== this.props.id);
-        console.log("________");
+
         return (
             <Profile {...this.props} profile={this.props.profile} status={this.props.status}
                      updateStatusTC={this.props.updateStatusTC} isOwner={this.props.myId === this.props.id} savePhoto={this.props.savePhoto}/>

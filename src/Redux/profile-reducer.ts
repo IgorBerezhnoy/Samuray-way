@@ -38,7 +38,7 @@ export const profileReducer = (state: ProfileReducerStateType = initialState, ac
         case 'profile/SAVE-PHOTO':{
             debugger
             // @ts-ignore
-            return {...state, profile:{...state.profile,photos:{...state.profile.photos,small:action.file}}}
+            return {...state, profile:{...state.profile,photos:{...state.profile.photos,small:action.photos.small, large:action.photos.large}}}
         }
         default:
             return state;
@@ -52,7 +52,7 @@ export const clearPost = (id: number) => ({type: 'profile/CLEAR_POST', id} as co
 export const setUserProfileAC = (profile: ProfileType) => ({type: 'profile/SET-USER-PROFILE', profile} as const);
 export const setUserStatusAC = (status: string) => ({type: 'profile/SET-USER-STATUS', status} as const);
 export const updateUserStatusAC = (status: string) => ({type: 'profile/UPDATE-USER-STATUS', status} as const);
-export const savePhotoSuccess = (file: File) => ({type: 'profile/SAVE-PHOTO', file} as const);
+export const savePhotoSuccess = (photos: PhotoDomainType) => ({type: 'profile/SAVE-PHOTO', photos} as const);
 
 
 export const setUserProfileTC = (userId: string): AppThunk => async (dispatch) => {
@@ -72,10 +72,10 @@ export const updateStatusTC = (status: string): AppThunk => async (dispatch) => 
 };
 export const savePhoto = (photo:File): AppThunk => async (dispatch) => {
     let res = await profileApi.savePhoto(photo);
-    console.log(res.data.reasultCode);
-    if (res.data.reasultCode === 0) {
+    console.log(res.data.resultCode);
+    if (res.data.resultCode === 0) {
         debugger
-        dispatch(savePhotoSuccess(photo));
+        dispatch(savePhotoSuccess(res.data.data.photos));
     }
 };
 
@@ -98,6 +98,8 @@ export type ProfileReducerStateType = {
     profile: null | ProfileType,
     status: string
 }
+export type PhotoDomainType = { large: string, small: string };
+
 
 export type AddPostTypeAT = { type: 'profile/ADD-POST', post: string }
 export type  updateNewPostTextTypeAT = { type: 'profile/UPDATE-NEW-POST-TEXT', newText: string }
@@ -120,8 +122,5 @@ export type ProfileType = {
     'fullName': string,
     'userId': number | null,
     status: string,
-    'photos': {
-        'small': any,
-        'large': any
-    }
+    'photos': PhotoDomainType
 }

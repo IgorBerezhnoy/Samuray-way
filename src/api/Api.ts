@@ -62,7 +62,6 @@ export const profileApi = {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
-        })
-            .then(res => res);
+        });
     }
 };

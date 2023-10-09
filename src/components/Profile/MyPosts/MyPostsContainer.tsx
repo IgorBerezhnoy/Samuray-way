@@ -1,5 +1,5 @@
 import React from 'react';
-import {addPost, PostType} from '../../../Redux/profile-reducer';
+import {addPost, PhotoDomainType, PostType} from '../../../Redux/profile-reducer';
 import {connect} from 'react-redux';
 import {MyPosts} from './MyPosts';
 import {AppRootStateType} from '../../../Redux/redux-store';
@@ -7,7 +7,7 @@ import {AppRootStateType} from '../../../Redux/redux-store';
 
 export type MyPostContainerPropsType = mapStateToPropsType & mapDispatchToPropsType
 
-type mapStateToPropsType = { posts: PostType[] }
+type mapStateToPropsType = { posts: PostType[], photo:PhotoDomainType|undefined }
 type mapDispatchToPropsType = {
     addPost: (post: string) => void,
 }
@@ -15,7 +15,8 @@ type mapDispatchToPropsType = {
 let mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
 
     return {
-        posts: state.profilePage.posts
+        posts: state.profilePage.posts,
+        photo:state.profilePage.profile?.photos
     };
 };
 
