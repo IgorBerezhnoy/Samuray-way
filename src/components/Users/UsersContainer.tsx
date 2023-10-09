@@ -12,7 +12,6 @@ import {
     UserType
 } from '../../Redux/users-reducer';
 import {Users} from './Users';
-import Preloader from '../common/Preloader/Preloader';
 import {WithAuthRedirect} from '../../hoc/WithAuthRedirect';
 import {compose} from 'redux';
 import {withRouter} from 'react-router-dom';
@@ -25,6 +24,7 @@ import {
     getUsers,
     getUsersSuperSelector
 } from '../../Redux/users-selectors';
+import {Preloader} from '../common';
 class UsersAPI extends React.Component<UsersAPIType> {
     componentDidMount() {
         console.log(11111111);

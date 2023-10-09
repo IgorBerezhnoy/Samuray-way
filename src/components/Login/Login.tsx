@@ -1,13 +1,7 @@
 import React from 'react';
-import {Field, InjectedFormProps, reduxForm} from 'redux-form';
-import {connect} from 'react-redux';
-import {loginDateTC} from '../../Redux/auth-reducer';
 import {formDateType} from '../../api/Api';
-import {AppRootStateType} from '../../Redux/redux-store';
 import {Redirect} from 'react-router-dom';
-import {Input} from '../common/FormsControls/FormsControls';
-import {minLength, requiredField} from '../../utils/validators/validators';
-import s from './Login.module.css';
+import {LoginReduxForm} from './LoginForm';
 
 type PropsType = {
     isAuth: boolean,
@@ -35,32 +29,6 @@ export const Login: React.FC<PropsType> = ({isAuth, loginDateTC, ...restProps}) 
     );
 };
 
-let mapStateToProps = (state: AppRootStateType) => {
-    return {
-        isAuth: state.authMe.isAuth
-    };
-};
 
-export let LoginContainer = connect(mapStateToProps, {
-    loginDateTC
-})(Login);
-
-
-let LoginForm: React.FC<InjectedFormProps> = (props) => {
-    return (<form onSubmit={props.handleSubmit}>
-        <div><Field component={Input} validate={[requiredField, minLength]} name={'login'} placeholder={'Login'}/>
-        </div>
-        <div><Field component={Input} validate={[requiredField, minLength]} name={'password'} type={'password'}
-                    placeholder={'Password'}/></div>
-        <div><Field component={'input'} name={'rememberMe'} type={'checkbox'}/>Remember Me</div>
-        <div>
-            {props.error && <div className={s.formSummaryError}> {props.error}</div>}
-            <button>Login</button>
-        </div>
-    </form>);
-};
-
-
-const LoginReduxForm = reduxForm({form: 'login'})(LoginForm);
 
 

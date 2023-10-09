@@ -11,7 +11,6 @@ import {WithAuthRedirect} from '../../hoc/WithAuthRedirect';
 class ProfileContainerAPI extends React.Component<CommonPropsType> {
 
     onUpdateComponent() {
-        debugger
         let userId = this.props.match.params.userId;
         if (!userId) {
             userId = this.props.myId!.toString();

@@ -29,12 +29,12 @@ export const ProfileStatusWithHook: React.FC<PropsType> = (props) => {
                 {editMode
                     ? <div><input autoFocus onBlur={deactivateEditMode} onChange={onStatusChange}
                                   value={value}></input></div>
-                    : <div><span
-                        onDoubleClick={activateEditMode}>{value ? value : 'Your status'}</span>
+                    : <div><b>My status</b><span
+                        onDoubleClick={activateEditMode}>{value ? value : <> I don't have status</>}</span>
                     </div>
                 }
             </div>
-            : <div><span>{value ? value : "Здесь бы мог быть статус "+props.name}</span>
+            : <div><span>{value ? value : 'Здесь бы мог быть статус ' + props.name}</span>
             </div>
     );
 

@@ -7,13 +7,13 @@ import {Settings} from './components/Settings/Settings';
 import {NavbarContainer} from './components/NavBar/NavbarContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
-import {LoginContainer} from './components/Login/Login';
 import {connect} from 'react-redux';
 import {AppRootStateType} from './Redux/redux-store';
 import {compose} from 'redux';
 import {setInitializedTC} from './Redux/app-reducer';
-import Preloader from './components/common/Preloader/Preloader';
 import {withSuspense} from './hoc/WithSuspense';
+import {Preloader} from './components/common';
+import {LoginContainer} from './components/Login/LoginContainer';
 
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
