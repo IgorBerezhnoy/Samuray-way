@@ -1,26 +1,58 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import s from './ProfileInfo.module.css';
 import {ProfileType} from '../../../Redux/profile-reducer';
 import {UserInfo} from './UserInfo/UserInfo';
 import {Preloader} from '../../common';
-import {formDateDomainType, UserInfoReduxForm} from './UserInfo/UserInfoForm';
+import { UserInfoReduxForm} from './UserInfo/UserInfoForm/UserInfoForm';
 import {reduxForm} from 'redux-form';
 import {LoginForm} from '../../Login/LoginForm';
+import {formDateDomainType} from '../../../api/Api';
 
-type PropsType = { profile: ProfileType | null, status: string, updateStatusTC: (status: string) => void, isOwner: boolean, savePhoto: (file: File) => void }
+type PropsType = {
+    profile: ProfileType | null, status: string,
+    updateStatusTC: (status: string) => void,
+    myId: number | null, isOwner: boolean, savePhoto: (file: File) => void
+    updateProfileInfoTC:(profileInfo: formDateDomainType)=>void
+}
+
+
 export const ProfileInfo: React.FC<PropsType> = (props) => {
+
+    const [editMode, setEditMode] = useState(false);
+
+    const onClickEditMode = () => setEditMode(true);
 
     if (!!props.profile) {
         const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
             if (e.target.files?.length) {
-                debugger
+
                 props.savePhoto(e.target.files[0]);
             }
 
         };
+        const onSubmit = (formDate: any) => {
 
-
-
+            console.log(formDate);
+            let data: formDateDomainType = {
+                userId: props.myId!.toString(),
+                fullName: formDate.fullName as string,
+                aboutMe:formDate.aboutMe,
+                lookingForAJob: formDate.lookingForAJob as boolean,
+                lookingForAJobDescription: formDate.lookingForAJobDescription as string,
+                contacts: {
+                    github: formDate.github,
+                    mainLink: formDate.mainLink,
+                    website: formDate.website,
+                    facebook: formDate.facebook,
+                    instagram: formDate.instagram,
+                    twitter: formDate.twitter,
+                    youtube: formDate.youtube,
+                    vk: formDate.vk
+                }
+            };
+            props.updateProfileInfoTC(data)
+            setEditMode(false);
+        };
 
         return <>
             <div><img src={`${process.env.PUBLIC_URL}/img/fon.jpg`}/></div>
@@ -34,8 +66,10 @@ export const ProfileInfo: React.FC<PropsType> = (props) => {
                 {props.isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
 
                 {props.isOwner
-                    ? <UserInfoReduxForm profile={props.profile} status={props.status} updateStatusTC={props.updateStatusTC}
-                                    isOwner={props.isOwner} />
+                    ? <UserInfoReduxForm profile={props.profile} status={props.status}
+                                         updateStatusTC={props.updateStatusTC}
+                                         isOwner={props.isOwner} onSubmit={onSubmit} onClickEditMode={onClickEditMode}
+                                         editMode={editMode}/>
                     : <UserInfo profile={props.profile} status={props.status} updateStatusTC={props.updateStatusTC}
                                 isOwner={props.isOwner}/>
                 }
@@ -47,4 +81,4 @@ export const ProfileInfo: React.FC<PropsType> = (props) => {
         return <Preloader/>;
     }
 };
-export const LoginReduxForm = reduxForm({form: 'login'} )(LoginForm);
+export const LoginReduxForm = reduxForm({form: 'login'})(LoginForm);

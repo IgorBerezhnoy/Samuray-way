@@ -1,11 +1,19 @@
 import React from 'react';
 import {Profile} from './Profile';
 import {connect} from 'react-redux';
-import {ProfileType, savePhoto, setUserProfileTC, setUserStatusTC, updateStatusTC} from '../../Redux/profile-reducer';
+import {
+    ProfileType,
+    savePhoto,
+    setUserProfileTC,
+    setUserStatusTC,
+    updateProfileInfoTC,
+    updateStatusTC
+} from '../../Redux/profile-reducer';
 import {AppRootStateType} from '../../Redux/redux-store';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {compose} from 'redux';
 import {WithAuthRedirect} from '../../hoc/WithAuthRedirect';
+import {formDateDomainType} from '../../api/Api';
 
 
 class ProfileContainerAPI extends React.Component<CommonPropsType> {
@@ -39,7 +47,7 @@ class ProfileContainerAPI extends React.Component<CommonPropsType> {
         return (
             <Profile {...this.props} profile={this.props.profile} status={this.props.status}
                      updateStatusTC={this.props.updateStatusTC} isOwner={this.props.myId === this.props.id}
-                     savePhoto={this.props.savePhoto}/>
+                     savePhoto={this.props.savePhoto} myId={this.props.myId} updateProfileInfoTC={this.props.updateProfileInfoTC}/>
         );
     }
 }
@@ -54,7 +62,7 @@ let mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
 };
 
 export default compose<React.ComponentType>(connect(mapStateToProps,
-        {setUserStatusTC, setUserProfileTC, updateStatusTC, savePhoto}), withRouter, WithAuthRedirect
+        {setUserStatusTC, setUserProfileTC, updateStatusTC, savePhoto, updateProfileInfoTC}), withRouter, WithAuthRedirect
     // ,WithAuthRedirect
 )(ProfileContainerAPI);
 
@@ -67,14 +75,14 @@ type CommonPropsType = RouteComponentProps<PathParamsType> & ProfileContainerPro
 type MapStateToPropsType = {
     profile: ProfileType | null,
     status: string
-    id?: number | null
+    id?: number | null | string
     myId: number | null
 
 }
 type MapDispatchToPropsType = {
     setUserProfileAC: (profile: ProfileType) => void, setUserProfileTC: (userId: string) => void,
     setUserStatusTC: (userId: string) => void, updateStatusTC: (status: string) => void,
-    savePhoto: (event: File) => void
+    savePhoto: (event: File) => void, updateProfileInfoTC:(profileInfo: formDateDomainType)=>void
 }
 
 

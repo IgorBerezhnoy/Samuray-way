@@ -14,27 +14,44 @@ export const usersAPI = {
             .then(res => res.data);
     },
     followUsersApi(user: UserType) {
-        return instance.post(`follow/${user.id}`, {})
-            .then(res => res);
+        return instance.post(`follow/${user.id}`, {});
     },
     unfollowUsersApi(user: UserType) {
-        return instance.delete(`follow/${user.id}`,)
-            .then(res => res);
+        return instance.delete(`follow/${user.id}`,);
     }
 };
 export const AuthMeApi = {
     me() {
-        return instance.get('auth/me')
-            .then(res => res);
+        return instance.get('auth/me');
     },
     login(properties: formDateType) {
-        return instance.post('auth/login', properties)
-            .then(res => res);
+        return instance.post('auth/login', properties);
     },
     logOut() {
-        return instance.delete('auth/login')
-            .then(res => res);
+        return instance.delete('auth/login');
     },
+};
+
+export const profileApi = {
+    getProfile(userId: string) {
+        return instance.get(`profile/${userId}`);
+    },
+    getUserStatus(userId: string) {
+        return instance.get(`profile/status/${userId}`);
+    },
+    updateStatus(status: string) {
+        return instance.put(`profile/status`, {status});
+    },
+    updateProfileInfo(profileInfo: formDateDomainType) {
+        return instance.put(`profile`, profileInfo);
+    },
+    savePhoto(image: File) {
+        let formData = new FormData();
+        formData.append('image', image);
+        return instance.put(`profile/photo`, formData, {
+            headers: {'Content-Type': 'multipart/form-data'}
+        });
+    }
 };
 export type formDateType = {
     email: string,
@@ -42,26 +59,20 @@ export type formDateType = {
     rememberMe: boolean
 }
 
-export const profileApi = {
-    getProfile(userId: string) {
-        return instance.get(`profile/${userId}`)
-            .then(res => res);
-    },
-    getUserStatus(userId: string) {
-        return instance.get(`profile/status/${userId}`)
-            .then(res => res);
-    },
-    updateStatus(status: string) {
-        return instance.put(`profile/status`, {status})
-            .then(res => res);
-    },
-    savePhoto(image: File) {
-        let FD = new FormData();
-        FD.append('image', image);
-        return instance.put(`profile/photo`, FD, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        });
+export type formDateDomainType = {
+    userId: string
+    lookingForAJob: boolean
+    aboutMe:  string,
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: {
+        github: string
+        vk: string
+        facebook: string
+        instagram: string
+        twitter: string
+        website: string
+        youtube: string
+        mainLink: string
     }
-};
+}

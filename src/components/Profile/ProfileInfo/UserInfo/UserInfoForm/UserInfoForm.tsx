@@ -1,22 +1,23 @@
-import {ProfileStatusWithHook} from '../ProfileStatusWithHook/ProfileStatusWithHook';
-import React, {useState} from 'react';
-import {ProfileType} from '../../../../Redux/profile-reducer';
-import {Input} from '../../../common';
+import {ProfileStatusWithHook} from '../../ProfileStatusWithHook/ProfileStatusWithHook';
+import React from 'react';
+import {ProfileType} from '../../../../../Redux/profile-reducer';
+import {Input} from '../../../../common';
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
-import {UserInfo} from './UserInfo';
-import {ContactItem} from './ContactItem';
+import {UserInfo} from '../UserInfo';
+import {ContactItem} from '../ContactItem';
 
 type PropsType = {
     profile: ProfileType
     status: string
     isOwner: boolean
+    editMode:boolean
     updateStatusTC: (status: string) => void
+    onClickEditMode:()=>void
 }
 
 export const UserInfoForm: React.FC<InjectedFormProps<formDateType, PropsType> & PropsType> = (props) => {
 
 
-    const [editMode, setEditMode] = useState(false);
 
     const conKey = Object.keys(props.profile.contacts);
     // const conVal = Object.values(props.profile.contacts);
@@ -26,50 +27,19 @@ export const UserInfoForm: React.FC<InjectedFormProps<formDateType, PropsType> &
     for (let i = 0; i < conKey.length; i++) {
         contacts.push(<ContactItem contactKey={conKey[i]}  formMode={true}/>);}
 
-    const onSubmit = (formDate: any) => {
-        debugger
-        console.log(formDate);
-        let data: formDateDomainType = {
-            userId: formDate.userId,
-            fullName: formDate.fullName as string,
-            lookingForAJob: formDate.lookingForAJob as boolean,
-            lookingForAJobDescription: formDate.lookingForAJobDescription as string,
-            contacts: {
-                github: formDate.github,
-                mainLink: formDate.mainLink,
-                website: formDate.website,
-                facebook: formDate.facebook,
-                instagram: formDate.instagram,
-                twitter: formDate.twitter,
-                youtube: formDate.youtube,
-                vk: formDate.vk
-            }
-        };
-        console.log(data);
-        onClickSaveMode();
-    };
-
-
-    const onClickEditMode = () => setEditMode(true);
-
-    const onClickSaveMode = () => {
-        setEditMode(false);
-    };
-
-
-    if (!editMode) {
+    if (!props.editMode) {
         return <div>
-            <button onClick={onClickEditMode}>edit</button>
+            <button onClick={props.onClickEditMode}>edit</button>
             <UserInfo profile={props.profile} status={props.status} updateStatusTC={props.updateStatusTC}
                       isOwner={props.isOwner}/></div>;
     }
 
     return (
         <div>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={props.handleSubmit}>
                 <div>
                     <div><b>FullName:</b>
-                        <Field component={Input} name={'fullName'} placeholder={'fullName'}/>
+                            <Field component={Input} name={'fullName'} placeholder={'fullName'} pattern={"props.profile.fullName"}/>
                     </div>
 
                     <div><b>Looking for a job:</b>
@@ -100,22 +70,7 @@ export const UserInfoForm: React.FC<InjectedFormProps<formDateType, PropsType> &
 export const UserInfoReduxForm = reduxForm<formDateType, PropsType>({form: 'UserInfoForm'})(UserInfoForm);
 
 
-export type formDateDomainType = {
-    userId: string
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    fullName: string
-    contacts: {
-        github: string
-        vk: string
-        facebook: string
-        instagram: string
-        twitter: string
-        website: string
-        youtube: string
-        mainLink: string
-    }
-}
+
 type formDateType = {
     lookingForAJob: boolean
     lookingForAJobDescription: string

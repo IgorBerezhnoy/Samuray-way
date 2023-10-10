@@ -1,5 +1,5 @@
 import {AppThunk} from './redux-store';
-import {profileApi} from '../api/Api';
+import {formDateDomainType, profileApi} from '../api/Api';
 import {setIDInNavbar} from './navbar-reducer';
 
 
@@ -35,10 +35,19 @@ export const profileReducer = (state: ProfileReducerStateType = initialState, ac
         case 'profile/UPDATE-USER-STATUS': {
             return {...state, status: action.status};
         }
-        case 'profile/SAVE-PHOTO':{
-            debugger
+        case 'profile/UPDATE-USER-INFO': {
             // @ts-ignore
-            return {...state, profile:{...state.profile,photos:{...state.profile.photos,small:action.photos.small, large:action.photos.large}}}
+            return {...state, profile: {...state.profile, ...action.profileInfo}};
+        }
+        case 'profile/SAVE-PHOTO': {
+            return {
+                // @ts-ignore
+                ...state, profile: {
+                    ...state.profile,
+                    // @ts-ignore
+                    photos: {...state.profile.photos, small: action.photos.small, large: action.photos.large}
+                }
+            };
         }
         default:
             return state;
@@ -53,6 +62,10 @@ export const setUserProfileAC = (profile: ProfileType) => ({type: 'profile/SET-U
 export const setUserStatusAC = (status: string) => ({type: 'profile/SET-USER-STATUS', status} as const);
 export const updateUserStatusAC = (status: string) => ({type: 'profile/UPDATE-USER-STATUS', status} as const);
 export const savePhotoSuccess = (photos: PhotoDomainType) => ({type: 'profile/SAVE-PHOTO', photos} as const);
+export const updateProfileInfoAC = (profileInfo: formDateDomainType) => ({
+    type: 'profile/UPDATE-USER-INFO',
+    profileInfo
+} as const);
 
 
 export const setUserProfileTC = (userId: string): AppThunk => async (dispatch) => {
@@ -70,7 +83,15 @@ export const updateStatusTC = (status: string): AppThunk => async (dispatch) => 
         dispatch(updateUserStatusAC(status));
     }
 };
-export const savePhoto = (photo:File): AppThunk => async (dispatch) => {
+export const updateProfileInfoTC = (profileInfo: formDateDomainType): AppThunk => async (dispatch) => {
+    console.log(profileInfo)
+    let res = await profileApi.updateProfileInfo(profileInfo);
+    console.log(res)
+    if (res.data.resultCode === 0) {
+        dispatch(updateProfileInfoAC(profileInfo));
+    }
+};
+export const savePhoto = (photo: File): AppThunk => async (dispatch) => {
     let res = await profileApi.savePhoto(photo);
     console.log(res.data.resultCode);
     if (res.data.resultCode === 0) {
@@ -84,7 +105,8 @@ export type ProfilePageActionType =
     AddPostTypeAT
     | updateNewPostTextTypeAT
     | SetUserProfileAT
-    | ReturnType<typeof setUserStatusAC> | ReturnType<typeof updateUserStatusAC> | ReturnType<typeof clearPost>| ReturnType<typeof savePhotoSuccess>
+    | ReturnType<typeof setUserStatusAC> | ReturnType<typeof updateUserStatusAC> | ReturnType<typeof clearPost>
+    | ReturnType<typeof savePhotoSuccess> | ReturnType<typeof updateProfileInfoAC>
 
 
 export type PostType = {
@@ -106,6 +128,9 @@ export type  updateNewPostTextTypeAT = { type: 'profile/UPDATE-NEW-POST-TEXT', n
 
 
 export type ProfileType = {
+    'photos': PhotoDomainType
+    status: string,
+    'userId': number | null | string,
     'aboutMe': null | string,
     'contacts': {
         'facebook': null | string,
@@ -118,9 +143,7 @@ export type ProfileType = {
         'mainLink': null | string
     },
     'lookingForAJob': boolean,
-    'lookingForAJobDescription': any,
+    'lookingForAJobDescription': string,
     'fullName': string,
-    'userId': number | null,
-    status: string,
-    'photos': PhotoDomainType
+
 }

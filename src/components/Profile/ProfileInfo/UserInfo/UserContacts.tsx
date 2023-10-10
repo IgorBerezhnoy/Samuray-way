@@ -5,10 +5,8 @@ import {Input} from '../../../common';
 import {ContactItem} from './ContactItem';
 
 export const UserContacts = (props: { profile: ProfileType }) => {
-    // const {vk, twitter, instagram, github, mainLink, website} = props.profile.contacts;
     const conKey = Object.keys(props.profile.contacts);
     const conVal = Object.values(props.profile.contacts);
-    console.log(conVal);
     let contacts = [];
     for (let i = 0; i < conKey.length; i++) {
         contacts.push(
