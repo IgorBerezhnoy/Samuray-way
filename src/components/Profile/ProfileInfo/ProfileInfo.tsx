@@ -3,7 +3,7 @@ import s from './ProfileInfo.module.css';
 import {ProfileType} from '../../../Redux/profile-reducer';
 import {UserInfo} from './UserInfo/UserInfo';
 import {Preloader} from '../../common';
-import {UserInfoForm, UserInfoReduxForm} from './UserInfo/UserInfoForm';
+import {formDateDomainType, UserInfoReduxForm} from './UserInfo/UserInfoForm';
 import {reduxForm} from 'redux-form';
 import {LoginForm} from '../../Login/LoginForm';
 
@@ -19,6 +19,9 @@ export const ProfileInfo: React.FC<PropsType> = (props) => {
 
         };
 
+
+
+
         return <>
             <div><img src={`${process.env.PUBLIC_URL}/img/fon.jpg`}/></div>
 
@@ -32,7 +35,7 @@ export const ProfileInfo: React.FC<PropsType> = (props) => {
 
                 {props.isOwner
                     ? <UserInfoReduxForm profile={props.profile} status={props.status} updateStatusTC={props.updateStatusTC}
-                                    isOwner={props.isOwner}/>
+                                    isOwner={props.isOwner} />
                     : <UserInfo profile={props.profile} status={props.status} updateStatusTC={props.updateStatusTC}
                                 isOwner={props.isOwner}/>
                 }

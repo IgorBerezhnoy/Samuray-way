@@ -7,6 +7,8 @@ import s from './Login.module.css';
 
 export let LoginForm: React.FC<InjectedFormProps> = (props) => {
 
+
+
     return (<form onSubmit={props.handleSubmit}>
         <div><Field component={Input} validate={[requiredField, minLength]} name={'login'} placeholder={'Login'}/>
         </div>

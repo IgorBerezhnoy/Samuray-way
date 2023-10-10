@@ -1,20 +1,27 @@
 import {ProfileType} from '../../../../Redux/profile-reducer';
 import React from 'react';
+import {Field} from 'redux-form';
+import {Input} from '../../../common';
+import {ContactItem} from './ContactItem';
 
 export const UserContacts = (props: { profile: ProfileType }) => {
-    const {vk, twitter, instagram, github, mainLink, website} = props.profile.contacts;
+    // const {vk, twitter, instagram, github, mainLink, website} = props.profile.contacts;
+    const conKey = Object.keys(props.profile.contacts);
+    const conVal = Object.values(props.profile.contacts);
+    console.log(conVal);
+    let contacts = [];
+    for (let i = 0; i < conKey.length; i++) {
+        contacts.push(
+            <ContactItem contactKey={conKey[i]} contactValue={conVal[i]}/>
+        );
+    }
 
     return (<div><b>contacts:</b>
         {
-            (mainLink || website || vk || twitter || instagram || github)
+            (conVal.filter(el=>el!==null).length)
                 ?
                 <div>
-                    {mainLink && <div><b>mainLink:</b>{mainLink}</div>}
-                    {website && <div><b>website:</b>{website}</div>}
-                    {vk && <div><b>vk:</b>{vk}</div>}
-                    {twitter && <div><b>twitter:</b>{twitter}</div>}
-                    {instagram && <div>instagram: {instagram}</div>}
-                    {github && <div><b>github:</b> {github}</div>}
+                    {contacts}
                 </div>
 
                 : <> I don't have contacts</>
