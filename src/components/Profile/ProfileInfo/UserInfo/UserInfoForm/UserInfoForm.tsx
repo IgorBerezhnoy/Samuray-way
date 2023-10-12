@@ -1,5 +1,5 @@
 import {ProfileStatusWithHook} from '../../ProfileStatusWithHook/ProfileStatusWithHook';
-import React from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import {ProfileType} from '../../../../../Redux/profile-reducer';
 import {Input} from '../../../../common';
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
@@ -10,26 +10,37 @@ type PropsType = {
     profile: ProfileType
     status: string
     isOwner: boolean
-    editMode:boolean
+    editMode: boolean
     updateStatusTC: (status: string) => void
-    onClickEditMode:()=>void
+    setEditMode: (isActive: boolean) => void
+    onMainPhotoSelected: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
 export const UserInfoForm: React.FC<InjectedFormProps<formDateType, PropsType> & PropsType> = (props) => {
+    let [error, setError]=useState<string>("")
 
+if (props.error){
+    if (props.error===error){
+    setError(props.error)
+    }
+}
 
+    console.log('error', props.error);
+
+    const onClickEditMode = () => props.setEditMode(true);
+    const onClickCancel = () => props.setEditMode(false);
 
     const conKey = Object.keys(props.profile.contacts);
-    // const conVal = Object.values(props.profile.contacts);
 
     let contacts = [];
 
     for (let i = 0; i < conKey.length; i++) {
-        contacts.push(<ContactItem contactKey={conKey[i]}  formMode={true}/>);}
+        contacts.push(<ContactItem key={i} contactKey={conKey[i]} formMode={true}/>);
+    }
 
     if (!props.editMode) {
         return <div>
-            <button onClick={props.onClickEditMode}>edit</button>
+            <button onClick={onClickEditMode}>edit</button>
             <UserInfo profile={props.profile} status={props.status} updateStatusTC={props.updateStatusTC}
                       isOwner={props.isOwner}/></div>;
     }
@@ -38,8 +49,13 @@ export const UserInfoForm: React.FC<InjectedFormProps<formDateType, PropsType> &
         <div>
             <form onSubmit={props.handleSubmit}>
                 <div>
+                    <div>
+                        <button onClick={onClickCancel}>cancel</button>
+                    </div>
+                    {props.isOwner &&
+                        <div><b>Update photo</b> <input type={'file'} onChange={props.onMainPhotoSelected}/></div>}
                     <div><b>FullName:</b>
-                            <Field component={Input} name={'fullName'} placeholder={'fullName'} pattern={"props.profile.fullName"}/>
+                        <Field component={Input} name={'fullName'} placeholder={'fullName'}/>
                     </div>
 
                     <div><b>Looking for a job:</b>
@@ -62,13 +78,15 @@ export const UserInfoForm: React.FC<InjectedFormProps<formDateType, PropsType> &
                 </div>
 
                 <div>{contacts}</div>
+                {props.error && <div> {error}</div>}
+                {/*{error && <div className={s.formSummaryError}> {error}</div>}*/}
 
                 <button>save</button>
             </form>
         </div>);
 };
-export const UserInfoReduxForm = reduxForm<formDateType, PropsType>({form: 'UserInfoForm'})(UserInfoForm);
 
+export const UserInfoReduxForm = reduxForm<formDateType, PropsType>({form: 'userInfoForm'})(UserInfoForm);
 
 
 type formDateType = {

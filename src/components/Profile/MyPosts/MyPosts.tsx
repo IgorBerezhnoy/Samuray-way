@@ -4,7 +4,7 @@ import {Post} from './Post/Post';
 import {MyPostContainerPropsType} from './MyPostsContainer';
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 import {maxLength30, requiredField} from '../../../utils/validators/validators';
-import {Input} from '../../common/FormsControls/FormsControls';
+import {Input} from '../../common';
 
 
 export const MyPosts = React.memo((props: MyPostContainerPropsType) => {

@@ -1,6 +1,7 @@
 import {AppThunk} from './redux-store';
 import {formDateDomainType, profileApi} from '../api/Api';
 import {setIDInNavbar} from './navbar-reducer';
+import {stopSubmit} from 'redux-form';
 
 
 let initialState: ProfileReducerStateType = {
@@ -84,18 +85,20 @@ export const updateStatusTC = (status: string): AppThunk => async (dispatch) => 
     }
 };
 export const updateProfileInfoTC = (profileInfo: formDateDomainType): AppThunk => async (dispatch) => {
-    console.log(profileInfo)
     let res = await profileApi.updateProfileInfo(profileInfo);
-    console.log(res)
     if (res.data.resultCode === 0) {
         dispatch(updateProfileInfoAC(profileInfo));
+        return res;
+    } else {
+        let message = res.data.messages[0] ? res.data.messages[0] : 'Some error';
+        // @ts-ignore
+        // dispatch(stopSubmit('userInfoForm', {"contacts": {"facebook":message}}));
+        dispatch(stopSubmit('userInfoForm', {_error:message}))
     }
 };
 export const savePhoto = (photo: File): AppThunk => async (dispatch) => {
     let res = await profileApi.savePhoto(photo);
-    console.log(res.data.resultCode);
     if (res.data.resultCode === 0) {
-        debugger
         dispatch(savePhotoSuccess(res.data.data.photos));
     }
 };

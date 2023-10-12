@@ -15,7 +15,7 @@ export const UserInfo = (props: PropsType) => {
 
         <div>
             {props.profile.fullName && <div><b>FullName:</b> {props.profile.fullName}</div>}
-            {props.profile.lookingForAJob && <div><b>lookingForAJob:</b> {props.profile.lookingForAJob}</div>}
+            {props.profile.lookingForAJobDescription && <div><b>lookingForAJob:</b> {props.profile.lookingForAJobDescription}</div>}
 
             <ProfileStatusWithHook status={props.status} updateStatusTC={props.updateStatusTC}
                                    isOwner={props.isOwner} name={props.profile.fullName}/>
