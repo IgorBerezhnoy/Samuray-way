@@ -15,10 +15,8 @@ export const ProfileInfo: React.FC<PropsType> = (props) => {
             if (e.target.files?.length) {
                 props.savePhoto(e.target.files[0]);
             }
-
         };
         const onSubmit = async (formDate: any) => {
-            console.log(formDate);
             let data: formDateDomainType = {
                 userId: props.myId!.toString(),
                 fullName: formDate.fullName as string,

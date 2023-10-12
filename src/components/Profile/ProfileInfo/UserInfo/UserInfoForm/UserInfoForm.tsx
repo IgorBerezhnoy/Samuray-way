@@ -1,10 +1,12 @@
 import {ProfileStatusWithHook} from '../../ProfileStatusWithHook/ProfileStatusWithHook';
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent} from 'react';
 import {ProfileType} from '../../../../../Redux/profile-reducer';
 import {Input} from '../../../../common';
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 import {UserInfo} from '../UserInfo';
 import {ContactItem} from '../ContactItem';
+import {maxLength150, minLength3, requiredField} from '../../../../../utils/validators/validators';
+import s from '../../../../Login/Login.module.css';
 
 type PropsType = {
     profile: ProfileType
@@ -17,19 +19,9 @@ type PropsType = {
 }
 
 export const UserInfoForm: React.FC<InjectedFormProps<formDateType, PropsType> & PropsType> = (props) => {
-    let [error, setError]=useState<string>("")
-
-if (props.error){
-    if (props.error===error){
-    setError(props.error)
-    }
-}
-
-    console.log('error', props.error);
 
     const onClickEditMode = () => props.setEditMode(true);
     const onClickCancel = () => props.setEditMode(false);
-
     const conKey = Object.keys(props.profile.contacts);
 
     let contacts = [];
@@ -55,7 +47,7 @@ if (props.error){
                     {props.isOwner &&
                         <div><b>Update photo</b> <input type={'file'} onChange={props.onMainPhotoSelected}/></div>}
                     <div><b>FullName:</b>
-                        <Field component={Input} name={'fullName'} placeholder={'fullName'}/>
+                        <Field component={Input} name={'fullName'}  validate={[requiredField]} placeholder={'fullName'}/>
                     </div>
 
                     <div><b>Looking for a job:</b>
@@ -64,22 +56,20 @@ if (props.error){
                     </div>
 
                     <div><b>Looking for a Description:</b>
-                        <Field component={Input} name={'lookingForAJobDescription'}
+                        <Field component={Input} name={'lookingForAJobDescription'}  validate={[maxLength150,requiredField]}
                                placeholder={'lookingForAJobDescription'}/>
                     </div>
 
                     <div><b>About me:</b>
-                        <Field component={Input} name={'aboutMe'} placeholder={'About me'}/>
+                        <Field component={Input} name={'aboutMe'}  validate={[maxLength150]} placeholder={'About me'}/>
                     </div>
 
                     <ProfileStatusWithHook status={props.status} updateStatusTC={props.updateStatusTC}
                                            isOwner={props.isOwner} name={props.profile.fullName}/>
-
                 </div>
+                {props.error && <div className={s.formSummaryError}> {props.error}</div>}
 
                 <div>{contacts}</div>
-                {props.error && <div> {error}</div>}
-                {/*{error && <div className={s.formSummaryError}> {error}</div>}*/}
 
                 <button>save</button>
             </form>

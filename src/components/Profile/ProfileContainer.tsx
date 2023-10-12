@@ -43,10 +43,9 @@ class ProfileContainerAPI extends React.Component<CommonPropsType> {
 
 
     render() {
-
         return (
             <Profile {...this.props} profile={this.props.profile} status={this.props.status}
-                     updateStatusTC={this.props.updateStatusTC} isOwner={this.props.myId === this.props.id}
+                     updateStatusTC={this.props.updateStatusTC} isOwner={this.props.myId == this.props.id}
                      savePhoto={this.props.savePhoto} myId={this.props.myId} updateProfileInfoTC={this.props.updateProfileInfoTC}/>
         );
     }
