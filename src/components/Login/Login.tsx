@@ -5,15 +5,17 @@ import {LoginReduxForm} from './LoginForm';
 
 type PropsType = {
     isAuth: boolean,
-    loginDateTC: (data: formDateType) => void
+    loginDateTC: (data: formDateType) => void,
+    captcha:string|null
 }
 
-export const Login: React.FC<PropsType> = ({isAuth, loginDateTC, ...restProps}) => {
+export const Login: React.FC<PropsType> = ({isAuth, loginDateTC,captcha, ...restProps}) => {
     const onSubmit = (formDate: any) => {
         let data: formDateType = {
             email: formDate.login as string,
             password: formDate.password as string,
-            rememberMe: formDate.rememberMe as boolean
+            rememberMe: formDate.rememberMe as boolean,
+            captcha: formDate.captcha as string
         };
         loginDateTC(data);
     };
@@ -24,7 +26,7 @@ export const Login: React.FC<PropsType> = ({isAuth, loginDateTC, ...restProps}) 
         <div><h1>
             Login
         </h1>
-            <LoginReduxForm onSubmit={onSubmit}/>
+            <LoginReduxForm onSubmit={onSubmit} captcha={captcha}/>
         </div>
     );
 };

@@ -11,7 +11,7 @@ import {connect} from 'react-redux';
 import {AppRootStateType} from './Redux/redux-store';
 import {compose} from 'redux';
 import {setInitializedTC} from './Redux/app-reducer';
-import {withSuspense} from './hoc/WithSuspense';
+import {withSuspense} from './hoc';
 import {Preloader} from './components/common';
 import {LoginContainer} from './components/Login/LoginContainer';
 

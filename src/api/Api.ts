@@ -20,7 +20,7 @@ export const usersAPI = {
         return instance.delete(`follow/${user.id}`,);
     }
 };
-export const AuthMeApi = {
+export const authMeApi = {
     me() {
         return instance.get('auth/me');
     },
@@ -30,6 +30,12 @@ export const AuthMeApi = {
     logOut() {
         return instance.delete('auth/login');
     },
+};
+export const securityApi = {
+    getCaptcha() {
+        return instance.get('/security/get-captcha-url');
+    },
+
 };
 
 export const profileApi = {
@@ -57,6 +63,7 @@ export type formDateType = {
     email: string,
     password: string,
     rememberMe: boolean
+    captcha?: string
 }
 
 export type formDateDomainType = {

@@ -3,7 +3,7 @@ import {addMessage} from '../../Redux/diologs-reducer';
 import {Dialogs} from './Dialogs';
 import {connect} from 'react-redux';
 import {AppRootStateType} from '../../Redux/redux-store';
-import {WithAuthRedirect} from '../../hoc/WithAuthRedirect';
+import {WithAuthRedirect} from '../../hoc';
 import {compose} from 'redux';
 
 
@@ -12,17 +12,15 @@ import {compose} from 'redux';
 //     dispatch: (action: ActionType) => void
 // }
 let mapStateToProps = (state: AppRootStateType) => {
-    return {
-        dialogsPage: state.dialogsPage,
-    };
+  return {
+    dialogsPage: state.dialogsPage,
+  };
 };
 
 
-
 export default compose<React.ComponentType>(connect(mapStateToProps, {
-    addMessage
-}),WithAuthRedirect)(Dialogs)
-
+  addMessage
+}), WithAuthRedirect)(Dialogs);
 
 
 // export const DialogsContainer = WithAuthRedirect(connect(mapStateToProps, {

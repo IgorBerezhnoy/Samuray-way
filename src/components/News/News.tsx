@@ -1,11 +1,12 @@
 import React from 'react';
-import s from "./News.module.css"
+import {WithAuthRedirect} from '../../hoc/WithAuthRedirect';
 
-export const News = () => {
+
+export const News = WithAuthRedirect(() => {
     return (
         <div className={""}>
             News
         </div>
-    );
-};
+    )
+})
 

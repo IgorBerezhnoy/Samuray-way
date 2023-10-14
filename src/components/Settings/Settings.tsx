@@ -1,11 +1,11 @@
 import React from 'react';
-import s from "./Settings.module.css"
+import {WithAuthRedirect} from '../../hoc';
 
-export const Settings = () => {
-    return (
-        <div className={""}>
-            Settings
-        </div>
-    );
-};
+export const Settings = WithAuthRedirect(() => {
+  return (
+    <div className={''}>
+      Settings
+    </div>
+  );
+});
 

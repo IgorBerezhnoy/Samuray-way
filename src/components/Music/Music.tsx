@@ -1,11 +1,11 @@
 import React from 'react';
-import s from "./Music.module.css"
+import {WithAuthRedirect} from '../../hoc';
 
-export const Music = () => {
+export const Music =WithAuthRedirect( () => {
     return (
         <div className={""}>
             Music
         </div>
     );
-};
+})
 
