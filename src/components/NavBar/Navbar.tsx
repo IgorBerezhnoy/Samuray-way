@@ -4,46 +4,56 @@ import {NavLink} from 'react-router-dom';
 import {DialogsType, MessagesType} from '../../Redux/diologs-reducer';
 
 type PropsType = {
-    navbar: { navItems: { name: string, navLink: string }[] }
-    dialogsPage: { dialogs: DialogsType, messages: MessagesType }
-    id: number |null
-    setIDInNavbar:(id:number)=>void
-    setUserProfileTC : (id:string)=>void
+  navbar: { navItems: { name: string, navLink: string, src: string }[] }
+  dialogsPage: { dialogs: DialogsType, messages: MessagesType }
+  id: number | null
+  setIDInNavbar: (id: number) => void
+  setUserProfileTC: (id: string) => void
 }
 
 export const Navbar: React.FC<PropsType> = (props) => {
 
-    const onclickHandler=()=>{
-if (props.id){
-        props.setUserProfileTC(props.id.toString())
-}
-
+  const onclickHandler = () => {
+    if (props.id) {
+      props.setUserProfileTC(props.id.toString());
     }
-    console.log(props.id);
-    let itemsNavbar = props.navbar.navItems.map((el, i) =>el.name==="Profile"?
-        <div key={i}><NavLink to={el.navLink+props.id} onClick={onclickHandler} activeClassName={s.active}>{el.name}</NavLink></div>
-            :
-        <div key={i}><NavLink to={el.navLink} activeClassName={s.active}>{el.name}</NavLink>
-    </div>);
 
-    let friendsNavbar = props.dialogsPage.dialogs.map((el, i) => <div key={i}><NavLink
-        to={`/dialogs/${el.id}`}>
-        <img className={s.imgFriends} src={el.srs} alt={el.name}/>{el.name}</NavLink></div>).slice(0, 3);
+  };
+  console.log(props.id);
+  let itemsNavbar = props.navbar.navItems.map((el, i) => el.name === 'Profile' ?
+      <NavLink to={el.navLink + props.id} onClick={onclickHandler} activeClassName={s.active}>
+    <div key={i} className={s.item}>
+      <img className={s.itemIcons} src={el.src} alt={el.name}/>
+      <span className={s.itemText}>{el.name}</span>
+    </div>
+    </NavLink>
+    :
+      <NavLink to={el.navLink} activeClassName={s.active}>
+    <div key={i} className={s.item}>
+      <img src={el.src} alt={el.name} className={s.itemIcons}/>
+      <span className={s.itemText}>{el.name}</span>
+    </div>
+    </NavLink>
+);
+
+  let friendsNavbar = props.dialogsPage.dialogs.map((el, i) => <div key={i}><NavLink
+    to={`/dialogs/${el.id}`}>
+    <img className={s.imgFriends} src={el.srs} alt={el.name}/>{el.name}</NavLink></div>).slice(0, 3);
 
 
-    return (
-        <nav className={s.nav}>
-            <div className={s.item}>
-                {itemsNavbar}
-                <div className={s.friendsBlock}>
-                    <div className={s.headerFriends}>Friends</div>
-                    <div className={s.imagesFriends}>
-                        {friendsNavbar}
+  return (
+    <nav className={s.nav}>
+      <div className={s.items}>
+        {itemsNavbar}
+        <div className={s.friendsBlock}>
+          <div className={s.headerFriends}>Friends</div>
+          <div className={s.imagesFriends}>
+            {friendsNavbar}
 
-                    </div>
-                </div>
-            </div>
-        </nav>);
+          </div>
+        </div>
+      </div>
+    </nav>);
 };
 
 // let itemsNavbar = props.navbar.navItems.map((el, i) => el === 'Messages' ?

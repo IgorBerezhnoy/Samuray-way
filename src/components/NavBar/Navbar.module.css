@@ -1,16 +1,33 @@
 .nav {
     grid-area: n;
-    background-color: yellowgreen;
+    background-color: #fdfdfe;
     padding: 20px;
 
 }
 
-.item a {
-    color: white;
+.items a {
+    color: #8692a2;
     text-decoration: none;
 }
+.itemIcons{
+    width: 45px;
+    height: 45px;
+}
+.item{
+    display: flex;
+    padding: 5px;
+    flex-direction: row;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+.itemText{
+    margin: 20px;
+    text-align: center;
+}
 
-.item a.active {
+
+.items a.active {
     color: gold;
 }
 
@@ -19,7 +36,7 @@
 }
 .headerFriends{
     font-size: 30px;
-    color: white;
+    color: #8692a2;
 
     margin: 40px 10px 10px;
 }

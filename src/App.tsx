@@ -26,8 +26,9 @@ class App extends React.Component<AppPropsType> {
     this.props.setInitializedTC();
 
   }
-componentWillUnmount() {
-}
+
+  componentWillUnmount() {
+  }
 
   render() {
     if (!this.props.isInitialized) {
@@ -55,6 +56,7 @@ componentWillUnmount() {
               <img src="http://ttt.dev.iwa.kz/image.png" width={'1000px'} alt={'Not found 404'}/>
 
             </div>}/>
+
             <Redirect from="*" to="/404"/>
           </Switch>
         </div>
