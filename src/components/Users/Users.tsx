@@ -1,6 +1,6 @@
 import React from 'react';
 import {UserType} from '../../Redux/users-reducer';
-import {Paginator} from '../common/Paginator/Paginator';
+import {Paginator} from '../common';
 import {User} from './User/User';
 
 type PropsType = {

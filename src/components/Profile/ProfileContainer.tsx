@@ -12,7 +12,7 @@ import {
 import {AppRootStateType} from '../../Redux/redux-store';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {compose} from 'redux';
-import {WithAuthRedirect} from '../../hoc/WithAuthRedirect';
+import {WithAuthRedirect} from '../../hoc';
 import {formDateDomainType} from '../../api/Api';
 
 
