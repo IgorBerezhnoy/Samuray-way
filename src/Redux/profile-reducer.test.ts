@@ -8,7 +8,7 @@ beforeEach(() => {
 
         ],
         profile: null,
-        status: ''
+        status: '', backgrounds:[]
     };
 });
 test('new post should be added', () => {

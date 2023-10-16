@@ -16,7 +16,9 @@ let initialState: ProfileReducerStateType = {
     {id: 4, message: 'It is my first post', like: 0}
   ],
   profile: null,
-  status: ''
+  status: '',
+  backgrounds: [`${process.env.PUBLIC_URL}/img/background/backGraund1.jpg`, `${process.env.PUBLIC_URL}/img/background/backGraund2.jpg`, `${process.env.PUBLIC_URL}/img/background/backGraund3.jpg`,
+    `${process.env.PUBLIC_URL}/img/background/backGraund4.jpg`, `${process.env.PUBLIC_URL}/img/background/backGraund5.jpg`, `${process.env.PUBLIC_URL}/img/background/backGraund6.jpg`,]
 };
 export const profileReducer = (state: ProfileReducerStateType = initialState, action: ProfilePageActionType): ProfileReducerStateType => {
   switch (action.type) {
@@ -125,6 +127,7 @@ export type ProfileReducerStateType = {
   posts: PostType[],
   profile: null | ProfileType,
   status: string
+  backgrounds: string[]
 }
 export type PhotoDomainType = { large: string, small: string };
 
@@ -153,3 +156,6 @@ export type ProfileType = {
   'fullName': string,
 
 }
+
+
+//

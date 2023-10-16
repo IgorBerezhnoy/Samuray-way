@@ -41,7 +41,7 @@ class App extends React.Component<AppPropsType> {
         <div className={'appWrapper'}>
           <Switch>
             <Route exact path={'/'} render={() => withSuspense(ProfileContainer)}/>
-            <Route exact path={'/dialogs'} render={() => withSuspense(DialogsContainer)}/>
+            <Route  path={'/dialogs'} render={() => withSuspense(DialogsContainer)}/>
             <Route exact path={'/profile/:userId?'} render={() => withSuspense(ProfileContainer)}/>
             <Route exact path={'/Users'} render={() => withSuspense(UsersContainer)}/>
             <Route exact path={'/news'} render={() => <News/>}/>

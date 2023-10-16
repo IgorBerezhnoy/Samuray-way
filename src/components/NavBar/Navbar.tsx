@@ -44,7 +44,7 @@ export const Navbar: React.FC<PropsType> = (props) => {
   return (
     <nav className={s.nav}>
       <div className={s.items}>
-        {itemsNavbar}
+        <div className={s.navItems}>{itemsNavbar}</div>
         <div className={s.friendsBlock}>
           <div className={s.headerFriends}>Friends</div>
           <div className={s.imagesFriends}>

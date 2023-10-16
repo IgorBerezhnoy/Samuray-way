@@ -11,18 +11,28 @@
 
 .loginBlock {
     float: right;
-    margin: 10px;
+    margin: 15px;
     font-size: 22px;
+}
+.headerBtn {
+ background-color: #fdfdfe;
+ color: #000001;
+    border-radius: 3px;
+    border: none;
+    font-size: medium;
+    padding: 5px;
+
 }
 
 .loginBlock a {
+    padding-right:20px ;
     color: white;
     text-decoration: none;
 }
 
 .login {
     float: right;
-    margin: 10px;
+    margin: 15px;
     font-size: 22px;
     color: white;
 }
