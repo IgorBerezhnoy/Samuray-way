@@ -48,6 +48,7 @@
 
     background-color: #e7f0f9;
     border-radius: 20px;
+    height: 150px;
 }
 
 .headerFriends {
@@ -60,6 +61,7 @@
 
 .imagesFriends {
     display: flex;
+    margin-left: 10px;
 }
 
 .imgFriends {

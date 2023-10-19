@@ -46,7 +46,8 @@ class ProfileContainerAPI extends React.Component<CommonPropsType> {
         return (
             <Profile {...this.props} profile={this.props.profile} status={this.props.status}
                      updateStatusTC={this.props.updateStatusTC} isOwner={this.props.myId == this.props.id}
-                     savePhoto={this.props.savePhoto} myId={this.props.myId} updateProfileInfoTC={this.props.updateProfileInfoTC} backgrounds={this.props.backgrounds}/>
+                     savePhoto={this.props.savePhoto} myId={this.props.myId} updateProfileInfoTC={this.props.updateProfileInfoTC}
+                     backgrounds={this.props.backgrounds} postsLeng={this.props.postsLeng}/>
         );
     }
 }
@@ -57,7 +58,8 @@ let mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
         status: state.profilePage.status,
         id: state.profilePage.profile?.userId,
         myId: state.authMe.id,
-        backgrounds:state.profilePage.backgrounds
+        backgrounds:state.profilePage.backgrounds,
+        postsLeng:state.profilePage.posts.length
     };
 };
 
@@ -73,6 +75,7 @@ type PathParamsType = { userId: string }
 type CommonPropsType = RouteComponentProps<PathParamsType> & ProfileContainerPropsType
 
 type MapStateToPropsType = {
+    postsLeng:number
     profile: ProfileType | null,
     status: string
     id?: number | null | string

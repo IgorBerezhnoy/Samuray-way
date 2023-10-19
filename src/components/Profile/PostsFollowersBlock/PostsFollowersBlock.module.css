@@ -1,0 +1,21 @@
+.wrapper{
+    display: flex;
+    margin-left: 20px;
+}
+.item{
+    margin: 30px 10px
+}
+.number{
+    color: #212529;
+    text-align: center;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+}
+.littleText{
+     color: #ADB5BD;
+     text-align: center;
+     font-size: 10px;
+     font-style: normal;
+     font-weight: 600;
+}

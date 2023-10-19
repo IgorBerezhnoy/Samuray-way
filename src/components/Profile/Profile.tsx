@@ -18,7 +18,7 @@ export const Profile: React.FC<PropsType> = (props) => {
                 <ProfileInfo profile={props.profile} status={props.status} updateStatusTC={props.updateStatusTC}
                              isOwner={props.isOwner} savePhoto={props.savePhoto}
                              myId={props.myId} updateProfileInfoTC={props.updateProfileInfoTC}
-                             backgrounds={props.backgrounds}
+                             backgrounds={props.backgrounds} postsLeng={props.postsLeng}
               /> :
                 <Preloader/>}
             <MyPostsContainer/>

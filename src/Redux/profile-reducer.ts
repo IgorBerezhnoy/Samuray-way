@@ -8,8 +8,7 @@ let initialState: ProfileReducerStateType = {
   posts: [
     {id: 1, message: 'Hello world!', like: 4},
     {id: 2, message: 'Hi how are you?', like: 432},
-    {
-      id: 3,
+    {id: 3,
       message: ' Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium alias aliquam asperiores delectus dolore doloremque doloribus eum fuga iure nam natus neque officia praesentium quisquam reprehenderit tempora, temporibus veniam, vero.',
       like: 32
     },

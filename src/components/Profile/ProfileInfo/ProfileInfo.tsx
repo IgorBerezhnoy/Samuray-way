@@ -5,6 +5,8 @@ import {UserInfo} from './UserInfo/UserInfo';
 import {Preloader} from '../../common';
 import {UserInfoReduxForm} from './UserInfo/UserInfoForm/UserInfoForm';
 import {formDateDomainType} from '../../../api/Api';
+import {PostsFollowersBlock} from '../PostsFollowersBlock/PostsFollowersBlock';
+import {UserName} from '../UserName/UserName';
 
 export const ProfileInfo: React.FC<PropsType> = (props) => {
 
@@ -43,11 +45,15 @@ export const ProfileInfo: React.FC<PropsType> = (props) => {
     };
 
     return <>
-      <div style={{position: 'relative'}}>
-        <img className={s.imgBackgrounds} src={randomBackground}/>
-        <img className={s.imgMain}
-             src={props.profile.photos.large ? props.profile.photos.large : `${process.env.PUBLIC_URL}/img/user5.png`}
-             width={'200px'}/>
+      <div className={"headerProfile"}>
+        <div style={{position: 'relative', height: '550px'}}>
+          <img className={s.imgBackgrounds} src={randomBackground}/>
+          <img className={s.imgMain}
+               src={props.profile.photos.large ? props.profile.photos.large : `${process.env.PUBLIC_URL}/img/user5.png`}
+               width={'200px'}/>
+          <PostsFollowersBlock posts={props.postsLeng} followers={'2.1k'} follow={'32k'}/>
+          <UserName fullName={props.profile.fullName} nickname={"@"+props.profile.fullName} />
+        </div>
       </div>
 
       <div className={s.descriptionBlock}>
@@ -59,7 +65,7 @@ export const ProfileInfo: React.FC<PropsType> = (props) => {
           ? <UserInfoReduxForm profile={props.profile} initialValues={props.profile} status={props.status}
                                updateStatusTC={props.updateStatusTC}
                                isOwner={props.isOwner} onSubmit={onSubmit} setEditMode={setEditMode}
-                               editMode={editMode} onMainPhotoSelected={onMainPhotoSelected}/>
+                               editMode={editMode} onMainPhotoSelected={onMainPhotoSelected} />
           : <UserInfo profile={props.profile} status={props.status} updateStatusTC={props.updateStatusTC}
                       isOwner={props.isOwner}/>
         }
@@ -78,5 +84,6 @@ type PropsType = {
   myId: number | null, isOwner: boolean, savePhoto: (file: File) => void
   updateProfileInfoTC: (profileInfo: formDateDomainType) => any
   backgrounds: string[]
+  postsLeng: number
 }
 

@@ -5,7 +5,7 @@ import {Input} from '../../../../common';
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 import {UserInfo} from '../UserInfo';
 import {ContactItem} from '../ContactItem';
-import {maxLength150, minLength3, requiredField} from '../../../../../utils/validators/validators';
+import {maxLength150, requiredField} from '../../../../../utils/validators/validators';
 import s from '../../../../Login/Login.module.css';
 
 type PropsType = {
@@ -34,7 +34,7 @@ export const UserInfoForm: React.FC<InjectedFormProps<formDateType, PropsType> &
         return <div>
             <button onClick={onClickEditMode}>edit</button>
             <UserInfo profile={props.profile} status={props.status} updateStatusTC={props.updateStatusTC}
-                      isOwner={props.isOwner}/></div>;
+                      isOwner={props.isOwner} /></div>;
     }
 
     return (
