@@ -28,7 +28,7 @@ export const HeaderProfile = (props: PropsTypeHeader) => {
              width={'200px'}/>
         <PostsFollowersBlock posts={props.postsLeng} followers={'2.1k'} follow={'32k'}/>
         <UserName fullName={props.profile.fullName} nickname={'@' + props.profile.fullName}/>
-        {props.isOwner ? <ButtonsBarProfile callBack={setEditModeHandler} className={props.editMode ? 'cancel' : 'green'} name={props.editMode ? 'cancel' : 'edit'}/>
+        {props.isOwner ? <ButtonsBarProfile callBack={setEditModeHandler} className={props.editMode ? 'red' : 'green'} name={props.editMode ? 'cancel' : 'edit'}/>
           : 'Somebutton'}
       </div>
     </div>

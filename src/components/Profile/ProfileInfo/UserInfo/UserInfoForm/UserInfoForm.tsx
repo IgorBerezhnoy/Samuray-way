@@ -7,6 +7,7 @@ import {UserInfo} from '../UserInfo';
 import {ContactItem} from '../ContactItem';
 import {maxLength150, requiredField} from '../../../../../utils/validators/validators';
 import s from '../../../../Login/Login.module.css';
+import {Button} from '../../../../common/Button/Button';
 
 type PropsType = {
     profile: ProfileType
@@ -20,8 +21,6 @@ type PropsType = {
 
 export const UserInfoForm: React.FC<InjectedFormProps<formDateType, PropsType> & PropsType> = (props) => {
 
-    const onClickEditMode = () => props.setEditMode(true);
-    const onClickCancel = () => props.setEditMode(false);
     const conKey = Object.keys(props.profile.contacts);
 
     let contacts = [];
@@ -32,7 +31,6 @@ export const UserInfoForm: React.FC<InjectedFormProps<formDateType, PropsType> &
 
     if (!props.editMode) {
         return <div>
-            <button onClick={onClickEditMode}>edit</button>
             <UserInfo profile={props.profile} status={props.status} updateStatusTC={props.updateStatusTC}
                       isOwner={props.isOwner} /></div>;
     }
@@ -41,9 +39,7 @@ export const UserInfoForm: React.FC<InjectedFormProps<formDateType, PropsType> &
         <div>
             <form onSubmit={props.handleSubmit}>
                 <div>
-                    <div>
-                        <button onClick={onClickCancel}>cancel</button>
-                    </div>
+
                     {props.isOwner &&
                         <div><b>Update photo</b> <input type={'file'} onChange={props.onMainPhotoSelected}/></div>}
                     <div><b>FullName:</b>
@@ -71,7 +67,7 @@ export const UserInfoForm: React.FC<InjectedFormProps<formDateType, PropsType> &
 
                 <div>{contacts}</div>
 
-                <button>save</button>
+                <Button name="save"  callBack={()=>{}} className={"green"} size={'medium'}/>
             </form>
         </div>);
 };
