@@ -1,15 +1,4 @@
 .descriptionBlock{
     padding: 10px;
 }
-.imgBackgrounds{
-    width: 900px;
-    height: 350px;
-    border-radius: 30px;
-}
-.imgMain{
-    position: absolute;
-    left: 39%;
-    top: 242px;
-    border-radius: 50%
 
-}
