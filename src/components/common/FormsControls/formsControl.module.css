@@ -1,5 +1,14 @@
 .formControl{
-
+    padding: 20px;
+    resize: none;
+    border-radius: 30px;
+    width: 85%;
+    height: 30px;
+    vertical-align: bottom;
+    background-color: #edf2f9;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    margin: 0px 20px ;
 }
 .formControlError{
     border: red solid 1px ;

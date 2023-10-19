@@ -25,16 +25,24 @@
     text-align: center;
     font-style: normal;
 }
+.whiteButton{
+    border: none;
+    border-radius: 5px;
+    background:  #fdfdfe;;
+    color: #000001;
+    text-align: center;
+    font-style: normal;
+}
 .large{
     min-width: 110px;
-    height: 50px;
+    height: 45px;
     font-size: 18px;
     font-weight: 700;
 
 }
 .medium{
     min-width: 75px;
-    height: 35px;
+    height: 30px;
     font-size: 16px;
     font-weight: 500;
 }

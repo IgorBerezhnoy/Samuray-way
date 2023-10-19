@@ -2,9 +2,7 @@ import React from 'react';
 import s from './MyPosts.module.css';
 import {Post} from './Post/Post';
 import {MyPostContainerPropsType} from './MyPostsContainer';
-import {Field, InjectedFormProps, reduxForm} from 'redux-form';
-import {maxLength30, requiredField} from '../../../utils/validators/validators';
-import {Input} from '../../common';
+import {AddPostReduxForm} from './AddPostForm';
 
 
 export const MyPosts = React.memo((props: MyPostContainerPropsType) => {
@@ -31,25 +29,6 @@ export const MyPosts = React.memo((props: MyPostContainerPropsType) => {
 
     );
 });
-
-const AddPostForm: React.FC<InjectedFormProps> = (props) => {
-
-
-    return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field component={Input} name={'newPostBody'} placeholder={'Enter your post'}
-                       validate={[requiredField, maxLength30]}/>
-            </div>
-            <div>
-                <button>Add post</button>
-            </div>
-
-        </form>
-    );
-};
-
-const AddPostReduxForm = reduxForm({form: 'MyPostsAddMessageForm'})(AddPostForm);
 
 
 // const OnClickEnter = (e: KeyboardEvent<HTMLTextAreaElement>) => {

@@ -20,6 +20,9 @@ export const requiredField = (value: string) => {
     }
     return 'Field is required';
 };
+export const allUndefined = (value: string) => {
+        return undefined;
+};
 export const maxLengthCreator = (maxlength: number) => (value:string)=>{
     if (value.length > maxlength) {
         return `Max length is ${maxlength}`;
