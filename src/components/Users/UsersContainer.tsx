@@ -12,7 +12,7 @@ import {
     UserType
 } from '../../Redux/users-reducer';
 import {Users} from './Users';
-import {WithAuthRedirect} from '../../hoc/WithAuthRedirect';
+import {WithAuthRedirect} from '../../hoc';
 import {compose} from 'redux';
 import {withRouter} from 'react-router-dom';
 import {

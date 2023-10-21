@@ -13,7 +13,7 @@ const AddPostForm: React.FC<InjectedFormProps> = (props) => {
       <div className={s.form}>
         <Field component={Input} name={'newPostBody'} placeholder={'Enter your post'}
                validate={[requiredField, maxLength30]}/>
-        <Button name={"Add post"} size={"large"} callBack={()=>{}} className={"blue"}/>
+        <Button name={"Add post"} size={"large"} callBack={()=>{}} color={"blue"}/>
       </div>
 
     </form>

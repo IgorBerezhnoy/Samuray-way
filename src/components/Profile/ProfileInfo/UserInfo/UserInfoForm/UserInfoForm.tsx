@@ -67,7 +67,7 @@ export const UserInfoForm: React.FC<InjectedFormProps<formDateType, PropsType> &
 
                 <div>{contacts}</div>
 
-                <Button name="save"  callBack={()=>{}} className={"green"} size={'medium'}/>
+                <Button name="save" callBack={()=>{}} color={"green"} size={'medium'}/>
             </form>
         </div>);
 };
