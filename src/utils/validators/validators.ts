@@ -29,6 +29,12 @@ export const maxLengthCreator = (maxlength: number) => (value:string)=>{
     }
     return undefined
 };
+export const maxLengthCreator150 = (value:string)=>{
+    if (value?.length > 150) {
+        return `Max length is ${150}`;
+    }
+    return undefined
+};
 export const minLengthCreator = (minlength: number) => (value:string)=>{
     if (value.length <= minlength) {
         return `Min length is ${minlength}`;

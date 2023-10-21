@@ -1,4 +1,10 @@
-
+.item{
+    margin-top: 20px;
+    box-shadow: 2px 7px 8px 2px rgba(34, 60, 80, 0.2);
+    padding: 15px;
+    background-color: #e7f0f9;
+    border-radius: 20px;
+}
 .item img{
     width: 50px;
     border-radius: 50px;

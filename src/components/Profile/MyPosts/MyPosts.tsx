@@ -21,10 +21,11 @@ export const MyPosts = React.memo((props: MyPostContainerPropsType) => {
     return (
         <div className={s.postsBlock}>
 
-            <h3>My post</h3>
+          <div className={s.header}><h3>My post</h3>
             <div>
-                <AddPostReduxForm onSubmit={onSubmit}/>
+              <AddPostReduxForm onSubmit={onSubmit}/>
             </div>
+          </div>
             <div className={s.posts}>
                 <div>{postsItems}
                 </div>

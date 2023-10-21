@@ -1,4 +1,3 @@
-import React from 'react';
 import {addPost, PhotoDomainType, PostType} from '../../../Redux/profile-reducer';
 import {connect} from 'react-redux';
 import {MyPosts} from './MyPosts';

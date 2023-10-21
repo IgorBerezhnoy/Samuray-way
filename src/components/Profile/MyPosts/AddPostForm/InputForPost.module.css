@@ -14,7 +14,8 @@
   border: red solid 1px ;
 }
 .spanFormControlError{
-  color: orange;
+  padding: 20px 0px 0px 40px;
+  color: red;
 }
 .form{
   display: flex;
