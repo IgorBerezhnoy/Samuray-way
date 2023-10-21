@@ -49,9 +49,6 @@ export const ProfileInfo: React.FC<PropsType> = (props) => {
                      randomBackground={randomBackground} isOwner={props.isOwner} postsLeng={props.postsLeng}/>
       <div className={s.descriptionBlock}>
 
-
-        {/*{props.isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}*/}
-
         {props.isOwner
           ? <UserInfoReduxForm profile={props.profile} initialValues={props.profile} status={props.status}
                                updateStatusTC={props.updateStatusTC}

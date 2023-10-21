@@ -22,6 +22,7 @@ let initialState: ProfileReducerStateType = {
 export const profileReducer = (state: ProfileReducerStateType = initialState, action: ProfilePageActionType): ProfileReducerStateType => {
   switch (action.type) {
     case 'profile/ADD-POST':
+
       let newPost: PostType = {
         id: state.posts.length,
         message: action.post,

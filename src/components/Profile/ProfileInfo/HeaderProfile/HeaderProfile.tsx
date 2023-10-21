@@ -44,7 +44,7 @@ export const HeaderProfile = (props: PropsTypeHeader) => {
                                  name={props.editMode ? 'cancel' : 'edit'}/>
             : <div>
               < ButtonsBarProfile disabled={disabled}
-                                  color={/*followed ? 'red' : 'green'*/ "white"}
+                                  color={followed ? 'red' : 'green' }
                                   callBack={onClickHandler} name={followed ? 'Unfollow' : 'Follow'}/>
             </div>
           }

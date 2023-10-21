@@ -2,7 +2,7 @@ import {ProfileStatusWithHook} from '../ProfileStatusWithHook/ProfileStatusWithH
 import React from 'react';
 import {ProfileType} from '../../../../Redux/profile-reducer';
 import {UserContacts} from './UserContacts';
-
+import s from "./../ProfileInfo.module.css"
 type PropsType = {
   profile: ProfileType
   status: string
@@ -14,7 +14,7 @@ export const UserInfo = (props: PropsType) => {
   return (<>
     <div>
       {/*{props.profile.fullName && <div><b>FullName:</b> {props.profile.fullName}</div>}*/}
-      <h4>About</h4>
+      <h3>About</h3>
       {props.profile.lookingForAJobDescription &&
           <div><b>lookingForAJobDescription:</b> {props.profile.lookingForAJobDescription}</div>}
 

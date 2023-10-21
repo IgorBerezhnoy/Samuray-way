@@ -2,7 +2,7 @@ import React from 'react';
 import s from './MyPosts.module.css';
 import {Post} from './Post/Post';
 import {MyPostContainerPropsType} from './MyPostsContainer';
-import {AddPostReduxForm} from './AddPostForm';
+import {AddPostReduxForm} from './AddPostForm/AddPostForm';
 
 
 export const MyPosts = React.memo((props: MyPostContainerPropsType) => {
@@ -10,8 +10,12 @@ export const MyPosts = React.memo((props: MyPostContainerPropsType) => {
     let postsItems = props.posts.map(el =>
         <Post key={el.id} message={el.message} like={el.like} photo={props.photo?.small!}/>);
 
-    const onSubmit = (formDate: any) => {props.addPost(formDate.newPostBody);
+    const onSubmit = (formDate: any) => {
+      if (formDate.newPostBody.trim()){
+        props.addPost(formDate.newPostBody);
         formDate.newPostBody = '';
+      }
+
     };
 
     return (
