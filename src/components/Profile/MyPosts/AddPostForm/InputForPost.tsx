@@ -10,11 +10,13 @@ type InputPropsType = {
 export const InputForPost = ({input, meta, ...props}: InputPropsType) => {
   const isError = meta.touched && meta.error;
 
+
   return (<>
     <div className={s.form}><input
+
       className={s.formControl + ' ' + (isError ? s.formControlError : '')}
       {...props} {...input} {...meta} />
-      <Button name={'Add post'} size={'large'} callBack={() => {
+      <Button name={'Add post'}  size={'large'} callBack={() => {
       }} color={'blue'}/></div>
 
     <div>{isError && <div className={s.spanFormControlError}>{meta.error}</div>}</div>

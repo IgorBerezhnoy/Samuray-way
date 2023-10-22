@@ -6,24 +6,24 @@ import {AppRootStateType} from '../../../Redux/redux-store';
 
 export type MyPostContainerPropsType = mapStateToPropsType & mapDispatchToPropsType
 
-type mapStateToPropsType = { posts: PostType[], photo:PhotoDomainType|undefined }
+type mapStateToPropsType = { posts: PostType[], photo: PhotoDomainType | undefined, userName: string | undefined }
 type mapDispatchToPropsType = {
-    addPost: (post: string) => void,
+  addPost: (post: string) => void,
 }
 
 let mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
 
-    return {
-        posts: state.profilePage.posts,
-        photo:state.profilePage.profile?.photos
-    };
+  return {
+    posts: state.profilePage.posts,
+    photo: state.profilePage.profile?.photos,
+    userName: state.profilePage.profile?.fullName
+  };
 };
 
 
 export const MyPostsContainer = connect(mapStateToProps, {
-    addPost
+  addPost
 })(MyPosts);
-
 
 
 // type PropsType = {

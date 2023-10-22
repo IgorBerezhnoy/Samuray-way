@@ -6,13 +6,15 @@ import {stopSubmit} from 'redux-form';
 
 let initialState: ProfileReducerStateType = {
   posts: [
-    {id: 1, message: 'Hello world!', like: 4},
-    {id: 2, message: 'Hi how are you?', like: 432},
-    {id: 3,
-      message: ' Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium alias aliquam asperiores delectus dolore doloremque doloribus eum fuga iure nam natus neque officia praesentium quisquam reprehenderit tempora, temporibus veniam, vero.',
-      like: 32
+    {id: 1, message: 'Hello world!', like: 4, timeAgo: 'hour ago'},
+    {id: 2, message: 'Hi how are you?', like: 432, timeAgo: 'two days ago'},
+    {
+      id: 3,
+      message: ' Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium alias ' +
+        'aliquam asperiores delectus dolore doloremque doloribus eum fuga iure nam natus neque officia praesentium quisquam reprehenderit tempora, temporibus veniam, vero.',
+      like: 32, timeAgo: 'last week'
     },
-    {id: 4, message: 'It is my first post', like: 0}
+    {id: 4, message: 'It is my first post', like: 0, timeAgo: 'two weeks ago'}
   ],
   profile: null,
   status: '',
@@ -26,7 +28,8 @@ export const profileReducer = (state: ProfileReducerStateType = initialState, ac
       let newPost: PostType = {
         id: state.posts.length,
         message: action.post,
-        like: 0
+        like: 0,
+        timeAgo: 'now'
       };
 
       return {...state, posts: [newPost, ...state.posts]};
@@ -121,6 +124,7 @@ export type PostType = {
   id: number
   message: string
   like: number
+  timeAgo: string
 }
 export type PostsType = PostType[]
 export type ProfileReducerStateType = {

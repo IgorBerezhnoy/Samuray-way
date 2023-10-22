@@ -8,7 +8,7 @@ import {AddPostReduxForm} from './AddPostForm/AddPostForm';
 export const MyPosts = React.memo((props: MyPostContainerPropsType) => {
 
     let postsItems = props.posts.map(el =>
-        <Post key={el.id} message={el.message} like={el.like} photo={props.photo?.small!}/>);
+        <Post key={el.id} postText={el.message} likeCount={el.like} photo={props.photo?.small!} timeAgo={el.timeAgo} userName={props.userName}/>);
 
     const onSubmit = (formDate: any) => {
       if (formDate.newPostBody.trim()){

@@ -4,7 +4,7 @@ let startState: ProfileReducerStateType;
 beforeEach(() => {
     startState = {
         posts: [
-            {id: 1, message: 'Hello world!', like: 4},
+            {id: 1, message: 'Hello world!', like: 4,timeAgo:""},
 
         ],
         profile: null,

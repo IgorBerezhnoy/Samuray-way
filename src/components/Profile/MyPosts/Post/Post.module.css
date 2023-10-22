@@ -1,11 +1,55 @@
-.item{
+.item {
     margin-top: 20px;
     box-shadow: 2px 7px 8px 2px rgba(34, 60, 80, 0.2);
-    padding: 15px;
+    padding: 20px;
     background-color: #e7f0f9;
     border-radius: 20px;
 }
-.item img{
+
+
+.photoAndNameBlock {
+    display: flex;
+}
+.NameAndTimeBlock {
+    margin: 7px 15px;
+}
+
+.userName {
+    font-weight: bold;
+}
+
+.timeAgo {
+    padding: 3px;
+    color: #9E9FAF;
+    font-size: 12px;
+
+}
+
+.postText{
+padding:     10px;
+}
+
+.userPhoto {
     width: 50px;
     border-radius: 50px;
+}
+
+.postFooter{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.likeImgAndCount{
+    display: flex;
+    align-items: center;
+}
+.likeCount{
+    color: #9E9FAF;
+    font-size: 14px;
+
+
+}
+.commentCount{
+    color: #9E9FAF;
+font-size: 14px;
 }
