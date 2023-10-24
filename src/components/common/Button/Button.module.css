@@ -1,4 +1,6 @@
-
+button{
+    cursor: pointer;
+}
 .greenButton {
     border: none;
     border-radius: 5px;

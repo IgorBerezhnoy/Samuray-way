@@ -6,85 +6,97 @@ import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 import {UserInfo} from '../UserInfo';
 import {ContactItem} from '../ContactItem';
 import {maxLength150, requiredField} from '../../../../../utils/validators/validators';
-import s from '../../../../Login/Login.module.css';
+import s from './UserInfoForm.module.css'
 import {Button} from '../../../../common/Button/Button';
 
 type PropsType = {
-    profile: ProfileType
-    status: string
-    isOwner: boolean
-    editMode: boolean
-    updateStatusTC: (status: string) => void
-    setEditMode: (isActive: boolean) => void
-    onMainPhotoSelected: (e: ChangeEvent<HTMLInputElement>) => void
+  profile: ProfileType
+  status: string
+  isOwner: boolean
+  editMode: boolean
+  updateStatusTC: (status: string) => void
+  setEditMode: (isActive: boolean) => void
+  onMainPhotoSelected: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
 export const UserInfoForm: React.FC<InjectedFormProps<formDateType, PropsType> & PropsType> = (props) => {
 
-    const conKey = Object.keys(props.profile.contacts);
+  const conKey = Object.keys(props.profile.contacts);
 
-    let contacts = [];
+  let contacts = [];
 
-    for (let i = 0; i < conKey.length; i++) {
-        contacts.push(<ContactItem key={i} contactKey={conKey[i]} formMode={true}/>);
-    }
+  for (let i = 0; i < conKey.length; i++) {
+    contacts.push(<ContactItem key={i} contactKey={conKey[i]} formMode={true}/>);
+  }
 
-    if (!props.editMode) {
-        return <div>
-            <UserInfo profile={props.profile} status={props.status} updateStatusTC={props.updateStatusTC}
-                      isOwner={props.isOwner} /></div>;
-    }
+  if (!props.editMode) {
+    return <div>
+      <UserInfo profile={props.profile} status={props.status} updateStatusTC={props.updateStatusTC}
+                isOwner={props.isOwner}/></div>;
+  }
 
-    return (
+  return (
+    <div>
+      <form onSubmit={props.handleSubmit}>
         <div>
-            <form onSubmit={props.handleSubmit}>
-                <div>
 
-                    {props.isOwner &&
-                        <div><b>Update photo</b> <input type={'file'} onChange={props.onMainPhotoSelected}/></div>}
-                    <div><b>FullName:</b>
-                        <Field component={Input} name={'fullName'}  validate={[requiredField]} placeholder={'fullName'}/>
-                    </div>
+          {props.isOwner && <table className={s.tableStyle}>
+              <tr>
+                  <td><b>Update photo</b></td>
+                  <td><input type={'file'} onChange={props.onMainPhotoSelected}/></td>
+              </tr>
 
-                    <div><b>Looking for a job:</b>
-                        <Field component={'input'} name={'lookingForAJob'} placeholder={'lookingForAJob'}
-                               type={'checkbox'}/>
-                    </div>
+              <tr>
+                  <td ><b>FullName:</b></td>
+                  <td><Field component={Input} name={'fullName'} validate={[requiredField]}
+                             placeholder={'fullName'}/></td>
+              </tr>
 
-                    <div><b>Looking for a Description:</b>
-                        <Field component={Input} name={'lookingForAJobDescription'}  validate={[maxLength150,requiredField]}
-                               placeholder={'lookingForAJobDescription'}/>
-                    </div>
+              <tr>
+                  <td><b>Looking for a job:</b></td>
+                  <td><Field component={'input'} name={'lookingForAJob'} placeholder={'lookingForAJob'}
+                             type={'checkbox'}/></td>
+              </tr>
+              <tr>
+                  <td><b>Looking for a Description:</b></td>
+                  <td><Field component={Input} name={'lookingForAJobDescription'}
+                             validate={[maxLength150, requiredField]}
+                             placeholder={'lookingForAJobDescription'}/></td>
+              </tr>
 
-                    <div><b>About me:</b>
-                        <Field component={Input} name={'aboutMe'}  validate={[maxLength150]} placeholder={'About me'}/>
-                    </div>
+              <tr>
+                  <td><b>About me:</b></td>
+                  <td><Field component={Input} name={'aboutMe'} validate={[maxLength150]} placeholder={'About me'}/>
+                  </td>
+              </tr>
+          </table>}
 
-                    <ProfileStatusWithHook status={props.status} updateStatusTC={props.updateStatusTC}
-                                           isOwner={props.isOwner} name={props.profile.fullName}/>
-                </div>
-                {props.error && <div className={s.formSummaryError}> {props.error}</div>}
+          {/*<ProfileStatusWithHook status={props.status} updateStatusTC={props.updateStatusTC}*/}
+          {/*                       isOwner={props.isOwner} name={props.profile.fullName}/>*/}
+        </div>
+        {props.error && <div className={s.formSummaryError}> {props.error}</div>}
 
-                <div>{contacts}</div>
+        <table className={s.tableStyle}>{contacts}</table>
 
-                <Button name="save" callBack={()=>{}} color={"green"} size={'medium'}/>
-            </form>
-        </div>);
+        <Button name="save" callBack={() => {
+        }} color={'green'} size={'medium'}/>
+      </form>
+    </div>);
 };
 
 export const UserInfoReduxForm = reduxForm<formDateType, PropsType>({form: 'userInfoForm'})(UserInfoForm);
 
 
 type formDateType = {
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    fullName: string
-    github: string
-    vk: string
-    facebook: string
-    instagram: string
-    twitter: string
-    website: string
-    youtube: string
-    mainLink: string
+  lookingForAJob: boolean
+  lookingForAJobDescription: string
+  fullName: string
+  github: string
+  vk: string
+  facebook: string
+  instagram: string
+  twitter: string
+  website: string
+  youtube: string
+  mainLink: string
 }

@@ -7,3 +7,7 @@
 
 
 
+.tableStyle > tr > td:first-child {
+    width: 220px;
+    text-align: right;
+}

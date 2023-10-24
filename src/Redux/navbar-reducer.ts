@@ -2,12 +2,12 @@ export type navBarStateType = typeof initialState
 
 let initialState = {
     navItems: [
-        {name: 'Profile', navLink: `/profile/`, src: `${process.env.PUBLIC_URL}/img/navbarIcons/profile.png`},
-        {name: 'Messages', navLink: '/dialogs' , src: `${process.env.PUBLIC_URL}/img/navbarIcons/dialogs.png`},
-        {name: 'News', navLink: '/news' , src: `${process.env.PUBLIC_URL}/img/navbarIcons/news.png`},
-        {name: 'Music', navLink: '/music' , src: `${process.env.PUBLIC_URL}/img/navbarIcons/music.png`},
-        {name: 'Settings',navLink:'/settings', src: `${process.env.PUBLIC_URL}/img/navbarIcons/settings.png` },
-        {name: 'Users', navLink: '/users' , src: `${process.env.PUBLIC_URL}/img/navbarIcons/users.png`}]
+        {name: 'Profile', navLink: `/profile/`, src: `${process.env.PUBLIC_URL}/img/icons/profile.png`},
+        {name: 'Messages', navLink: '/dialogs' , src: `${process.env.PUBLIC_URL}/img/icons/dialogs.png`},
+        {name: 'News', navLink: '/news' , src: `${process.env.PUBLIC_URL}/img/icons/news.png`},
+        {name: 'Music', navLink: '/music' , src: `${process.env.PUBLIC_URL}/img/icons/music.png`},
+        {name: 'Settings',navLink:'/settings', src: `${process.env.PUBLIC_URL}/img/icons/settings.png` },
+        {name: 'Users', navLink: '/users' , src: `${process.env.PUBLIC_URL}/img/icons/users.png`}]
 };
 
 export type NavActionType = ReturnType<typeof setIDInNavbar>

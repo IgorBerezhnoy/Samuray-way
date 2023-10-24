@@ -1,4 +1,4 @@
-import {addPost, PhotoDomainType, PostType} from '../../../Redux/profile-reducer';
+import {addOrRemoveLike, addPost, PhotoDomainType, PostType} from '../../../Redux/profile-reducer';
 import {connect} from 'react-redux';
 import {MyPosts} from './MyPosts';
 import {AppRootStateType} from '../../../Redux/redux-store';
@@ -9,6 +9,7 @@ export type MyPostContainerPropsType = mapStateToPropsType & mapDispatchToPropsT
 type mapStateToPropsType = { posts: PostType[], photo: PhotoDomainType | undefined, userName: string | undefined }
 type mapDispatchToPropsType = {
   addPost: (post: string) => void,
+  addOrRemoveLike:(postId: number)=>void
 }
 
 let mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
@@ -22,7 +23,8 @@ let mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
 
 
 export const MyPostsContainer = connect(mapStateToProps, {
-  addPost
+  addPost,
+  addOrRemoveLike
 })(MyPosts);
 
 

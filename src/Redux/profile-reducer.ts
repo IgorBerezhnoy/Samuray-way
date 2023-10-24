@@ -6,15 +6,21 @@ import {stopSubmit} from 'redux-form';
 
 let initialState: ProfileReducerStateType = {
   posts: [
-    {id: 1, message: 'Hello world!', like: 4, timeAgo: 'hour ago'},
-    {id: 2, message: 'Hi how are you?', like: 432, timeAgo: 'two days ago'},
+    {id: 1, postText: 'Hello world!', like: 4, timeAgo: 'hour ago', isLiked: false},
+    {
+      id: 2,
+      postText: '        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus assumenda aut, enim facere facilis id iure, molestias mollitia pariatur quas quis quos reiciendis rerum sint sit tenetur unde voluptates voluptatibus.\n',
+      like: 432,
+      timeAgo: 'two days ago',
+      isLiked: false
+    },
     {
       id: 3,
-      message: ' Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium alias ' +
+      postText: ' Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium alias ' +
         'aliquam asperiores delectus dolore doloremque doloribus eum fuga iure nam natus neque officia praesentium quisquam reprehenderit tempora, temporibus veniam, vero.',
-      like: 32, timeAgo: 'last week'
+      like: 32, timeAgo: 'last week', isLiked: false
     },
-    {id: 4, message: 'It is my first post', like: 0, timeAgo: 'two weeks ago'}
+    {id: 4, postText: 'It is my first post', like: 0, timeAgo: 'two weeks ago', isLiked: false}
   ],
   profile: null,
   status: '',
@@ -27,14 +33,28 @@ export const profileReducer = (state: ProfileReducerStateType = initialState, ac
 
       let newPost: PostType = {
         id: state.posts.length,
-        message: action.post,
+        postText: action.post,
         like: 0,
-        timeAgo: 'now'
+        timeAgo: 'now',
+        isLiked: false
       };
 
       return {...state, posts: [newPost, ...state.posts]};
     case 'profile/CLEAR_POST': {
       return {...state, posts: state.posts.filter(el => el.id !== action.id)};
+    }
+    case 'profile/ADD/REMOVE-LIKE': {
+      const likeTracker = (post: PostType) => {
+        if (!post.isLiked) {
+          post.isLiked = true;
+          ++post.like;
+        } else {
+          post.isLiked = false;
+          --post.like;
+        }
+        return post;
+      };
+      return {...state, posts: state.posts.map(el => el.id === action.postId ? {...likeTracker(el)} : el)};
     }
     case 'profile/SET-USER-PROFILE': {
       return {...state, profile: action.profile};
@@ -65,6 +85,7 @@ export const profileReducer = (state: ProfileReducerStateType = initialState, ac
 };
 export const addPost = (post: string): AddPostTypeAT => ({type: 'profile/ADD-POST', post});
 export const clearPost = (id: number) => ({type: 'profile/CLEAR_POST', id} as const);
+export const addOrRemoveLike = (postId: number) => ({type: 'profile/ADD/REMOVE-LIKE', postId} as const);
 
 
 export const setUserProfileAC = (profile: ProfileType) => ({type: 'profile/SET-USER-PROFILE', profile} as const);
@@ -75,7 +96,6 @@ export const updateProfileInfoAC = (profileInfo: formDateDomainType) => ({
   type: 'profile/UPDATE-USER-INFO',
   profileInfo
 } as const);
-
 
 export const setUserProfileTC = (userId: string): AppThunk => async (dispatch) => {
   setIDInNavbar(Number(userId));
@@ -117,14 +137,15 @@ export type ProfilePageActionType =
   | updateNewPostTextTypeAT
   | SetUserProfileAT
   | ReturnType<typeof setUserStatusAC> | ReturnType<typeof updateUserStatusAC> | ReturnType<typeof clearPost>
-  | ReturnType<typeof savePhotoSuccess> | ReturnType<typeof updateProfileInfoAC>
+  | ReturnType<typeof savePhotoSuccess> | ReturnType<typeof updateProfileInfoAC> | ReturnType<typeof addOrRemoveLike>
 
 
 export type PostType = {
   id: number
-  message: string
+  postText: string
   like: number
   timeAgo: string
+  isLiked: boolean
 }
 export type PostsType = PostType[]
 export type ProfileReducerStateType = {

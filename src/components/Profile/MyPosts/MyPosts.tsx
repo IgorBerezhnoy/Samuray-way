@@ -7,32 +7,32 @@ import {AddPostReduxForm} from './AddPostForm/AddPostForm';
 
 export const MyPosts = React.memo((props: MyPostContainerPropsType) => {
 
-    let postsItems = props.posts.map(el =>
-        <Post key={el.id} postText={el.message} likeCount={el.like} photo={props.photo?.small!} timeAgo={el.timeAgo} userName={props.userName}/>);
+  let postsItems = props.posts.map(el =>
+    <Post key={el.id} post={el} photo={props.photo?.small!} userName={props.userName} addOrRemoveLike={props.addOrRemoveLike}/>);
 
-    const onSubmit = (formDate: any) => {
-      if (formDate.newPostBody.trim()){
-        props.addPost(formDate.newPostBody);
-        formDate.newPostBody = '';
-      }
+  const onSubmit = (formDate: any) => {
+    if (formDate.newPostBody.trim()) {
+      props.addPost(formDate.newPostBody);
+      formDate.newPostBody = '';
+    }
 
-    };
+  };
 
-    return (
-        <div className={s.postsBlock}>
+  return (
+    <div className={s.postsBlock}>
 
-          <div className={s.header}><h3>My post</h3>
-            <div>
-              <AddPostReduxForm onSubmit={onSubmit}/>
-            </div>
-          </div>
-            <div className={s.posts}>
-                <div>{postsItems}
-                </div>
-            </div>
+      <div className={s.header}><h3>My post</h3>
+        <div>
+          <AddPostReduxForm onSubmit={onSubmit}/>
         </div>
+      </div>
+      <div className={s.posts}>
+        <div>{postsItems}
+        </div>
+      </div>
+    </div>
 
-    );
+  );
 });
 
 

@@ -4,7 +4,7 @@ let startState: ProfileReducerStateType;
 beforeEach(() => {
     startState = {
         posts: [
-            {id: 1, message: 'Hello world!', like: 4,timeAgo:""},
+            {id: 1, postText: 'Hello world!', like: 4,timeAgo:"",isLiked:false},
 
         ],
         profile: null,
@@ -14,7 +14,7 @@ beforeEach(() => {
 test('new post should be added', () => {
 
     let finishedState = profileReducer(startState, addPost('Hi how are you?'));
-    expect(finishedState.posts[0].message).toBe('Hi how are you?');
+    expect(finishedState.posts[0].postText).toBe('Hi how are you?');
 
 
 });
