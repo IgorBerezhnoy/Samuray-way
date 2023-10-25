@@ -1,12 +1,18 @@
 .dialogs {
     display: grid;
     grid-template-columns: 2fr 10fr;
+    margin: 20px 0px;
+    position: relative;
+    box-shadow: 2px 7px 8px 2px rgba(34, 60, 80, 0.2);
+    padding: 15px 15px 30px;
+    background-color: #e7f0f9;
+    border-radius: 20px;
 }
 
 .dialogsWrapper {
     display: flex;
     min-width: 1000px;
-    justify-content: space-around;
+ justify-content: space-between;;
     align-items: center;
 }
 
@@ -29,7 +35,6 @@
 
 .dialog {
     text-decoration: none;
-    color: white;
     padding: 10px;
 }
 
@@ -40,10 +45,11 @@
 
 .messages {
     padding: 10px;
+    width: 650px;
 }
 
 .message {
-    color: white;
+
 }
 
 .addForm {

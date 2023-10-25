@@ -1,6 +1,6 @@
 [data-title] {
     position: relative; /* Относительное позиционирование */
-    cursor: help; /* Меняем курсор на справочный */
+    cursor: pointer;
 }
 [data-title]::after {
     content: attr(data-title); /* Выводим текст из атрибута data-title */
