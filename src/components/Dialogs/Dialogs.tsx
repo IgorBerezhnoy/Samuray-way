@@ -10,7 +10,9 @@ import {Input} from '../common';
 type PropsType = {
 
   dialogsPage: {
-    dialogs: DialogsType, messages: MessagesType, newMessageText: string
+    dialogs: DialogsType
+    outgoingMessages: MessagesType,
+    incomingMessages: MessagesType
   }
   addMessage: (message: string) => void
 };
@@ -20,7 +22,7 @@ export const Dialogs: React.FC<PropsType> = (props) => {
   let dialogsItems = props.dialogsPage.dialogs.map(el =>
     <DialogItem key={el.id} name={el.name} id={el.id} srs={el.srs}/>);
 
-  let messagesItems = props.dialogsPage.messages.map(el => <Message key={el.id} message={el.message}/>);
+  let messagesItems = props.dialogsPage.outgoingMessages.map(el => <Message key={el.id} message={el.message}/>);
 
 
   const onSubmit = (formDate: any) => {

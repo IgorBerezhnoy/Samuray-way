@@ -1,11 +1,11 @@
 import React from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from 'react-router-dom';
-import {DialogsType, MessagesType} from '../../Redux/diologs-reducer';
+import {DialogsType, DialogType} from '../../Redux/diologs-reducer';
 
 type PropsType = {
   navbar: { navItems: { name: string, navLink: string, src: string }[] }
-  dialogsPage: { dialogs: DialogsType, messages: MessagesType }
+  dialogs:DialogsType
   id: number | null
   setIDInNavbar: (id: number) => void
   setUserProfileTC: (id: string) => void
@@ -36,7 +36,7 @@ export const Navbar: React.FC<PropsType> = (props) => {
     </NavLink>
 );
 
-  let friendsNavbar = props.dialogsPage.dialogs.map((el, i) => <div key={i}><NavLink
+  let friendsNavbar = props.dialogs.map((el, i) => <div key={i}><NavLink
     to={`/dialogs/${el.id}`}>
     <img className={s.imgFriends} src={el.srs} alt={el.name}/>{el.name}</NavLink></div>).slice(0, 3);
 

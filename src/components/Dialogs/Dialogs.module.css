@@ -12,15 +12,13 @@
 .dialogsWrapper {
     display: flex;
     min-width: 1000px;
- justify-content: space-between;;
+    justify-content: space-between;;
     align-items: center;
 }
 
 
 .dialogsItems {
     padding: 10px;
-
-
 }
 
 .dialogsItemsImg {

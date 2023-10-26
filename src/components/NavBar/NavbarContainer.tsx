@@ -8,7 +8,7 @@ import {setUserProfileTC} from '../../Redux/profile-reducer';
 let mapStateToProps = (state:AppRootStateType ) => {
     return {
         navbar: state.navbar,
-        dialogsPage: state.dialogsPage.dialogs,
+        dialogs: state.dialogsPage.dialogs,
         id: state.authMe.id
     };
 };
