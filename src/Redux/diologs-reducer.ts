@@ -1,3 +1,5 @@
+import {getEditedTime} from '../utils/getTime';
+
 let initialState: StateType = {
   dialogs: [
     {id: '1', name: 'Dimych', srs: `${process.env.PUBLIC_URL}/img/user5.png`,},
@@ -10,14 +12,14 @@ let initialState: StateType = {
       srs: `${process.env.PUBLIC_URL}/img/png-transparent-account-avatar-profile-user-avatars-icon.png`
     },
   ],
-  outgoingMessages: [
-    {id: 1, message: 'Hello'},
-    {id: 2, message: 'How are you?'},
-    {id: 3, message: 'I am fine. What are you doing'},
+  friendMessages: [
+    {id: 1, message: 'Hello', time:"18:10"},
+    {id: 2, message: 'How are you?', time:"18:14"},
+    {id: 3, message: 'I am fine. What are you doing', time:"18:18"},
   ],
-  incomingMessages: [
-    {id: 1, message: 'Hi'},
-    {id: 2, message: 'Good, and you?'},
+  myMessages: [
+    {id: 1, message: 'Hi', time:"18:12"},
+    {id: 2, message: 'Good, and you?',time:"18:15"},
   ]
 };
 
@@ -25,11 +27,12 @@ export const dialogsReducer = (state: StateType = initialState, action: DialogsA
   switch (action.type) {
     case 'dialogs/ADD-MESSAGE':
       let newMessage: MassageType = {
-        id: state.incomingMessages.length,
-        message: action.message
+        id: state.myMessages.length,
+        message: action.message,
+        time:getEditedTime()
       };
       return {
-        ...state,incomingMessages:[...state.incomingMessages,newMessage]
+        ...state,myMessages:[...state.myMessages,newMessage]
            };
 
     default:
@@ -49,7 +52,7 @@ export type DialogsType = DialogType[]
 
 export type MassageType = {
   id: number
-  message: string
+  message: string, time:string
 }
 export type MessagesType = MassageType[]
 
@@ -58,7 +61,7 @@ export type  updateNewMessageTextTypeAT = { type: 'dialogs/UPDATE-NEW-MESSAGE-TE
 
 export type StateType = {
   dialogs: DialogsType
-  outgoingMessages: MessagesType,
-  incomingMessages: MessagesType
+  friendMessages: MessagesType,
+  myMessages: MessagesType
 }
 export type DialogsActionType = AddMessageTypeAT

@@ -67,6 +67,10 @@ button{
 .whiteButton:active:not(:disabled){
     background: #dedede;;
 }
+.whiteButton:hover {
+    background: #C9E5FF;
+}
+
 .large {
     min-width: 110px;
     height: 45px;

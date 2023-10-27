@@ -2,27 +2,28 @@ import React from 'react';
 import s from './Dialogs.module.css';
 import {DialogItem} from './DialogItem/DialogItem';
 import {Message} from './Message/Message';
-import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 import {DialogsType, MessagesType} from '../../Redux/diologs-reducer';
-import {maxLength150, requiredField} from '../../utils/validators/validators';
-import {Input} from '../common';
+import {AddMessageReduxForm} from './AddMessageForm/AddMessageForm';
+import {FriendMessage} from './Message/FriendMessage/FriendMessage';
+import {MyMessage} from './Message/MyMessage/MyMessage';
 
 type PropsType = {
 
   dialogsPage: {
     dialogs: DialogsType
-    outgoingMessages: MessagesType,
-    incomingMessages: MessagesType
+    friendMessages: MessagesType,
+    myMessages: MessagesType
   }
-  addMessage: (message: string) => void
+  addMessage: (message: string) => void, userName: string, userPhoto:string
 };
 
 export const Dialogs: React.FC<PropsType> = (props) => {
-
+  let userPhoto=props.userPhoto|| `${process.env.PUBLIC_URL}/img/myPhoto.jpeg`
   let dialogsItems = props.dialogsPage.dialogs.map(el =>
     <DialogItem key={el.id} name={el.name} id={el.id} srs={el.srs}/>);
 
-  let messagesItems = props.dialogsPage.outgoingMessages.map(el => <Message key={el.id} message={el.message}/>);
+  let friendMessages = props.dialogsPage.friendMessages.map(el => <Message key={el.id} message={el.message}/>);
+  let myMessages = props.dialogsPage.myMessages.map(el => <Message key={el.id} message={el.message}/>);
 
 
   const onSubmit = (formDate: any) => {
@@ -32,48 +33,27 @@ export const Dialogs: React.FC<PropsType> = (props) => {
   };
 
   return (
-    <>
-      <div className={s.dialogs}>
-        <div className={s.dialogsWrapper}>
-          <div className={s.dialogsItems}>
-            {dialogsItems}
-          </div>
-          <div className={s.messages}>
-            {messagesItems}
-          </div>
+    <div className={s.dialogs}>
+
+      <div className={s.dialogsWrapper}>
+        <div className={s.dialogsItems}>
+          {dialogsItems}
         </div>
+        <div className={s.cross}></div>
+        <div className={s.messages}>
+          <FriendMessage message={props.dialogsPage.friendMessages[1]} friend={props.dialogsPage.dialogs[1]}/>
+          <FriendMessage message={props.dialogsPage.friendMessages[1]} friend={props.dialogsPage.dialogs[1]}/>
+          <MyMessage message={props.dialogsPage.myMessages[1]} userName={props.userName} userPhoto={userPhoto}/>
+          {/*{friendMessages}*/}
+          {/*{myMessages}*/}
+        </div>
+      </div>
 
-      </div>
-      <div className={s.addForm}>
-        <AddMessageReduxForm onSubmit={onSubmit}/>
-        {/*<textarea value={props.dialogsPage.newMessageText} onChange={onMessageChange}*/}
-        {/*          style={{width: '827px', height: '58px'}} ref={newMessageElement}*/}
-        {/*          onKeyPress={OnClickEnter} placeholder={'Enter your message'}> </textarea>*/}
-        {/*<button onClick={addMessage}>Send</button>*/}
-      </div>
-    </>
+
+      <div><AddMessageReduxForm onSubmit={onSubmit}/></div>
+    </div>
   );
 };
-
-
-const AddMessageForm: React.FC<InjectedFormProps> = (props) => {
-
-
-  return (
-    <form onSubmit={props.handleSubmit}>
-      <div className={s.addForm}>
-        <Field component={Input} name={'newMessageBody'}
-               placeholder={'Enter your message'} style={{width: '827px', height: '58px'}}
-               validate={[requiredField, maxLength150]}/>
-        <button>Send</button>
-      </div>
-
-
-    </form>
-  );
-};
-
-const AddMessageReduxForm = reduxForm({form: 'dialogAddMessageForm'})(AddMessageForm);
 
 
 // addMessage: (message: string) => void

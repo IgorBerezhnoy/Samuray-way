@@ -1,5 +1,5 @@
 .dialogs {
-    display: grid;
+    /*display: grid;*/
     grid-template-columns: 2fr 10fr;
     margin: 20px 0px;
     position: relative;
@@ -7,18 +7,26 @@
     padding: 15px 15px 30px;
     background-color: #e7f0f9;
     border-radius: 20px;
+
 }
 
 .dialogsWrapper {
     display: flex;
     min-width: 1000px;
-    justify-content: space-between;;
-    align-items: center;
+    justify-content: flex-start;
 }
 
-
+.cross{
+    background: rgba(133, 146, 161, 0.19);
+    margin-top: 20px;
+    margin-left: 20px;
+    width: 2px;
+    height: 480px;
+    border-radius: 7px;
+}
 .dialogsItems {
     padding: 10px;
+
 }
 
 .dialogsItemsImg {
@@ -34,6 +42,7 @@
 .dialog {
     text-decoration: none;
     padding: 10px;
+    color: #8692a2;
 }
 
 .dialogsItems .active {
@@ -43,7 +52,7 @@
 
 .messages {
     padding: 10px;
-    width: 650px;
+    width: 770px;
 }
 
 .message {
@@ -53,7 +62,4 @@
 .addForm {
     margin: 10px;
     padding: 10px;
-    display: flex;
-    justify-content: center;
-
 }
