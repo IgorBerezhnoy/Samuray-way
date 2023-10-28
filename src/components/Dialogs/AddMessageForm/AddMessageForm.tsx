@@ -5,7 +5,6 @@ import {InputForMessage} from './InputForMessage';
 
 const AddMessageForm: React.FC<InjectedFormProps> = (props) => {
 
-
   return (
     <form onSubmit={props.handleSubmit}>
       <div className={s.addForm}>

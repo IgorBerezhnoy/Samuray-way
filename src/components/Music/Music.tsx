@@ -4,7 +4,7 @@ import {WithAuthRedirect} from '../../hoc';
 export const Music =WithAuthRedirect( () => {
     return (
         <div className={""}>
-            Music
+           <img  width={"800px"} src={`${process.env.PUBLIC_URL}/img/razrabotke.jpg`} />
         </div>
     );
 })

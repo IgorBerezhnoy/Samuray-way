@@ -1,5 +1,5 @@
 .formControl{
-  padding: 20px;
+  padding: 20px 10px;
   resize: none;
   border-radius: 30px;
   width: 85%;
@@ -8,13 +8,12 @@
   background-color: #edf2f9;
   font-size: 14px;
   font-family: 'Montserrat', sans-serif;
-  margin: 0px 20px ;
+  margin: 0px 10px ;
 }
 .formControlError{
   border: red solid 1px ;
 }
 .spanFormControlError{
-  padding: 20px 0px 0px 40px;
   color: red;
 }
 .form{

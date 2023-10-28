@@ -29,6 +29,12 @@ export const dialogsReducer = (state: StateType = initialState, action: DialogsA
         time: getEditedTime(),
         userId: '0'
       };
+
+      return {
+        ...state,
+        messages: [...state.messages, newMessage],
+      };
+    case 'dialogs/ADD-FRIEND-MESSAGE': {
       let newFriendsMessage: MassageType = {
         id: state.messages.length,
         message: 'It\'s very good',
@@ -37,16 +43,19 @@ export const dialogsReducer = (state: StateType = initialState, action: DialogsA
       };
       return {
         ...state,
-        messages: [...state.messages, newMessage, newFriendsMessage],
+        messages: [...state.messages, newFriendsMessage],
       };
-
+    }
     default:
       return state;
   }
-
-
 };
-export const addMessage = (message: string, userId: string) => ({type: 'dialogs/ADD-MESSAGE', message, userId});
+export const addMessage = (message: string, userId: string) => ({
+  type: 'dialogs/ADD-MESSAGE',
+  message,
+  userId
+} as const);
+export const addFriendMessage = () => ({type: 'dialogs/ADD-FRIEND-MESSAGE'} as const);
 
 
 export type DialogType = {
@@ -68,4 +77,4 @@ export type StateType = {
   dialogs: DialogsType
   messages: MessagesType,
 }
-export type DialogsActionType = AddMessageTypeAT
+export type DialogsActionType = AddMessageTypeAT | ReturnType<typeof addFriendMessage>

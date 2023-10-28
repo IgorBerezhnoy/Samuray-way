@@ -1,5 +1,5 @@
 import React from 'react';
-import {addMessage} from '../../Redux/diologs-reducer';
+import {addFriendMessage, addMessage} from '../../Redux/diologs-reducer';
 import {Dialogs} from './Dialogs';
 import {connect} from 'react-redux';
 import {AppRootStateType} from '../../Redux/redux-store';
@@ -15,5 +15,5 @@ let mapStateToProps = (state: AppRootStateType) => {
 };
 
 export default compose<React.ComponentType>(connect(mapStateToProps, {
-  addMessage
+  addMessage, addFriendMessage
 }), WithAuthRedirect)(Dialogs);

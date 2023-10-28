@@ -1,18 +1,23 @@
 import s from '../Dialogs.module.css';
 import {NavLink} from 'react-router-dom';
 import React from 'react';
+import {DialogType} from '../../../Redux/diologs-reducer';
 
 type DialogsDataPropsType = {
-    name: string
-    id: string
-    srs:string
+  user: DialogType
+  setCurrentUser: (user: DialogType) => void
 }
 
 
-export const DialogItem:React.FC<DialogsDataPropsType> = (props) => {
-    return (
-        <div className={s.dialogsItemsImg}>
-            <NavLink className={`${s.dialog}`} activeClassName={s.active} to={'/dialogs/' + props.id}>{props.name}</NavLink>
-            <NavLink className={`${s.dialog}`} activeClassName={s.active} to={'/dialogs/' + props.id}> <img src={props.srs} width={"50px"} height={"50px"}/></NavLink>
-        </div>);
+export const DialogItem: React.FC<DialogsDataPropsType> = (props) => {
+  const setUser = () => props.setCurrentUser(props.user);
+
+
+  return (
+    <div className={s.dialogsItemsImg}>
+      <NavLink className={`${s.dialog}`} onClick={setUser} activeClassName={s.active}
+               to={'/dialogs/' + props.user.id}>{props.user.name}</NavLink>
+      <NavLink className={`${s.dialog}`} onClick={setUser} activeClassName={s.active} to={'/dialogs/' + props.user.id}>
+        <img src={props.user.srs} width={'50px'} height={'50px'}/></NavLink>
+    </div>);
 };
