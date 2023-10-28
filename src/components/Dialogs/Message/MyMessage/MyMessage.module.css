@@ -50,6 +50,7 @@
 
 .messageText {
     max-width: 500px;
+    word-break: break-all;
 
 }
 

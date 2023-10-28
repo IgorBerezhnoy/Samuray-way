@@ -14,6 +14,7 @@
     display: flex;
     min-width: 1000px;
     justify-content: flex-start;
+
 }
 
 .cross{
@@ -53,6 +54,8 @@
 .messages {
     padding: 10px;
     width: 770px;
+    height: 600px;
+    overflow-y: scroll;
 }
 
 .message {
@@ -62,4 +65,8 @@
 .addForm {
     margin: 10px;
     padding: 10px;
+}
+.bottomRef{
+    /*background-color: red;*/
+    padding-bottom:150px    ;
 }

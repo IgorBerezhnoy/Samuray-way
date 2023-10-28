@@ -31,7 +31,7 @@ export const dialogsReducer = (state: StateType = initialState, action: DialogsA
       };
       let newFriendsMessage: MassageType = {
         id: state.messages.length,
-        message: 'Good',
+        message: 'It\'s very good',
         time: getEditedTime(),
         userId: '1'
       };
