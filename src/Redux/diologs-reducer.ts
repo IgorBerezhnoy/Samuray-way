@@ -12,28 +12,33 @@ let initialState: StateType = {
       srs: `${process.env.PUBLIC_URL}/img/png-transparent-account-avatar-profile-user-avatars-icon.png`
     },
   ],
-  friendMessages: [
-    {id: 1, message: 'Hello', time:"18:10"},
-    {id: 2, message: 'How are you?', time:"18:14"},
-    {id: 3, message: 'I am fine. What are you doing', time:"18:18"},
+  messages: [
+    {id: 1, message: 'Hi', time: '18:12', userId: '0'},
+    {id: 2, message: 'Hello', time: '18:10', userId: '1'},
+    {id: 3, message: 'How are you?', time: '18:14', userId: '1'},
+    {id: 4, message: 'Good, and you?', time: '18:15', userId: '0'},
+    {id: 5, message: 'I am fine. What are you doing', time: '18:18', userId: '1'},
   ],
-  myMessages: [
-    {id: 1, message: 'Hi', time:"18:12"},
-    {id: 2, message: 'Good, and you?',time:"18:15"},
-  ]
 };
-
 export const dialogsReducer = (state: StateType = initialState, action: DialogsActionType): StateType => {
   switch (action.type) {
     case 'dialogs/ADD-MESSAGE':
       let newMessage: MassageType = {
-        id: state.myMessages.length,
+        id: state.messages.length,
         message: action.message,
-        time:getEditedTime()
+        time: getEditedTime(),
+        userId: '0'
+      };
+      let newFriendsMessage: MassageType = {
+        id: state.messages.length,
+        message: 'Good',
+        time: getEditedTime(),
+        userId: '1'
       };
       return {
-        ...state,myMessages:[...state.myMessages,newMessage]
-           };
+        ...state,
+        messages: [...state.messages, newMessage, newFriendsMessage],
+      };
 
     default:
       return state;
@@ -52,7 +57,7 @@ export type DialogsType = DialogType[]
 
 export type MassageType = {
   id: number
-  message: string, time:string
+  message: string, time: string, userId: string
 }
 export type MessagesType = MassageType[]
 
@@ -61,7 +66,6 @@ export type  updateNewMessageTextTypeAT = { type: 'dialogs/UPDATE-NEW-MESSAGE-TE
 
 export type StateType = {
   dialogs: DialogsType
-  friendMessages: MessagesType,
-  myMessages: MessagesType
+  messages: MessagesType,
 }
 export type DialogsActionType = AddMessageTypeAT
