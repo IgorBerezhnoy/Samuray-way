@@ -4,26 +4,27 @@ import {Paginator} from '../common';
 import {User} from './User/User';
 
 type PropsType = {
-    totalUsesCount: number
-    pageSize: number
-    onSetCurrentPage: (page: number) => void
-    currentPage: number
-    followUnfollowTC: (user: UserType, followed: boolean) => void
-    users: UserType[]
-    isFetching: boolean
-    followingInProgress: number[]
+  totalUsesCount: number
+  pageSize: number
+  onSetCurrentPage: (page: number) => void
+  currentPage: number
+  followUnfollowTC: (user: UserType, followed: boolean) => void
+  users: UserType[]
+  isFetching: boolean
+  followingInProgress: number[]
 }
 
 export const Users: React.FC<PropsType> = (props) => {
 
-    const users = props.users.map(el =>
-        <User key={el.id} user={el} followingInProgress={props.followingInProgress}followUnfollowTC={props.followUnfollowTC}/>);
-    return (
-        <Paginator onSetCurrentPage={props.onSetCurrentPage} currentPage={props.currentPage} pageSize={props.pageSize}
-                   totalUsesCount={props.totalUsesCount}>
-            {users}
-        </Paginator>
-    );
+  const users = props.users.map(el =>
+    <User key={el.id} user={el} followingInProgress={props.followingInProgress}
+          followUnfollowTC={props.followUnfollowTC}/>);
+  return (
+    <Paginator onSetCurrentPage={props.onSetCurrentPage} currentPage={props.currentPage} pageSize={props.pageSize}
+               totalUsesCount={props.totalUsesCount}>
+      <div style={{display: 'flex', flexWrap: 'wrap'}}>{users}</div>
+    </Paginator>
+  );
 };
 
 // props.followingInProgressAC(user.id, true);

@@ -1,6 +1,5 @@
 .usersWrapper{
     display: flex;
-    background-color: grey;
     flex-direction: column;
     justify-content: space-around;
     align-items: stretch;
