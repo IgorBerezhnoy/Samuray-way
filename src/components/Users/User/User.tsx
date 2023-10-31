@@ -17,16 +17,16 @@ export const User: React.FC<PropsUserType> = ({user, ...props}) => {
       <img className={s.bg} src={`${process.env.PUBLIC_URL}/img/user/bg/card1.png`} alt={''}/>
       <div className={s.img_text}>
         <NavLink to={`/Profile/${user.id}`}>
-          <img
-               src={user.photos.small !== null ? user.photos.small : `${process.env.PUBLIC_URL}/img/user5.png`}
+          <img src={user.photos.small !== null ? user.photos.small : `${process.env.PUBLIC_URL}/img/user5.png`}
                alt={user.name} className={s.img}/>
-          <div className={s.name}></div>
-          <div className={s.nikName}></div>
+          <h2 className={s.fullName}>{user.name}</h2>
         </NavLink>
+        <div className={s.nickname}>{'@' + user.name}</div>
         <div>
-          <Button disabled={props.followingInProgress.some(id => id === user.id)}
-                  callBack={() => props.followUnfollowTC(user, !user.followed)}
-                  name={user.followed ? 'Unfollow' : 'Follow'}/>
+          <div className={s.btn}><Button disabled={props.followingInProgress.some(id => id === user.id)}
+                                         callBack={() => props.followUnfollowTC(user, !user.followed)}
+                                         name={user.followed ? 'Unfollow' : 'Follow'} size={'large'} color={'green'}/>
+          </div>
         </div>
       </div>
     </div>
