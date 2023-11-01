@@ -49,6 +49,7 @@
     background-color: #e7f0f9;
     border-radius: 20px;
     height: 150px;
+    width: 190px;
 }
 
 .headerFriends {
@@ -66,7 +67,6 @@
 
 .imgFriends {
     width: 50px;
-    margin: 5px;
 }
 
 .ImgAndName {

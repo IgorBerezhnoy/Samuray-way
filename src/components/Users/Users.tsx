@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {UserType} from '../../Redux/users-reducer';
 import {Paginator} from '../common';
 import {User} from './User/User';
@@ -18,7 +18,7 @@ export const Users: React.FC<PropsType> = (props) => {
 
   const users = props.users.map(el =>
     <User key={el.id} user={el} followingInProgress={props.followingInProgress}
-          followUnfollowTC={props.followUnfollowTC}/>);
+          followUnfollowTC={props.followUnfollowTC} numBackground={Math.floor(Math.random()*10)}/>);
   return (
     <Paginator onSetCurrentPage={props.onSetCurrentPage} currentPage={props.currentPage} pageSize={props.pageSize}
                totalUsesCount={props.totalUsesCount}>

@@ -1,12 +1,13 @@
 import {getEditedTime} from '../utils/getTime';
+import {imgWrap} from '../utils/imgWrap';
 
 let initialState: StateType = {
   dialogs: [
-    {id: '1', name: 'Dimych', srs: `${process.env.PUBLIC_URL}/img/user5.png`,},
-    {id: '2', name: 'Andrew', srs: `${process.env.PUBLIC_URL}/img/user7.png`,},
-    {id: '3', name: 'Sveta', srs: `${process.env.PUBLIC_URL}/img/1761894.png`,},
-    {id: '4', name: 'Sasha', srs: `${process.env.PUBLIC_URL}/img/Sveta.png`,},
-    {id: '5', name: 'Valera', srs: `${process.env.PUBLIC_URL}/img/1067538.png`,},
+    {id: '1', name: 'Dimych', srs: imgWrap('/img/user5.png')},
+    {id: '2', name: 'Andrew', srs: imgWrap('/img/user7.png')},
+    {id: '3', name: 'Sveta', srs: imgWrap('/img/1761894.png'),},
+    {id: '4', name: 'Sasha', srs: imgWrap('/img/Sveta.png'),},
+    {id: '5', name: 'Valera', srs: imgWrap("/img/1067538.png"),},
     {
       id: '6', name: 'Viktor',
       srs: `${process.env.PUBLIC_URL}/img/png-transparent-account-avatar-profile-user-avatars-icon.png`
