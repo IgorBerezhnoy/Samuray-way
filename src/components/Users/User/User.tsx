@@ -12,7 +12,7 @@ type PropsUserType = {
 export const User: React.FC<PropsUserType> = ({user, ...props}) => {
 
 
-  return <div className={s.user} key={user.id}>
+  return <div className={s.user} key={user.id}  >
     <div className={s.wrapper}>
       <img className={s.bg} src={`${process.env.PUBLIC_URL}/img/user/bg/card1.png`} alt={''}/>
       <div className={s.img_text}>
