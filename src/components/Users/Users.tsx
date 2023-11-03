@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {UserType} from '../../Redux/users-reducer';
 import {Paginator} from '../common';
 import {User} from './User/User';

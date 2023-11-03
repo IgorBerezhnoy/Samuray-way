@@ -1,7 +1,6 @@
 .dialogs {
     /*display: grid;*/
     grid-template-columns: 2fr 10fr;
-    margin: 0px 0px;
     position: relative;
     box-shadow: 2px 7px 8px 2px rgba(34, 60, 80, 0.2);
     padding: 3px 10px 10px;
