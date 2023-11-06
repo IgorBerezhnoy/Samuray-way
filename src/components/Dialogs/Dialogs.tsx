@@ -6,10 +6,11 @@ import {AddMessageReduxForm} from './AddMessageForm/AddMessageForm';
 import {FriendMessage} from './Message/FriendMessage/FriendMessage';
 import {MyMessage} from './Message/MyMessage/MyMessage';
 import {Preloader} from '../common';
+import {imgWrap} from '../../utils/imgWrap';
 
 
 export const Dialogs: React.FC<PropsType> = (props) => {
-  let userPhoto = props.userPhoto || `${process.env.PUBLIC_URL}/img/myPhoto.jpeg`;
+  let userPhoto = props.userPhoto ||imgWrap(`/img/myPhoto.jpeg`);
   const dialogsPage = props.dialogsPage;
   const bottomRef = useRef(null);
   let [currentUser, setCurrentUser] = useState<DialogType>(dialogsPage.dialogs[0]);

@@ -14,6 +14,7 @@ import {setInitializedTC} from './Redux/app-reducer';
 import {withSuspense} from './hoc';
 import {Preloader} from './components/common';
 import {LoginContainer} from './components/Login/LoginContainer';
+import {imgWrap} from './utils/imgWrap';
 
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
@@ -50,11 +51,8 @@ class App extends React.Component<AppPropsType> {
             <Route exact path={'/settings'} render={() => <Settings/>}/>
             <Route exact path={'/login'} render={() => withSuspense(LoginContainer)}/>
 
-
-            {/*<Route  path='/*' render={()=><h1>not find</h1>} />*/}
-
             <Route path="/404" render={() => <div>
-              <img src="http://ttt.dev.iwa.kz/image.png" width={'1000px'} alt={'Not found 404'}/>
+              <img src={imgWrap('/img/page404.png')} width={'1000px'} alt={'Not found 404'}/>
 
             </div>}/>
 
