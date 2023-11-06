@@ -34,11 +34,12 @@ class App extends React.Component<AppPropsType> {
     if (!this.props.isInitialized) {
       return <Preloader/>;
     }
+
     return (
-      <div className="app-wrapper">
-        <HeaderContainer/>
-        <NavbarContainer/>
-        <div className={'appWrapper'}>
+      <div className={this.props.isLogin? 'app-wrapper':""}>
+        {!this.props.isLogin||<HeaderContainer/>}
+        {!this.props.isLogin||<NavbarContainer/>}
+        <div className={this.props.isLogin? 'appWrapper':""}>
           <Switch>
             <Route exact path={'/'} render={() => withSuspense(ProfileContainer)}/>
             <Route  path={'/dialogs'} render={() => withSuspense(DialogsContainer)}/>
@@ -65,12 +66,13 @@ class App extends React.Component<AppPropsType> {
   }
 }
 
-type MapStateToProps = { isInitialized: boolean }
+type MapStateToProps = { isInitialized: boolean, isLogin:boolean }
 type AppPropsType = MapStateToProps & MapDispatchToPropsType
 type MapDispatchToPropsType = { setInitializedTC: () => void }
 let mapStateToProps = (state: AppRootStateType) => {
   return {
     isInitialized: state.app.isInitialized,
+    isLogin:state.authMe.isAuth
   };
 };
 

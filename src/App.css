@@ -1,4 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Roboto, sans-serif;
+
+}
+
 .app-wrapper {
+
+
     display: grid;
     margin: 0 auto;
     width: 1200px;
@@ -8,10 +20,10 @@
     "n  c";
     grid-template-rows: 60px 1fr;
     grid-template-columns: 2fr 10fr;
-    font-family: Roboto, sans-serif;
 }
 
 .appWrapper {
+
     padding: 20px;
     grid-area: c;
     /*background-color: #eef3fa;*/

@@ -8,7 +8,8 @@ let initialState: StateType = {
   email: null,
   isFetching: false,
   isAuth: false,
-  captcha: null
+  captcha: null,
+  errorMessage: null
 };
 export const authReducer = (state: StateType = initialState, action: AuthReducerActionType): StateType => {
   switch (action.type) {
@@ -18,6 +19,9 @@ export const authReducer = (state: StateType = initialState, action: AuthReducer
     case 'auth/GET-CAPTCHA': {
       return {...state, captcha: action.captcha};
     }
+    case 'auth/SET-ERROR': {
+      return {...state, errorMessage: action.error};
+    }
     default:
       return state;
   }
@@ -25,6 +29,9 @@ export const authReducer = (state: StateType = initialState, action: AuthReducer
 
 export const setUserDateAC = (state: StateType, isAuth: boolean = false, isFetching: boolean = false) => {
   return {type: 'auth/SET-USER-DATE', state, isAuth, isFetching} as const;
+};
+export const setErrorAC = (error: string | null) => {
+  return {type: 'auth/SET-ERROR', error} as const;
 };
 export const getCaptchaSuccess = (captcha: string | null) => {
   return {type: 'auth/GET-CAPTCHA', captcha} as const;
@@ -42,12 +49,16 @@ export const authMeTC = (): AppThunk => async (dispatch) => {
 };
 export const loginDateTC = (loginData: formDateType): AppThunk => async (dispatch) => {
   let res = await authMeApi.login(loginData);
+  dispatch(setErrorAC(null));
   if (res.data.resultCode === 0) {
     await dispatch(authMeTC());
     dispatch(setUserDateAC(res.data.data, true, true));
+  } else if (res.data.resultCode === 1) {
+    console.log(res.data.messages[0]);
+    dispatch(setErrorAC(res.data.messages[0]));
   } else {
-    if (res.data.resultCode===10){
-       dispatch(getCaptcha())
+    if (res.data.resultCode === 10) {
+      dispatch(getCaptcha());
     }
     let message = res.data.messages[0] ? res.data.messages[0] : 'Some error';
     // @ts-ignore
@@ -67,7 +78,8 @@ export const logOutTC = (): AppThunk => async (dispatch) => {
       email: null,
       isFetching: false,
       isAuth: false,
-      captcha: null
+      captcha: null,
+      errorMessage: null
     };
     dispatch(setUserDateAC(dataNull));
   }
@@ -87,5 +99,6 @@ export type StateType = {
   isFetching: boolean,
   isAuth: boolean
   captcha: string | null
+  errorMessage: null | string
 }
-export type AuthReducerActionType = SetUserDateAT | ReturnType<typeof getCaptchaSuccess>
+export type AuthReducerActionType = SetUserDateAT | ReturnType<typeof getCaptchaSuccess> | ReturnType<typeof setErrorAC>
