@@ -16,7 +16,7 @@ export const InputLogin = ({input, meta, ...props}: InputPropsType) => {
       className={s.login__input + ' ' + s.formControl + ' ' + (isError ? s.formControlError : '')}
       placeholder="User name / Email"
       {...props} {...input} {...meta} />
-      {isError && <span className={s.spanFormControlError}>{meta.error}</span>}
+      {isError && <div className={s.spanFormControlError}>{meta.error}</div>}
 
     </div>
   );

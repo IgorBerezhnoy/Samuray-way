@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './formsControl.module.css';
 
-type InputPropsType = { input: any, meta: { error: string, touched: boolean }
+type InputPropsType = { input: any, meta: { error: string, touched: boolean,  }
 isCustom?:boolean };
 
 export const Input = ({input, meta, ...props}: InputPropsType) => {

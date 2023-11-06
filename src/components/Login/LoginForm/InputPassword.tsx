@@ -15,7 +15,7 @@ export const InputPassword = ({input, meta, ...props}: InputPropsType) => {
       <i className="login__icon fas fa-lock"></i><input
       className={s.login__input + ' ' + s.formControl + ' ' + (isError ? s.formControlError : '')}
       {...props} {...input} {...meta} />
-      {isError && <span className={s.spanFormControlError}>{meta.error}</span>}
+      {isError && <div className={s.spanFormControlError}>{meta.error}</div>}
     </div>
   );
 };

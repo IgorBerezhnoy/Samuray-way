@@ -8,11 +8,13 @@ import './Login_style.css';
 type PropsType = {
   isAuth: boolean,
   loginDateTC: (data: formDateType) => void,
-  captcha: string | null
+  setErrorAC: (error: string|null) => void,
+  captcha: string | null,
+  errorMessage: string | null
 }
 
 
-export const Login: React.FC<PropsType> = ({isAuth, loginDateTC, captcha, ...restProps}) => {
+export const Login: React.FC<PropsType> = ({isAuth, loginDateTC, captcha, errorMessage, ...restProps}) => {
   const onSubmit = (formDate: any) => {
     let data: formDateType = {
       email: formDate.login as string,
@@ -30,7 +32,14 @@ export const Login: React.FC<PropsType> = ({isAuth, loginDateTC, captcha, ...res
       <div className={s.container}>
         <div className={s.screen}>
           <div className={s.screen__content}>
-            <LoginReduxForm onSubmit={onSubmit} captcha={captcha}/>
+            <div className={s.freeLoginAndPass}>
+              <div className={s.freeLoginAndPass__wrapp}>
+                <div className={s.freeLoginAndPass__email}><b>Email:</b> free@samuraijs.com</div>
+                <div className={s.freeLoginAndPass__password}><b>Password:</b> free</div>
+
+              </div>
+            </div>
+            <LoginReduxForm onSubmit={onSubmit} captcha={captcha} errorMessage={errorMessage} setError={restProps.setErrorAC}/>
             <div className={s.socialLogin}>
               <h3>log in via</h3>
               <div className={s.socialIcons}>
@@ -42,6 +51,7 @@ export const Login: React.FC<PropsType> = ({isAuth, loginDateTC, captcha, ...res
           </div>
           <div className={s.screen__background}>
 
+
             <span className={`${s.screen__background__shape} ${s.screen__background__shape4}`}></span>
             <span className={`${s.screen__background__shape} ${s.screen__background__shape3}`}></span>
             <span className={`${s.screen__background__shape} ${s.screen__background__shape2}`}></span>
@@ -49,7 +59,6 @@ export const Login: React.FC<PropsType> = ({isAuth, loginDateTC, captcha, ...res
           </div>
         </div>
       </div>
-
 
     </div>
   );
